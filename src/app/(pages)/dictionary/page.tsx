@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 import {
   faSearch,
   faTrash,
@@ -31,7 +31,6 @@ import {
   StateTypes,
   TagTypes,
   ToastContentTypes,
-  ToastContextTypes,
   WordTypes,
 } from "@/components/types";
 
@@ -155,7 +154,7 @@ export default function Dictionary() {
   const Name = useRef<HTMLInputElement>(null);
   const AdminPassword = useRef<HTMLInputElement>(null);
 
-  const toastPopUp = ({ mode, msg, closeMsg }: ToastContentTypes) => {
+  const toastPopUp = useCallback(({ mode, msg, closeMsg }: ToastContentTypes) => {
     toast.open((id) => (
       <div
         className={`bg-secondary border-2 ${mode ? "border-success" : "border-error"} dark:bg-secondary-dark flex w-[90vw] max-w-[555px] justify-between gap-3 rounded-lg px-3 py-2`}
@@ -188,7 +187,7 @@ export default function Dictionary() {
         </motion.button>
       </div>
     ));
-  };
+  }, []);
 
   const DateCreated = new Date().toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -278,7 +277,6 @@ export default function Dictionary() {
             closeMsg: "Hop",
           });
 
-          // Reset form
           dispatch({ type: "RESET_FORM" });
           Name.current.value = "";
 
@@ -287,7 +285,7 @@ export default function Dictionary() {
             .forEach((el) => {
               el.checked = false;
             });
-        } catch (err) {
+        } catch (_error) {
           toastPopUp({
             mode: false,
             msg: "The word ran away before Pee could catch it...",
@@ -333,14 +331,14 @@ export default function Dictionary() {
           closeMsg: "Done",
         });
       }
-    } catch (err) {
+    } catch (_error) {
       toastPopUp({
         mode: false,
         msg: `Star sticker fell off ${word.name.toUpperCase()}...`,
         closeMsg: "Burrow",
       });
       setTimeout(() => {
-        dispatch({ type: "FAVORITE", payload: word.id }); //rollback
+        dispatch({ type: "FAVORITE", payload: word.id });
       }, 300);
     }
   };
@@ -357,7 +355,7 @@ export default function Dictionary() {
           msg: `Poo made ${word.name.toUpperCase()} vanish!`,
           closeMsg: "Bye",
         });
-      } catch (err) {
+      } catch (_error) {
         toastPopUp({
           mode: false,
           msg: "The word refused to leave, Pee is chasing it around!",

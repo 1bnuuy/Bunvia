@@ -18,7 +18,6 @@ export default function ToastProvider({
   children: React.ReactNode;
 }) {
   const [toasts, setToasts] = useState<ToastTypes[]>([]);
-  const { ThemeDark } = useTheme();
 
   const open: ToastContextTypes["open"] = (component) => {
     const id = Date.now() + Math.random();
@@ -34,7 +33,7 @@ export default function ToastProvider({
     <ToastContext.Provider value={{ open, close }}>
       {children}
       <div
-        className={`${ThemeDark && "dark"} absolute top-5 right-0 z-40 flex flex-col items-end gap-3 overflow-hidden px-5 max-sm:items-center`}
+        className="absolute top-5 right-0 z-40 flex flex-col items-end gap-3 overflow-hidden px-5 max-sm:items-center"
       >
         <AnimatePresence>
           {toasts.map(({ id, component }) => (

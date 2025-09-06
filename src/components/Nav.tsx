@@ -63,7 +63,7 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={`bg-secondary dark:bg-secondary-dark max-xs:gap-2 fixed left-4 z-40 flex items-start justify-between gap-8 rounded-md px-4 text-nowrap transition ease-in-out select-none max-lg:bottom-4 max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8 ${ThemeDark ? "dark" : ""}`}
+        className={`bg-secondary dark:bg-secondary-dark max-xs:gap-2 fixed left-4 z-40 flex items-start justify-between gap-8 rounded-md px-4 text-nowrap transition ease-in-out select-none max-lg:bottom-4 max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8`}
       >
         <motion.button
           variants={btnVariants}
@@ -159,12 +159,12 @@ export default function Nav() {
               onClick={ThemeToggle}
             >
               <span
-                className={`absolute ${ThemeDark ? "scale-y-0" : "scale-y-100"} bg-accent dark:bg-accent-dark top-2/3 left-5/6 h-full w-1 origin-top -translate-1/2 rotate-45 transition select-none`}
+                className={`bg-accent dark:bg-accent-dark absolute top-2/3 left-5/6 h-full w-1 origin-top -translate-1/2 scale-y-100 rotate-45 transition select-none dark:scale-y-0`}
               ></span>
 
               <FontAwesomeIcon
                 icon={faMoon}
-                className={`${ThemeDark ? "text-accent-dark" : "text-heading"} px-[7px] py-2.5 text-2xl`}
+                className={`text-heading dark:text-accent-dark px-[7px] py-2.5 text-2xl`}
               />
 
               <motion.span
@@ -177,7 +177,7 @@ export default function Nav() {
                   },
                 }}
                 key="label"
-                className={`text-primary pointer-events-none absolute z-40 rounded-md px-3 py-1 max-lg:mb-30 lg:ml-65 ${ThemeDark ? "bg-accent-dark" : "bg-accent"}`}
+                className={`text-primary bg-accent dark:bg-accent-dark pointer-events-none absolute z-40 rounded-md px-3 py-1 max-lg:mb-30 lg:ml-65`}
               >
                 Theme
               </motion.span>
@@ -197,4 +197,4 @@ export default function Nav() {
       </nav>
     </>
   );
-};
+}
