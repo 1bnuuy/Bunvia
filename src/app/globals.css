@@ -1,26 +1,97 @@
 @import "tailwindcss";
+@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --breakpoint-xs: 30rem;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /*Light Theme*/
+  --color-primary: #f0f0f0;
+  --color-secondary: #e1e1e1;
+  --color-tertiary: #c3c3c3;
+  --color-accent: #695afa;
+  --color-accent-hovered: #463791;
+  --color-heading: #0f0f0f;
+  --color-subtext: #7d7d7d;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /*Dark Theme*/
+  --color-primary-dark: #0f0f0f;
+  --color-secondary-dark: #1e1e1e;
+  --color-tertiary-dark: #3c3c3c;
+  --color-accent-dark: #1e91fa;
+  --color-accent-hovered-dark: #416e91;
+  --color-heading-dark: #f0f0f0;
+  --color-subtext-dark: #969696;
+
+  /*General*/
+  --color-success: #19a54b;
+  --color-error: #eb000f;
+  --color-success-hovered: #1e783c;
+  --color-error-hovered: #6e000f;
+
+  --animate-carrot: carrot 2s ease-in-out infinite alternate;
+
+  @keyframes carrot {
+    0%,
+    10% {
+      left: 50px;
+    }
+    90%,
+    100% {
+      left: calc(100% - 100px);
+    }
   }
 }
 
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /*Light Theme*/
+  ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-hovered);
+  }
+
+  /*Dark Theme*/
+  .dark ::-webkit-scrollbar-thumb {
+    background: var(--color-accent-dark);
+    border-radius: 8px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-hovered-dark);
+  }
+
+  .grid-background {
+    background-image:
+    linear-gradient(to right, #7d7d7d2a 1px, transparent 1px),
+    linear-gradient(to bottom, #7d7d7d2a 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .dark .grid-background {
+    background-image:
+    linear-gradient(to right, #9696962a 1px, transparent 1px),
+    linear-gradient(to bottom, #9696962a 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+:root {
+  font-family: "JetBrains Mono", Arial, sans-serif;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
