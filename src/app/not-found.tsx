@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { btnVariants } from "@/components/Theme";
+import { btnScale } from "@/components/Theme";
 
 const MotionLink = motion.create(Link);
 
@@ -284,7 +284,7 @@ export default function ErrorPage() {
         </g>
       </svg>
       <MotionLink
-        variants={btnVariants}
+        variants={btnScale}
         initial="initial"
         whileHover="hover"
         whileTap="tap"

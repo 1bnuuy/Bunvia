@@ -1,5 +1,9 @@
+"use client";
+
+import { btnRelocate } from "@/components/Theme";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AnimatePresence, motion } from "motion/react";
 
 export default function Todolist() {
   return (
@@ -9,20 +13,57 @@ export default function Todolist() {
           Let&apos;s see what we&apos;tve got to do today.
         </p>
 
-        <div>
-          <div className="bg-secondary relative border-subtext overflow-hidden dark:border-subtext-dark dark:bg-secondary-dark flex w-[90vw] max-w-[550px] items-center gap-4 rounded-md border-1 px-3 py-2.5">
-            <input type="checkbox" className="peer appearance-none left-0 cursor-pointer absolute size-full"/>
-            <span className="text-heading peer-checked:text-accent dark:text-heading-dark text-lg">
-              Walk the dog
-            </span>
-            <div className="ml-auto flex items-center gap-2 z-40">
-              <FontAwesomeIcon icon={faCheck} className="bg-accent-hovered max-w-[28px] rounded-md text-xl p-1"/>
-            <FontAwesomeIcon icon={faXmark} className="bg-error-hovered text-error max-w-[28px] rounded-md text-xl p-1"/>
+        <div className="flex flex-col gap-3">
+          <AnimatePresence>
+            <motion.div
+              key="yes"
+              variants={btnRelocate}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              className="bg-secondary border-subtext dark:border-subtext-dark dark:bg-secondary-dark relative flex w-[90vw] max-w-[550px] items-center gap-4 overflow-hidden rounded-md border-1 px-3 py-2.5"
+            >
+              <input
+                type="checkbox"
+                className="peer absolute left-0 size-full cursor-pointer appearance-none"
+              />
+              <span className="text-heading peer-checked:text-accent dark:text-heading-dark text-lg">
+                Walk the dog
+              </span>
+              <div className="z-40 ml-auto flex items-center gap-2">
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className="bg-accent-hovered max-w-[28px] rounded-md p-1 text-xl"
+                />
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className="bg-error-hovered text-error max-w-[28px] rounded-md p-1 text-xl"
+                />
+              </div>
+            </motion.div>
+
+            <div className="bg-secondary border-subtext dark:border-subtext-dark dark:bg-secondary-dark relative flex w-[90vw] max-w-[550px] items-center gap-4 overflow-hidden rounded-md border-1 px-3 py-2.5">
+              <input
+                type="checkbox"
+                className="peer absolute left-0 size-full cursor-pointer appearance-none"
+              />
+              <span className="text-heading peer-checked:text-accent dark:text-heading-dark text-lg">
+                Walk the dog
+              </span>
+              <div className="z-40 ml-auto flex items-center gap-2">
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className="bg-accent-hovered max-w-[28px] rounded-md p-1 text-xl"
+                />
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className="bg-error-hovered text-error max-w-[28px] rounded-md p-1 text-xl"
+                />
+              </div>
             </div>
-        
-          </div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
   );
-};
+}

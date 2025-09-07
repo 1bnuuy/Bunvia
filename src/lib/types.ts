@@ -52,7 +52,7 @@ export type ActionTypes =
   | { type: "RESET_FORM" }
   | { type: "DUPLICATED"; payload: boolean }
   | { type: "SEARCH"; payload: string }
-  | { type: "OPEN_FORM"; payload?: boolean }
+  | { type: "OPEN_FORM"}
   | {
       type: "CONFIRMATION";
       payload?: { word: WordTypes; index: number } | null;

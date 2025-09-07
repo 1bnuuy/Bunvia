@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { btnVariants } from "@/components/Theme";
+import { btnScale } from "@/components/Theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,7 +22,7 @@ export default function Home() {
             </span>
 
             <MotionLink
-              variants={btnVariants}
+              variants={btnScale}
               initial="initial"
               whileHover="hover"
               whileTap="tap"
