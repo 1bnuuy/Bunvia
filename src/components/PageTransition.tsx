@@ -30,7 +30,8 @@ export default function PageTransition({
                   delay: delay,
                   ease: [0, 0.71, 0.2, 1.01],
                 }}
-                className={`bg-accent dark:bg-accent-dark fixed top-[${top}vh] z-50 h-[21vh] w-screen origin-${origin}`}
+                style={{top: `${top}vh`, transformOrigin: `${origin}`}}
+                className="bg-accent dark:bg-accent-dark fixed z-50 h-[21vh] w-screen"
               />
             );
           }),

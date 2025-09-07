@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useMemo, useReducer, useRef } from "react";
+import { AnimatePresence, motion } from "motion/react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 import {
   faSearch,
   faTrash,
@@ -11,118 +13,24 @@ import {
   faCheck,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-  where,
-  query,
-  onSnapshot,
-} from "firebase/firestore";
 
-import { db } from "@firebase";
 import { useToast } from "@/components/Toast";
 import { btnVariants } from "@/components/Theme";
-import {
-  ActionTypes,
-  StateTypes,
-  TagTypes,
-  ToastContentTypes,
-  WordTypes,
-} from "@/components/types";
+import { TagTypes } from "@/components/types";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { AnimatePresence, motion } from "motion/react";
+import {
+  Create,
+  Delete,
+  Favorite,
+  Fetch,
+  initialState,
+  reducer,
+} from "@/lib/manageWords";
 
 const MotionLink = motion.create(Link);
-
-const initialState: StateTypes = {
-  words: [],
-  selectedTags: [],
-  selectedTypes: [],
-  dup: false,
-  search: "",
-  open: false,
-  confirm: false,
-  confirmTarget: null,
-  adminAccess: false,
-};
-
-const reducer: (state: StateTypes, action: ActionTypes) => StateTypes = (
-  state,
-  action,
-) => {
-  switch (action.type) {
-    case "FETCH_WORD":
-      return { ...state, words: action.payload }; //...state keeps everything else unrelated to action.payload's target
-
-    case "SELECT_TYPES":
-      return {
-        ...state,
-        selectedTypes: state.selectedTypes.includes(action.payload)
-          ? state.selectedTypes.filter((tag) => tag !== action.payload)
-          : [...state.selectedTypes, action.payload],
-      };
-
-    case "SELECT_TAGS":
-      return {
-        ...state,
-        selectedTags: state.selectedTags.includes(action.payload)
-          ? state.selectedTags.filter((tag) => tag !== action.payload)
-          : [...state.selectedTags, action.payload],
-      };
-
-    case "DELETE":
-      return {
-        ...state,
-        words: state.words.filter((w) => w.id !== action.payload),
-      };
-
-    case "FAVORITE":
-      return {
-        ...state,
-        words: state.words.map((w) =>
-          w.id === action.payload ? { ...w, favorite: !w.favorite } : w,
-        ),
-      };
-
-    case "RESET_FORM":
-      return { ...state, selectedTags: [], selectedTypes: [], dup: false };
-
-    case "DUPLICATED":
-      return { ...state, dup: action.payload };
-
-    case "SEARCH":
-      return { ...state, search: action.payload };
-
-    case "OPEN_FORM":
-      return { ...state, open: !state.open };
-
-    case "CONFIRMATION":
-      return {
-        ...state,
-        confirm: !state.confirm,
-        confirmTarget: action.payload ?? null,
-      };
-
-    case "ROLLBACK":
-      const rw = [...state.words];
-      rw.splice(action.index, 0, action.payload);
-
-      return { ...state, words: rw };
-
-    case "ADMIN_ACCESS":
-      return { ...state, adminAccess: !state.adminAccess };
-
-    default:
-      return state;
-  }
-};
 
 const tagColors: Record<TagTypes, string> = {
   A1: "bg-green-200",
@@ -149,232 +57,23 @@ const wordType = [
 
 export default function Dictionary() {
   const isAdminPanel = usePathname().startsWith("/bnuuyPanel");
-  const toast = useToast();
+  const { toastPopUp } = useToast();
+
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const Name = useRef<HTMLInputElement>(null);
   const AdminPassword = useRef<HTMLInputElement>(null);
 
-  const toastPopUp = useCallback(({ mode, msg, closeMsg }: ToastContentTypes) => {
-    toast.open((id) => (
-      <div
-        className={`bg-secondary border-2 ${mode ? "border-success" : "border-error"} dark:bg-secondary-dark flex w-[90vw] max-w-[555px] justify-between gap-3 rounded-lg px-3 py-2`}
-      >
-        <div className="flex items-center gap-3">
-          <span
-            className={`${mode ? "bg-success" : "bg-error"} h-full min-w-1.5 rounded-full`}
-          />
-          <div className="flex flex-col">
-            <span
-              className={`${mode ? "text-success" : "text-error"} text-lg font-bold`}
-            >
-              {mode ? "Hooray!" : "Uh-oh!"}
-            </span>
-            <span className="text-subtext dark:text-subtext-dark text-sm">
-              {msg}
-            </span>
-          </div>
-        </div>
-
-        <motion.button
-          variants={btnVariants}
-          initial="initial"
-          whileHover="hover"
-          whileTap="tap"
-          className="text-accent dark:text-accent-dark bg-tertiary dark:bg-tertiary-dark active:text-accent-hovered dark:active:text-accent-hovered-dark hover:text-accent-hovered dark:hover:text-accent-hovered-dark cursor-pointer self-center rounded-md px-2 py-1 font-bold text-nowrap"
-          onClick={() => toast.close(id)}
-        >
-          {closeMsg}
-        </motion.button>
-      </div>
-    ));
-  }, []);
-
-  const DateCreated = new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-
-  //Fetch words
   useEffect(() => {
-    let firstLoad = true;
-
     const DelayTransition = setTimeout(() => {
-      const fetchWords = onSnapshot(
-        collection(db, "words"),
-        (snapshot) => {
-          const wordList = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...(doc.data() as Omit<WordTypes, "id">),
-          }));
-          dispatch({ type: "FETCH_WORD", payload: wordList });
+      const unsub = Fetch(dispatch, toastPopUp);
 
-          if (firstLoad) {
-            toastPopUp({
-              mode: true,
-              msg: `Poo returned with a basket containing ${wordList.length} carrots!`,
-              closeMsg: "Thanks",
-            });
-            firstLoad = false;
-          }
-        },
-        () => {
-          toastPopUp({
-            mode: false,
-            msg: "Oops, Poo stepped on the cable… connection lost!",
-            closeMsg: "Dismiss",
-          });
-        },
-      );
-
-      return () => fetchWords();
+      return () => unsub();
     }, 600);
 
     return () => clearTimeout(DelayTransition);
   }, []);
 
-  //Add words
-  const Create = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const newWord = {
-      tag: state.selectedTags,
-      name: Name.current?.value.trim().toLowerCase(),
-      type: state.selectedTypes,
-      date: DateCreated,
-      favorite: false,
-    };
-
-    const blankFields = [];
-
-    if (!Name.current?.value) blankFields.push("Name");
-    if (!state.selectedTypes.length) blankFields.push("Class");
-
-    if (isAdminPanel && state.adminAccess) {
-      if (Name.current?.value && state.selectedTypes.length) {
-        const wordsRef = collection(db, "words");
-        const q = query(
-          wordsRef,
-          where("name", "==", newWord.name?.trim().toLowerCase()),
-        );
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-          dispatch({ type: "DUPLICATED", payload: true });
-          toastPopUp({
-            mode: false,
-            msg: "This word already exists! Pee and Poo won't let it in!",
-            closeMsg: "Okay",
-          });
-          return;
-        }
-
-        try {
-          await addDoc(collection(db, "words"), newWord);
-          toastPopUp({
-            mode: true,
-            msg: "New word created, Pee hugs it tight!",
-            closeMsg: "Hop",
-          });
-
-          dispatch({ type: "RESET_FORM" });
-          Name.current.value = "";
-
-          document
-            .querySelectorAll<HTMLInputElement>("input[type=checkbox]")
-            .forEach((el) => {
-              el.checked = false;
-            });
-        } catch (_error) {
-          toastPopUp({
-            mode: false,
-            msg: "The word ran away before Pee could catch it...",
-            closeMsg: "Oops",
-          });
-        }
-      } else {
-        toastPopUp({
-          mode: false,
-          msg: `Hoppy mistake! ${blankFields.join(", ")} ${blankFields.length > 1 ? "fields are" : "field is"} still blank!`,
-          closeMsg: "On it",
-        });
-      }
-    } else {
-      toastPopUp({
-        mode: false,
-        msg: "You don't have admin access, get out!",
-        closeMsg: "Oh...",
-      });
-    }
-  };
-
-  //Favorite
-  const Favor = async (word: WordTypes) => {
-    dispatch({ type: "FAVORITE", payload: word.id });
-
-    try {
-      const wordRef = doc(db, "words", word.id);
-      await updateDoc(wordRef, {
-        favorite: !word.favorite,
-      });
-
-      if (!word.favorite) {
-        toastPopUp({
-          mode: true,
-          msg: `Favorited! Poo put a bow on ${word.name.toUpperCase()}.`,
-          closeMsg: "Done",
-        });
-      } else {
-        toastPopUp({
-          mode: true,
-          msg: `${word.name.toUpperCase()} is no longer a favorite, but still adorable!`,
-          closeMsg: "Done",
-        });
-      }
-    } catch (_error) {
-      toastPopUp({
-        mode: false,
-        msg: `Star sticker fell off ${word.name.toUpperCase()}...`,
-        closeMsg: "Burrow",
-      });
-      setTimeout(() => {
-        dispatch({ type: "FAVORITE", payload: word.id });
-      }, 300);
-    }
-  };
-
-  //Delete
-  const Delete = async (word: WordTypes, index: number) => {
-    if (isAdminPanel && state.adminAccess) {
-      dispatch({ type: "DELETE", payload: word.id });
-
-      try {
-        await deleteDoc(doc(db, "words", word.id));
-        toastPopUp({
-          mode: true,
-          msg: `Poo made ${word.name.toUpperCase()} vanish!`,
-          closeMsg: "Bye",
-        });
-      } catch (_error) {
-        toastPopUp({
-          mode: false,
-          msg: "The word refused to leave, Pee is chasing it around!",
-          closeMsg: "Retry",
-        });
-        setTimeout(() => {
-          dispatch({ type: "ROLLBACK", payload: word, index });
-        }, 300);
-      }
-    } else {
-      toastPopUp({
-        mode: false,
-        msg: "Nuh uh! Don't even try to cheat!",
-        closeMsg: "Aww",
-      });
-    }
-  };
-
-  //Search
   const filteredWords = useMemo(() => {
     return state.words.filter((item) => {
       return item.name?.toLowerCase().includes(state.search.toLowerCase());
@@ -412,7 +111,7 @@ export default function Dictionary() {
           {state.open && (
             <motion.form
               key="form"
-              onSubmit={(e) => Create(e)}
+              onSubmit={(e) => Create(e, Name, state, dispatch, toastPopUp)}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0 }}
@@ -746,8 +445,9 @@ export default function Dictionary() {
                       Delete(
                         state.confirmTarget.word,
                         state.confirmTarget.index,
+                        dispatch,
+                        toastPopUp,
                       );
-                      dispatch({ type: "CONFIRMATION" });
                     }
                   }}
                 >
@@ -987,7 +687,9 @@ export default function Dictionary() {
                               whileHover="hover"
                               whileTap="tap"
                               type="button"
-                              onClick={() => Favor(word)}
+                              onClick={() =>
+                                Favorite(word, dispatch, toastPopUp)
+                              }
                             >
                               <FontAwesomeIcon
                                 icon={faStar}
@@ -1006,4 +708,4 @@ export default function Dictionary() {
       </section>
     </>
   );
-};
+}
