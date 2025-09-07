@@ -35,10 +35,8 @@ export default function Dictionary() {
   const AdminPassword = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    let firstLoad = true;
-
     const DelayTransition = setTimeout(() => {
-      const unsub = Fetch(dispatch, toastPopUp, firstLoad);
+      const unsub = Fetch(dispatch, toastPopUp);
 
       return () => unsub();
     }, 600);
@@ -78,7 +76,7 @@ export default function Dictionary() {
 
   return (
     <>
-      <Modal state={state} dispatch={dispatch}/>
+      <Modal state={state} dispatch={dispatch} />
 
       {isAdminPanel && !state.adminAccess && (
         <div className="fixed top-1/2 left-1/2 z-40 w-11/12 max-w-[650px] min-w-[200px] -translate-x-1/2 -translate-y-1/2">
@@ -269,7 +267,7 @@ export default function Dictionary() {
                               whileTap="tap"
                               target="_blank"
                               href={`https://dictionary.cambridge.org/dictionary/english/${word.name}`}
-                              className="ml-auto flex items-center group"
+                              className="group ml-auto flex items-center"
                             >
                               <FontAwesomeIcon
                                 icon={faLink}

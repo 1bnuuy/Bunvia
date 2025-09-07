@@ -250,8 +250,9 @@ export async function Create(
 export function Fetch(
   dispatch: React.Dispatch<ActionTypes>,
   toastPopUp: ToastContextTypes["toastPopUp"],
-  firstLoad: boolean,
 ) {
+  let firstLoad = true;
+
   const unsubscribe = onSnapshot(
     collection(db, "words"),
     (snapshot) => {
