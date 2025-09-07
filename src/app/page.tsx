@@ -2,15 +2,13 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { btnVariants, useTheme } from "@/components/Theme";
+import { btnVariants } from "@/components/Theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
 
 const MotionLink = motion.create(Link);
 
 export default function Home() {
-  const { ThemeDark } = useTheme();
-
   return (
       <section className="dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-x-hidden overflow-y-scroll pt-2 transition max-lg:pb-25 md:pt-15 lg:px-30">
         <div className="relative flex flex-col-reverse items-center gap-10 p-6 sm:py-12 md:flex-row md:justify-around">

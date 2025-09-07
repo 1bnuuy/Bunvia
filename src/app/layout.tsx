@@ -15,7 +15,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LopCloud",
+  title: "Bunvia",
   description:
     "LopCloud is my 2nd project and also my very first NextJS project.",
 };

@@ -6,8 +6,7 @@ export type ThemeContextTypes = {
 
 //--------------Toast.tsx--------------//
 export type ToastContextTypes = {
-  open: (component: ToastComponentTypes) => void;
-  close: (id: number) => void;
+  toastPopUp: (content: ToastContentTypes) => void
 };
 
 export type ToastComponentTypes = (id: number) => React.ReactNode;
