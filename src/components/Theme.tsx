@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import { ThemeContextTypes } from "./types";
+import { ThemeContextTypes } from "../lib/types";
 
 const ThemeContext = createContext<ThemeContextTypes | undefined>(undefined);
 export const useTheme = (): ThemeContextTypes => {
@@ -12,10 +12,16 @@ export const useTheme = (): ThemeContextTypes => {
   return context;
 };
 
-export const btnVariants = {
+export const btnScale = {
   initial: { scale: 1 },
   hover: { scale: 1.1 },
   tap: { scale: 0.9 },
+};
+
+export const btnRelocate = {
+  initial: { scale: 1, x: 0 },
+  hover: { x: 20 },
+  tap: { scale: 0.95, x: 20 },
 };
 
 export default function ThemeProvider({

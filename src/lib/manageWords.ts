@@ -3,7 +3,7 @@ import {
   StateTypes,
   ToastContextTypes,
   WordTypes,
-} from "@/components/types";
+} from "@/lib/types";
 import {
   addDoc,
   collection,
@@ -12,11 +12,16 @@ import {
   getDocs,
   onSnapshot,
   query,
-  serverTimestamp,
   updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
+
+const DateCreated = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
 
 export const initialState: StateTypes = {
   words: [],
@@ -182,7 +187,7 @@ export async function Create(
     tag: state.selectedTags,
     name: Name.current?.value.trim().toLowerCase(),
     type: state.selectedTypes,
-    date: serverTimestamp(),
+    date: DateCreated,
     favorite: false,
   };
 
@@ -246,7 +251,9 @@ export function Fetch(
   dispatch: React.Dispatch<ActionTypes>,
   toastPopUp: ToastContextTypes["toastPopUp"],
 ) {
-  const unsub = onSnapshot(
+  let firstLoad = true;
+
+  const unsubscribe = onSnapshot(
     collection(db, "words"),
     (snapshot) => {
       const wordList = snapshot.docs.map((doc) => ({
@@ -255,12 +262,13 @@ export function Fetch(
       }));
       dispatch({ type: "FETCH_WORD", payload: wordList });
 
-      if (wordList.length > 0) {
+      if (firstLoad) {
         toastPopUp({
           mode: true,
           msg: `Poo returned with a basket containing ${wordList.length} carrots!`,
           closeMsg: "Thanks",
         });
+        firstLoad = false;
       }
     },
     () => {
@@ -272,5 +280,5 @@ export function Fetch(
     },
   );
 
-  return unsub;
+  return unsubscribe;
 }

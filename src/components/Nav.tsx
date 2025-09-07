@@ -17,7 +17,7 @@ import {
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-import { btnVariants, useTheme } from "@/components/Theme";
+import { btnScale, useTheme } from "@/components/Theme";
 
 const links = [
   {
@@ -70,7 +70,7 @@ export default function Nav() {
           className={`bg-secondary dark:bg-secondary-dark max-xs:gap-2 fixed left-4 z-40 flex items-start justify-between gap-8 rounded-md px-4 text-nowrap transition ease-in-out select-none max-lg:bottom-4 max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8`}
         >
           <motion.button
-            variants={btnVariants}
+            variants={btnScale}
             whileHover="hover"
             whileTap="tap"
             initial="initial"
@@ -111,7 +111,7 @@ export default function Nav() {
                             className={`absolute ${link.path === pathname ? "block" : "hidden"} bg-accent dark:bg-accent-dark -top-3 h-1.25 w-full max-lg:rounded-b-full lg:top-0 lg:-left-4 lg:h-full lg:w-1.25 lg:rounded-r-full`}
                           ></span>
                           <motion.button
-                            variants={btnVariants}
+                            variants={btnScale}
                             whileHover="hover"
                             whileTap="tap"
                             initial="initial"

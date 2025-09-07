@@ -17,7 +17,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Bunvia",
   description:
-    "LopCloud is my 2nd project and also my very first NextJS project.",
+    "Bunvia is my 2nd project and also my very first NextJS project.",
 };
 
 export default function RootLayout({

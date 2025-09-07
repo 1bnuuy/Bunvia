@@ -8,8 +8,8 @@ import {
   ToastTypes,
   ToastContentTypes,
   ToastComponentTypes,
-} from "./types";
-import { btnVariants } from "./Theme";
+} from "../lib/types";
+import { btnScale } from "./Theme";
 
 const ToastContext = createContext<ToastContextTypes | undefined>(undefined);
 export const useToast = () => {
@@ -61,7 +61,7 @@ export default function ToastProvider({
         </div>
 
         <motion.button
-          variants={btnVariants}
+          variants={btnScale}
           initial="initial"
           whileHover="hover"
           whileTap="tap"
