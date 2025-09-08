@@ -4,7 +4,6 @@ import {
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
-import { getAuth, signInAnonymously } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC0HPBs50SN9w8ks8MCS8lXziUHJvJR-9Q",
@@ -23,10 +22,3 @@ export const db = initializeFirestore(app, {
     tabManager: persistentMultipleTabManager(),
   }),
 });
-
-export const auth = getAuth(app);
-signInAnonymously(auth)
-  .then((userCredential) => {
-    console.log("Hello, ", userCredential.user.uid);
-  })
-  .catch((error) => console.error(error));
