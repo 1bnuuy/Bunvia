@@ -9,30 +9,22 @@ import {
   faTrash,
   faStar,
   faLink,
-  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useToast } from "@/components/Toast";
 import { btnScale } from "@/components/Theme";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import { Favorite, Fetch, initialState, reducer } from "@/lib/manageWords";
+import { Favorite, Fetch, reducer } from "@/lib/manageWords";
+import { initialState } from "@/lib/variables";
 import { TagTypes } from "@/lib/types";
 import { tagColor } from "@/lib/variables";
 
 import { Modal } from "./modal";
 
-const MotionLink = motion.create(Link);
-
 export default function Dictionary() {
-  const isAdminPanel = usePathname().startsWith("/bnuuyPanel");
   const { toastPopUp } = useToast();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const AdminPassword = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const DelayTransition = setTimeout(() => {
@@ -50,98 +42,13 @@ export default function Dictionary() {
     });
   }, [state.words, state.search]);
 
-  const AdminAccessCheck = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const validPasswords = process.env.ADMIN_PASSWORDS?.split(",") || [];
-    const isValidPassword = (password: string) =>
-      validPasswords.includes(password);
-
-    if (isValidPassword(AdminPassword.current?.value || "")) {
-      //If current is null, it passes an empty string.
-      dispatch({ type: "ADMIN_ACCESS" });
-      toastPopUp({
-        mode: true,
-        msg: "Access granted, the carrot vault awaits.",
-        closeMsg: "Bnuuy",
-      });
-    } else {
-      toastPopUp({
-        mode: false,
-        msg: "Oops, this area is for admins only!",
-        closeMsg: "Sorry",
-      });
-    }
-  };
-
   return (
     <>
       <Modal state={state} dispatch={dispatch} />
 
-      {isAdminPanel && !state.adminAccess && (
-        <div className="fixed top-1/2 left-1/2 z-40 w-11/12 max-w-[650px] min-w-[200px] -translate-x-1/2 -translate-y-1/2">
-          <AnimatePresence>
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-secondary dark:bg-secondary-dark relative space-y-5 rounded-lg p-5 text-center"
-            >
-              <p className="text-heading dark:text-heading-dark text-3xl font-bold">
-                Admin Access
-              </p>
-
-              <form
-                autoComplete="off"
-                className="space-y-5"
-                onSubmit={(e) => AdminAccessCheck(e)}
-              >
-                <div className="bg-secondary dark:bg-secondary-dark border-accent dark:border-accent-dark flex w-full items-center gap-4 rounded-md border-2 px-3 py-2 text-2xl">
-                  <input
-                    autoComplete="new-password"
-                    required
-                    ref={AdminPassword}
-                    placeholder="Password"
-                    type="password"
-                    name="passwordAdmin"
-                    className={`placeholder:text-subtext dark:placeholder:text-subtext-dark text-heading dark:text-heading-dark w-full outline-none`}
-                  />
-                  <FontAwesomeIcon
-                    icon={faLock}
-                    className="text-accent dark:text-accent-dark pointer-events-none"
-                  />
-                </div>
-
-                <div className="flex gap-5">
-                  <MotionLink
-                    variants={btnScale}
-                    initial="initial"
-                    whileHover="hover"
-                    whileTap="tap"
-                    className="text-primary bg-error active:bg-error-hovered hover:bg-error-hovered w-full cursor-pointer rounded-md p-1 text-xl select-none"
-                    href="/"
-                  >
-                    Return
-                  </MotionLink>
-
-                  <motion.button
-                    variants={btnScale}
-                    initial="initial"
-                    whileHover="hover"
-                    whileTap="tap"
-                    className="text-heading hover:text-primary active:bg-success hover:bg-success dark:text-heading-dark dark:bg-tertiary-dark bg-tertiary w-full cursor-pointer rounded-md p-1 text-xl select-none"
-                  >
-                    Log in
-                  </motion.button>
-                </div>
-              </form>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      )}
-
       <section className="dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-8 transition max-lg:pb-25 md:pt-15 lg:px-30">
         <div
-          className={`relative flex h-full flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm || (isAdminPanel && !state.adminAccess)) && "pointer-events-none opacity-30"}`}
+          className={`relative flex h-full flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm) && "pointer-events-none opacity-30"}`}
         >
           {state.words.length > 0 && (
             <div className="bg-secondary dark:bg-secondary-dark border-accent dark:border-accent-dark flex w-full max-w-[450px] min-w-[200px] items-center gap-4 rounded-md border-2 p-2.5 text-2xl">
@@ -164,6 +71,7 @@ export default function Dictionary() {
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
+                aria-label="add"
                 onClick={() => dispatch({ type: "OPEN_FORM" })}
                 className="text-primary active:bg-accent-hovered dark:active:bg-accent-hovered-dark bg-accent dark:bg-accent-dark hover:bg-accent-hovered dark:hover:bg-accent-hovered-dark cursor-pointer rounded-md px-5 text-2xl select-none"
               >
@@ -282,6 +190,7 @@ export default function Dictionary() {
                                 whileHover="hover"
                                 whileTap="tap"
                                 type="button"
+                                aria-label="confirm delete"
                                 onClick={() => {
                                   dispatch({
                                     type: "CONFIRMATION",
@@ -306,6 +215,7 @@ export default function Dictionary() {
                               whileHover="hover"
                               whileTap="tap"
                               type="button"
+                              aria-label="favorite"
                               onClick={() =>
                                 Favorite(word, dispatch, toastPopUp)
                               }

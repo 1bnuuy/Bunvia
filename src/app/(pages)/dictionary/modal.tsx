@@ -37,16 +37,16 @@ export const Modal = ({
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="bg-secondary dark:bg-secondary-dark flex flex-col gap-8 rounded-md p-6"
+            className="bg-secondary dark:bg-secondary-dark flex flex-col gap-8 rounded-md rounded-tl-none p-6"
           >
             <FontAwesomeIcon
               icon={faPen}
-              className={`text-accent dark:text-accent-dark absolute rounded-t-md ${state.confirm ? "text-subtext dark:text-subtext-dark bg-tertiary dark:bg-tertiary-dark -top-7 left-0 -z-10" : "-top-11 left-0 z-10 bg-inherit"} px-4 py-3 text-2xl`}
+              className={`text-accent dark:text-accent-dark absolute left-0 rounded-t-md ${state.confirm ? "text-subtext dark:text-subtext-dark bg-tertiary dark:bg-tertiary-dark" : "bg-inherit"} -top-12 left-0 z-10 px-4 py-3 text-2xl`}
             />
 
             <FontAwesomeIcon
               icon={faTrash}
-              className={`text-accent dark:text-accent-dark absolute rounded-t-md ${!state.confirm ? "text-subtext dark:text-subtext-dark bg-tertiary dark:bg-tertiary-dark -top-7 left-16.5 -z-10" : "-top-11 left-16.5 z-10 bg-inherit"} px-4 py-3 text-2xl`}
+              className={`text-accent dark:text-accent-dark absolute left-[4.125rem] rounded-t-md ${!state.confirm ? "text-subtext dark:text-subtext-dark bg-tertiary dark:bg-tertiary-dark" : "bg-inherit"} -top-12 left-0 z-10 px-4 py-3 text-2xl`}
             />
 
             {!state.confirm && (
@@ -149,6 +149,7 @@ export const Modal = ({
                     whileTap="tap"
                     className="text-heading hover:text-primary active:bg-error hover:bg-error dark:text-heading-dark dark:bg-tertiary-dark bg-tertiary cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
                     type="button"
+                    aria-label="Cancel"
                     onClick={() => dispatch({ type: "OPEN_FORM" })}
                   >
                     Cancel
@@ -159,6 +160,7 @@ export const Modal = ({
                     initial="initial"
                     whileHover="hover"
                     whileTap="tap"
+                    aria-label="Create"
                     className="text-primary hover:bg-accent-hovered dark:hover:bg-accent-hovered-dark active:bg-accent-hovered dark:active:bg-accent-hovered-dark bg-accent dark:bg-accent-dark cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
                   >
                     Create
@@ -168,7 +170,7 @@ export const Modal = ({
             )}
 
             {state.confirm && (
-              <div className="space-y-5">
+              <div className="flex flex-col gap-5">
                 <p className="text-heading dark:text-heading-dark text-2xl font-bold">
                   Are you sure, bun?
                 </p>
@@ -195,100 +197,99 @@ export const Modal = ({
                 </p>
 
                 <div
-                  className={`bg-tertiary relative dark:bg-tertiary-dark flex items-center border-heading dark:border-heading-dark w-full rounded-md border-2 p-4`}
+                  className={`border-heading dark:border-heading-dark relative w-full rounded-md border-2 px-4 py-5`}
                 >
-                  <div className="flex flex-col gap-2">
-                    <div className="flex gap-2">
-                      {(Array.isArray(state.confirmTarget?.word.tag) &&
-                      state.confirmTarget?.word.tag.length > 0
-                        ? state.confirmTarget?.word.tag
-                        : ["N/A"]
-                      )
-                        .filter(Boolean)
-                        .sort((a, b) => a.localeCompare(b))
-                        .map((t, i) => {
-                          const ColorClass =
-                            t in tagColor
-                              ? tagColor[t as TagTypes]
-                              : "bg-gray-300";
-                          return (
-                            <span
-                              className={`${ColorClass} text-heading rounded-sm px-2 text-sm font-semibold select-none`}
-                              key={i}
-                            >
-                              {t || "N/A"}
-                            </span>
-                          );
-                        })}
-                    </div>
+                  <div className="bg-secondary dark:bg-secondary-dark absolute -top-3 flex gap-2 px-2">
+                    {(Array.isArray(state.confirmTarget?.word.tag) &&
+                    state.confirmTarget?.word.tag.length > 0
+                      ? state.confirmTarget?.word.tag
+                      : ["N/A"]
+                    )
+                      .filter(Boolean)
+                      .sort((a, b) => a.localeCompare(b))
+                      .map((t, i) => {
+                        const ColorClass =
+                          t in tagColor
+                            ? tagColor[t as TagTypes]
+                            : "bg-gray-300";
+                        return (
+                          <span
+                            className={`${ColorClass} text-heading rounded-sm px-2 text-sm font-semibold select-none`}
+                            key={i}
+                          >
+                            {t || "N/A"}
+                          </span>
+                        );
+                      })}
+                  </div>
+
+                  <div className="flex items-center justify-between space-x-3">
                     <p
-                      className={`text-heading dark:text-heading-dark line-clamp-2 text-2xl font-semibold text-balance capitalize`}
+                      className={`text-heading dark:text-heading-dark line-clamp-1 text-2xl font-semibold text-balance capitalize`}
                     >
                       {state.confirmTarget?.word.name}
                     </p>
 
-                    <div className="flex flex-wrap">
-                      {(Array.isArray(state.confirmTarget?.word.type)
-                        ? state.confirmTarget?.word.type
-                        : [state.confirmTarget?.word.type]
-                      ).map((t, i, arr) => {
-                        return (
-                          <span
-                            className={`text-subtext dark:text-subtext-dark px-1 text-sm font-semibold`}
-                            key={i}
-                          >
-                            {t}
-                            {i < arr.length - 1 && ","}
-                          </span>
-                        );
-                      })}
-                    </div>
+                    <motion.button
+                      variants={btnScale}
+                      initial="initial"
+                      whileHover="hover"
+                      whileTap="tap"
+                      className="text-primary bg-error active:bg-error-hovered hover:bg-error-hovered cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
+                      type="button"
+                      aria-label="Delete"
+                      onClick={() => {
+                        if (state.confirmTarget) {
+                          Delete(
+                            state.confirmTarget.word,
+                            state.confirmTarget.index,
+                            dispatch,
+                            toastPopUp,
+                          );
+                          dispatch({ type: "CONFIRMATION" });
+                          dispatch({ type: "OPEN_FORM" });
+                        }
+                      }}
+                    >
+                      Delete
+                    </motion.button>
                   </div>
 
-                  <span className="text-primary bg-accent -right-5 rotate-90 text-[0.75rem] absolute dark:bg-accent-dark py-0.5 px-2 rounded-md">
-                    {state.confirmTarget?.word.date}
-                  </span>
+                  <div className="bg-secondary dark:bg-secondary-dark absolute right-4 -bottom-3 flex px-2">
+                    {(Array.isArray(state.confirmTarget?.word.type)
+                      ? state.confirmTarget?.word.type
+                      : [state.confirmTarget?.word.type]
+                    ).map((t, i, arr) => {
+                      return (
+                        <span
+                          className={`text-subtext dark:text-subtext-dark px-1 text-sm font-semibold text-nowrap`}
+                          key={i}
+                        >
+                          {t}
+                          <span className="text-heading dark:text-heading-dark">
+                            {i < arr.length - 1 && " —"}
+                          </span>
+                        </span>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <div className="flex gap-5">
-                  <motion.button
-                    variants={btnScale}
-                    initial="initial"
-                    whileHover="hover"
-                    whileTap="tap"
-                    className="text-heading hover:text-primary active:bg-accent dark:active:bg-accent-dark hover:bg-accent dark:hover:bg-accent-dark dark:text-heading-dark dark:bg-tertiary-dark bg-tertiary w-full cursor-pointer rounded-md p-1 text-xl font-semibold select-none"
-                    type="button"
-                    onClick={() => {
-                      dispatch({ type: "CONFIRMATION" });
-                      dispatch({ type: "OPEN_FORM" });
-                    }}
-                  >
-                    Cancel
-                  </motion.button>
-
-                  <motion.button
-                    variants={btnScale}
-                    initial="initial"
-                    whileHover="hover"
-                    whileTap="tap"
-                    className="text-primary bg-error active:bg-error-hovered hover:bg-error-hovered w-full cursor-pointer rounded-md p-1 text-xl font-semibold select-none"
-                    type="button"
-                    onClick={() => {
-                      if (state.confirmTarget) {
-                        Delete(
-                          state.confirmTarget.word,
-                          state.confirmTarget.index,
-                          dispatch,
-                          toastPopUp,
-                        );
-                        dispatch({ type: "CONFIRMATION" });
-                        dispatch({ type: "OPEN_FORM" });
-                      }
-                    }}
-                  >
-                    Delete
-                  </motion.button>
-                </div>
+                <motion.button
+                  variants={btnScale}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="text-heading hover:text-primary active:bg-accent dark:active:bg-accent-dark hover:bg-accent dark:hover:bg-accent-dark dark:text-heading-dark dark:bg-tertiary-dark bg-tertiary mt-3 w-5/6 cursor-pointer self-center rounded-md px-4 py-1 text-xl font-semibold select-none"
+                  type="button"
+                  aria-label="Cancel"
+                  onClick={() => {
+                    dispatch({ type: "CONFIRMATION" });
+                    dispatch({ type: "OPEN_FORM" });
+                  }}
+                >
+                  Cancel
+                </motion.button>
               </div>
             )}
           </motion.div>

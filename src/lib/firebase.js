@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+} from "firebase/firestore";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC0HPBs50SN9w8ks8MCS8lXziUHJvJR-9Q",
@@ -8,13 +13,20 @@ const firebaseConfig = {
   storageBucket: "lopcloud.firebasestorage.app",
   messagingSenderId: "537813002413",
   appId: "1:537813002413:web:c1245ac715793cbe797e24",
-  measurementId: "G-F756813310"
+  measurementId: "G-F756813310",
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache({
-    tabManager: persistentMultipleTabManager()
-  })
+    tabManager: persistentMultipleTabManager(),
+  }),
 });
+
+export const auth = getAuth(app);
+signInAnonymously(auth)
+  .then((userCredential) => {
+    console.log("Hello, ", userCredential.user.uid);
+  })
+  .catch((error) => console.error(error));

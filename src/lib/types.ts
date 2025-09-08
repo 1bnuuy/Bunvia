@@ -40,7 +40,6 @@ export type StateTypes = {
   open: boolean;
   confirm: boolean;
   confirmTarget: { word: WordTypes; index: number } | null;
-  adminAccess: boolean;
 };
 
 export type ActionTypes =

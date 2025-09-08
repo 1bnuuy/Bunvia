@@ -1,4 +1,21 @@
-import { TagTypes } from "./types";
+import { StateTypes, TagTypes } from "./types";
+
+export const DateCreated = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+
+export const initialState: StateTypes = {
+  words: [],
+  selectedTags: [],
+  selectedTypes: [],
+  dup: false,
+  search: "",
+  open: false,
+  confirm: false,
+  confirmTarget: null,
+};
 
 export const tagColor: Record<TagTypes, string> = {
   A1: "bg-green-200",

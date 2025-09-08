@@ -1,8 +1,10 @@
 "use client";
 
 import { btnRelocate } from "@/components/Theme";
+
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { AnimatePresence, motion } from "motion/react";
 
 export default function Todolist() {

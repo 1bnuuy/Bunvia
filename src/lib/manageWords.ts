@@ -16,24 +16,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
-
-const DateCreated = new Date().toLocaleDateString("en-GB", {
-  day: "2-digit",
-  month: "2-digit",
-  year: "numeric",
-});
-
-export const initialState: StateTypes = {
-  words: [],
-  selectedTags: [],
-  selectedTypes: [],
-  dup: false,
-  search: "",
-  open: false,
-  confirm: false,
-  confirmTarget: null,
-  adminAccess: false,
-};
+import { DateCreated } from "./variables";
 
 export const reducer: (state: StateTypes, action: ActionTypes) => StateTypes = (
   state,
@@ -98,9 +81,6 @@ export const reducer: (state: StateTypes, action: ActionTypes) => StateTypes = (
 
       return { ...state, words: rw };
 
-    case "ADMIN_ACCESS":
-      return { ...state, adminAccess: !state.adminAccess };
-
     default:
       return state;
   }
@@ -139,9 +119,7 @@ export async function Favorite(
       msg: `Star sticker fell off ${word.name.toUpperCase()}...`,
       closeMsg: "Burrow",
     });
-    setTimeout(() => {
-      dispatch({ type: "FAVORITE", payload: word.id });
-    }, 300);
+    dispatch({ type: "FAVORITE", payload: word.id });
   }
 }
 
@@ -167,9 +145,7 @@ export async function Delete(
       msg: "The word refused to leave, Pee is chasing it around!",
       closeMsg: "Retry",
     });
-    setTimeout(() => {
-      dispatch({ type: "ROLLBACK", payload: word, index });
-    }, 300);
+    dispatch({ type: "ROLLBACK", payload: word, index });
   }
 }
 
