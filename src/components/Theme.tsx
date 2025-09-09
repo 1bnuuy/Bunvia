@@ -20,8 +20,8 @@ export const btnScale = {
 
 export const btnRelocate = {
   initial: { scale: 1, x: 0 },
-  hover: { x: 20 },
-  tap: { scale: 0.95, x: 20 },
+  hover: { x: -20 },
+  tap: { scale: 0.95, x: -20 },
 };
 
 export default function ThemeProvider({

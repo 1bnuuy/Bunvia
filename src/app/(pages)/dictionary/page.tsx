@@ -14,10 +14,9 @@ import {
 import { useToast } from "@/components/Toast";
 import { btnScale } from "@/components/Theme";
 
-import { Favorite, Fetch, reducer } from "@/lib/manageWords";
-import { initialState } from "@/lib/variables";
+import { Favorite, Fetch } from "@/lib/manageWords";
+import { initialState, tagColor, reducer } from "@/lib/variables";
 import { TagTypes } from "@/lib/types";
-import { tagColor } from "@/lib/variables";
 
 import { Modal } from "./modal";
 
@@ -174,6 +173,7 @@ export default function Dictionary() {
                               whileHover="hover"
                               whileTap="tap"
                               target="_blank"
+                              aria-label="Link to word"
                               href={`https://dictionary.cambridge.org/dictionary/english/${word.name}`}
                               className="group ml-auto flex items-center"
                             >

@@ -72,6 +72,7 @@ export const Modal = ({
                             payload: e.target.value,
                           })
                         }
+                        checked={state.selectedTags.includes(tag)}
                         value={tag}
                         className="peer absolute top-1/2 left-0 z-50 size-full -translate-y-1/2 cursor-pointer appearance-none"
                       />
@@ -131,6 +132,7 @@ export const Modal = ({
                             payload: e.target.value,
                           })
                         }
+                        checked={state.selectedTypes.includes(type)}
                         value={type}
                         className="peer absolute top-1/2 left-0 size-full -translate-y-1/2 cursor-pointer appearance-none"
                       />
@@ -161,9 +163,10 @@ export const Modal = ({
                     whileHover="hover"
                     whileTap="tap"
                     aria-label="Create"
-                    className="text-primary hover:bg-accent-hovered dark:hover:bg-accent-hovered-dark active:bg-accent-hovered dark:active:bg-accent-hovered-dark bg-accent dark:bg-accent-dark cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
+                    disabled={state.btnLoading}
+                    className="text-primary disabled:cursor-not-allowed disabled:bg-tertiary disabled:text-heading dark:disabled:text-heading-dark dark:disabled:bg-tertiary-dark hover:bg-accent-hovered dark:hover:bg-accent-hovered-dark active:bg-accent-hovered dark:active:bg-accent-hovered-dark bg-accent dark:bg-accent-dark cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
                   >
-                    Create
+                    {state.btnLoading ? "..." : "Create"}
                   </motion.button>
                 </div>
               </form>

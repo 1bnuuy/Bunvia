@@ -1,4 +1,4 @@
-import { StateTypes, TagTypes } from "./types";
+import { ActionTypes, StateTypes, TagTypes } from "./types";
 
 export const DateCreated = new Date().toLocaleDateString("en-GB", {
   day: "2-digit",
@@ -15,6 +15,81 @@ export const initialState: StateTypes = {
   open: false,
   confirm: false,
   confirmTarget: null,
+  btnLoading: false,
+};
+
+export const reducer: (state: StateTypes, action: ActionTypes) => StateTypes = (
+  state,
+  action,
+) => {
+  switch (action.type) {
+    case "FETCH_WORD":
+      return { ...state, words: action.payload };
+
+    case "SELECT_TYPES":
+      return {
+        ...state,
+        selectedTypes: state.selectedTypes.includes(action.payload)
+          ? state.selectedTypes.filter((tag) => tag !== action.payload)
+          : [...state.selectedTypes, action.payload],
+      };
+
+    case "SELECT_TAGS":
+      return {
+        ...state,
+        selectedTags: state.selectedTags.includes(action.payload)
+          ? state.selectedTags.filter((tag) => tag !== action.payload)
+          : [...state.selectedTags, action.payload],
+      };
+
+    case "DELETE":
+      return {
+        ...state,
+        words: state.words.filter((w) => w.id !== action.payload),
+      };
+
+    case "FAVORITE":
+      return {
+        ...state,
+        words: state.words.map((w) =>
+          w.id === action.payload ? { ...w, favorite: !w.favorite } : w,
+        ),
+      };
+
+    case "BUTTON_LOADING":
+      return {
+        ...state,
+        btnLoading: !state.btnLoading,
+      };
+
+    case "RESET_FORM":
+      return { ...state, selectedTags: [], selectedTypes: [], dup: false };
+
+    case "DUPLICATED":
+      return { ...state, dup: action.payload };
+
+    case "SEARCH":
+      return { ...state, search: action.payload };
+
+    case "OPEN_FORM":
+      return { ...state, open: !state.open };
+
+    case "CONFIRMATION":
+      return {
+        ...state,
+        confirm: !state.confirm,
+        confirmTarget: action.payload ?? null,
+      };
+
+    case "ROLLBACK":
+      const rw = [...state.words];
+      rw.splice(action.index, 0, action.payload);
+
+      return { ...state, words: rw };
+
+    default:
+      return state;
+  }
 };
 
 export const tagColor: Record<TagTypes, string> = {

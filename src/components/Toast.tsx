@@ -9,7 +9,7 @@ import {
   ToastContentTypes,
   ToastComponentTypes,
 } from "../lib/types";
-import { btnScale } from "./Theme";
+import { btnRelocate } from "./Theme";
 
 const ToastContext = createContext<ToastContextTypes | undefined>(undefined);
 export const useToast = () => {
@@ -36,23 +36,26 @@ export default function ToastProvider({
     setToasts((toast) => toast.filter((toast) => toast.id !== id));
 
   const toastPopUp: ToastContextTypes["toastPopUp"] = ({
-    mode,
+    success,
     msg,
-    closeMsg,
   }: ToastContentTypes) => {
     open((id) => (
-      <div
-        className={`bg-secondary border-2 ${mode ? "border-success" : "border-error"} dark:bg-secondary-dark flex w-[90vw] max-w-[555px] justify-between gap-3 rounded-lg px-3 py-2`}
+      <motion.div
+        variants={btnRelocate}
+        initial="initial"
+        whileHover="hover"
+        whileTap="tap"
+        className={`bg-secondary relative border-2 ${success ? "border-success" : "border-error"} dark:bg-secondary-dark flex w-[90vw] max-w-[555px] justify-between gap-3 rounded-lg px-3 py-2`}
       >
         <div className="flex items-center gap-3">
           <span
-            className={`${mode ? "bg-success" : "bg-error"} h-full min-w-1.5 rounded-full`}
+            className={`${success ? "bg-success" : "bg-error"} h-full min-w-1.5 rounded-full`}
           />
           <div className="flex flex-col">
             <span
-              className={`${mode ? "text-success" : "text-error"} text-lg font-bold`}
+              className={`${success ? "text-success" : "text-error"} text-lg font-bold`}
             >
-              {mode ? "Hooray!" : "Uh-oh!"}
+              {success ? "Hooray!" : "Uh-oh!"}
             </span>
             <span className="text-subtext dark:text-subtext-dark text-sm">
               {msg}
@@ -60,17 +63,11 @@ export default function ToastProvider({
           </div>
         </div>
 
-        <motion.button
-          variants={btnScale}
-          initial="initial"
-          whileHover="hover"
-          whileTap="tap"
-          className="text-accent dark:text-accent-dark bg-tertiary dark:bg-tertiary-dark active:text-accent-hovered dark:active:text-accent-hovered-dark hover:text-accent-hovered dark:hover:text-accent-hovered-dark cursor-pointer self-center rounded-md px-2 py-1 font-bold text-nowrap"
+        <button
+          className="absolute top-0 left-0 size-full cursor-pointer"
           onClick={() => close(id)}
-        >
-          {closeMsg}
-        </motion.button>
-      </div>
+        />
+      </motion.div>
     ));
   };
 
