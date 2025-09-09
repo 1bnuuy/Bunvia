@@ -1,12 +1,12 @@
-//--------------Theme.tsx--------------//
+//--------------Theme--------------//
 export type ThemeContextTypes = {
   ThemeDark: boolean;
   ThemeToggle: () => void;
 };
 
-//--------------Toast.tsx--------------//
+//--------------Toast--------------//
 export type ToastContextTypes = {
-  toastPopUp: (content: ToastContentTypes) => void
+  toastPopUp: (content: ToastContentTypes) => void;
 };
 
 export type ToastComponentTypes = (id: number) => React.ReactNode;
@@ -17,12 +17,11 @@ export type ToastTypes = {
 };
 
 export type ToastContentTypes = {
-  mode: boolean;
+  success: boolean;
   msg: string;
-  closeMsg: string;
 };
 
-//--------------Dictionary.tsx--------------//
+//--------------Dictionary--------------//
 export type WordTypes = {
   id: string;
   tag: string[];
@@ -40,7 +39,7 @@ export type StateTypes = {
   open: boolean;
   confirm: boolean;
   confirmTarget: { word: WordTypes; index: number } | null;
-  adminAccess: boolean;
+  btnLoading: boolean;
 };
 
 export type ActionTypes =
@@ -49,10 +48,11 @@ export type ActionTypes =
   | { type: "SELECT_TAGS"; payload: string }
   | { type: "DELETE"; payload: string }
   | { type: "FAVORITE"; payload: string }
+  | { type: "BUTTON_LOADING" }
   | { type: "RESET_FORM" }
   | { type: "DUPLICATED"; payload: boolean }
   | { type: "SEARCH"; payload: string }
-  | { type: "OPEN_FORM"}
+  | { type: "OPEN_FORM" }
   | {
       type: "CONFIRMATION";
       payload?: { word: WordTypes; index: number } | null;
@@ -61,3 +61,9 @@ export type ActionTypes =
   | { type: "ADMIN_ACCESS" };
 
 export type TagTypes = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+
+//--------------API--------------//
+export type ApiResponseTypes = {
+  success: boolean;
+  msg: string;
+};
