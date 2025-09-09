@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useReducer, useRef } from "react";
+import { useEffect, useMemo, useReducer } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,7 +33,7 @@ export default function Dictionary() {
     }, 600);
 
     return () => clearTimeout(DelayTransition);
-  }, []);
+  }, [toastPopUp, dispatch]);
 
   const filteredWords = useMemo(() => {
     return state.words.filter((item) => {

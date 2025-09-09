@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
       },
       { status: 201 },
     );
-  } catch (_error) {
+  } catch {
     return NextResponse.json(
       {
         success: false,

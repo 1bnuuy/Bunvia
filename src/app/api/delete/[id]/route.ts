@@ -4,19 +4,20 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  wordID : { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await wordID.params
     const body = await req.json();
     const name = body.name ?? null;
 
-    await deleteDoc(doc(db, "words", params.id));
+    await deleteDoc(doc(db, "words", id));
 
     return NextResponse.json({
       success: true,
       msg: `Poo made ${name ? name.toUpperCase() : "it"} vanish!`,
     });
-  } catch (_error) {
+  } catch {
     return NextResponse.json(
       {
         success: false,
