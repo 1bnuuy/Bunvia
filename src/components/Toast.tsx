@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import {
@@ -35,41 +35,40 @@ export default function ToastProvider({
   const close: (id: number) => void = (id) =>
     setToasts((toast) => toast.filter((toast) => toast.id !== id));
 
-  const toastPopUp: ToastContextTypes["toastPopUp"] = ({
-    success,
-    msg,
-  }: ToastContentTypes) => {
-    open((id) => (
-      <motion.div
-        variants={btnRelocate}
-        initial="initial"
-        whileHover="hover"
-        whileTap="tap"
-        className={`bg-secondary relative border-2 ${success ? "border-success" : "border-error"} dark:bg-secondary-dark flex w-[90vw] max-w-[555px] justify-between gap-3 rounded-lg px-3 py-2`}
-      >
-        <div className="flex items-center gap-3">
-          <span
-            className={`${success ? "bg-success" : "bg-error"} h-full min-w-1.5 rounded-full`}
-          />
-          <div className="flex flex-col">
+  const toastPopUp: ToastContextTypes["toastPopUp"] = useCallback(
+    ({ success, msg }: ToastContentTypes) => {
+      open((id) => (
+        <motion.div
+          variants={btnRelocate}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
+          className={`bg-secondary relative border-2 ${success ? "border-success" : "border-error"} dark:bg-secondary-dark flex w-[90vw] max-w-[555px] justify-between gap-3 rounded-lg px-3 py-2`}
+        >
+          <div className="flex items-center gap-3">
             <span
-              className={`${success ? "text-success" : "text-error"} text-lg font-bold`}
-            >
-              {success ? "Hooray!" : "Uh-oh!"}
-            </span>
-            <span className="text-subtext dark:text-subtext-dark text-sm">
-              {msg}
-            </span>
+              className={`${success ? "bg-success" : "bg-error"} h-full min-w-1.5 rounded-full`}
+            />
+            <div className="flex flex-col">
+              <span
+                className={`${success ? "text-success" : "text-error"} text-lg font-bold`}
+              >
+                {success ? "Hooray!" : "Uh-oh!"}
+              </span>
+              <span className="text-subtext dark:text-subtext-dark text-sm">
+                {msg}
+              </span>
+            </div>
           </div>
-        </div>
 
-        <button
-          className="absolute top-0 left-0 size-full cursor-pointer"
-          onClick={() => close(id)}
-        />
-      </motion.div>
-    ));
-  };
+          <button
+            className="absolute top-0 left-0 size-full cursor-pointer"
+            onClick={() => close(id)}
+          />
+        </motion.div>
+      ));
+    }, [],
+  );
 
   return (
     <ToastContext.Provider value={{ toastPopUp }}>

@@ -40,7 +40,7 @@ export async function Favorite(
       });
       dispatch({ type: "FAVORITE", payload: word.id });
     }
-  } catch (_error) {
+  } catch {
     toastPopUp({
       success: false,
       msg: `Star sticker fell off ${word.name.toUpperCase()}...`,
@@ -82,7 +82,7 @@ export async function Delete(
       });
       dispatch({ type: "ROLLBACK", payload: word, index });
     }
-  } catch (_error) {
+  } catch {
     //Runs if res = await fetch fails
     toastPopUp({
       success: false,
@@ -127,7 +127,7 @@ export async function Create(
     } else {
       toastPopUp({ success: result.success, msg: result.msg });
     }
-  } catch (_error) {
+  } catch {
     toastPopUp({
       success: false,
       msg: `Pee couldn't create ${Name.current?.value.toUpperCase()}...`,

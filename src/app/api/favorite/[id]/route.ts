@@ -26,7 +26,7 @@ export async function PATCH(
         msg: `${name.toUpperCase()} is no longer a favorite, but still adorable!`,
       });
     }
-  } catch (_error) {
+  } catch {
     return NextResponse.json(
       {
         success: false,

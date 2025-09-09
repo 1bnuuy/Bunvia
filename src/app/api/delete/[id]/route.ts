@@ -16,7 +16,7 @@ export async function DELETE(
       success: true,
       msg: `Poo made ${name ? name.toUpperCase() : "it"} vanish!`,
     });
-  } catch (_error) {
+  } catch {
     return NextResponse.json(
       {
         success: false,

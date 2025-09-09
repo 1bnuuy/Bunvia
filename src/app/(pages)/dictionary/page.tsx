@@ -33,7 +33,7 @@ export default function Dictionary() {
     }, 600);
 
     return () => clearTimeout(DelayTransition);
-  }, []);
+  }, [toastPopUp, dispatch]);
 
   const filteredWords = useMemo(() => {
     return state.words.filter((item) => {
