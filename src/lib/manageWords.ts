@@ -26,6 +26,10 @@ export async function Favorite(
       }),
     });
 
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
     const result: ApiResponseTypes = await res.json().catch(() => null);
 
     if (result?.success) {
