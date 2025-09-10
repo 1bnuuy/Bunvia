@@ -4,13 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const body = await req.json();
     const name = body.name ?? null;
 
-    await deleteDoc(doc(db, "words", params.id));
+    await deleteDoc(doc(db, "words", id));
 
     return NextResponse.json({
       success: true,
