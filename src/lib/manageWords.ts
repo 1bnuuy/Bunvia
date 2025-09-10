@@ -64,11 +64,12 @@ export async function Delete(
   dispatch({ type: "DELETE", payload: word.id });
 
   try {
-    const res = await fetch(`/api/delete/${word.id}`, {
+    const res = await fetch(`/api/delete`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: word.name,
+        id: word.id,
       }),
     });
 

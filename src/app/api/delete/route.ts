@@ -2,14 +2,10 @@ import { db } from "@/lib/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function DELETE(req: NextRequest) {
   try {
-    const { id } = await params;
     const body = await req.json();
-    const name = body.name ?? null;
+    const { name, id } = body ?? null;
 
     await deleteDoc(doc(db, "words", id));
 
