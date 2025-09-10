@@ -17,10 +17,11 @@ export async function Favorite(
   dispatch({ type: "FAVORITE", payload: word.id });
 
   try {
-    const res = await fetch(`/api/favorite/${word.id}`, {
+    const res = await fetch(`/api/favorite`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        id: word.id,
         name: word.name,
         favorite: word.favorite,
       }),

@@ -4,12 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { id } = await params;
     const body = await req.json();
-    const { name, favorite } = body ?? null;
+    const { name, favorite, id } = body ?? null;
 
     const wordRef = doc(db, "words", id);
     await updateDoc(wordRef, {
