@@ -19,7 +19,6 @@ import { initialState, tagColor, reducer } from "@/lib/variables";
 import { TagTypes } from "@/lib/types";
 
 import { Modal } from "./modal";
-import { Test } from "@/lib/test";
 
 export default function Dictionary() {
   const { toastPopUp } = useToast();
@@ -218,7 +217,7 @@ export default function Dictionary() {
                               type="button"
                               aria-label="favorite"
                               onClick={() =>
-                                Test(word)
+                                Favorite(word, dispatch, toastPopUp)
                               }
                             >
                               <FontAwesomeIcon
