@@ -21,7 +21,7 @@ export async function DELETE(
     return NextResponse.json(
       {
         success: false,
-        msg: "Something went really wrong, Pee is lost in the fields!",
+        msg: "Something went wrong, Pee is lost in the fields!",
       },
       { status: 500 },
     );

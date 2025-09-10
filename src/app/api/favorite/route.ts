@@ -4,29 +4,22 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { id } = await params;
     const body = await req.json();
-    const { name, favorite } = body ?? null;
+    const { name, favorite, id } = body ?? null;
 
     const wordRef = doc(db, "words", id);
     await updateDoc(wordRef, {
       favorite: !favorite,
     });
 
-    if (!favorite) {
-      return NextResponse.json({
-        success: true,
-        msg: `Favorited! Poo put a bow on ${name.toUpperCase()}.`,
-      });
-    } else {
-      return NextResponse.json({
-        success: true,
-        msg: `${name.toUpperCase()} is no longer a favorite, but still adorable!`,
-      });
-    }
+    return NextResponse.json({
+      success: true,
+      msg: !favorite
+        ? `Favorited! Poo put a bow on ${name.toUpperCase()}.`
+        : `${name.toUpperCase()} is no longer a favorite, but still adorable!`,
+    });
   } catch {
     return NextResponse.json(
       {
