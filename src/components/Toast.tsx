@@ -67,20 +67,27 @@ export default function ToastProvider({
           />
         </motion.div>
       ));
-    }, [],
+    },
+    [],
   );
 
   return (
     <ToastContext.Provider value={{ toastPopUp }}>
       {children}
       <div className="absolute top-5 z-40 flex flex-col gap-3 px-5 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:right-0">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {toasts.map(({ id, component }) => (
             <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.2 }}
+              layout
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{
+                duration: 0.3,
+                type: "spring",
+                visualDuration: 0.2,
+                bounce: 0.5,
+              }}
               key={id}
             >
               {component}
