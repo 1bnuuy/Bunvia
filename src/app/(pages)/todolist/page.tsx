@@ -1,6 +1,6 @@
 "use client";
 
-import { btnRelocate, btnScale } from "@/components/Theme";
+import { btnRelocate } from "@/lib/variables";
 
 import { faCheck, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

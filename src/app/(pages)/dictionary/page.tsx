@@ -12,8 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useToast } from "@/components/Toast";
-import { btnScale } from "@/components/Theme";
 
+import { btnScale } from "@/lib/variables";
 import { Favorite, Fetch } from "@/lib/manageWords";
 import { initialState, tagColor, reducer } from "@/lib/variables";
 import { TagTypes } from "@/lib/types";

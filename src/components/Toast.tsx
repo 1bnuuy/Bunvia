@@ -9,7 +9,7 @@ import {
   ToastContentTypes,
   ToastComponentTypes,
 } from "../lib/types";
-import { btnRelocate } from "./Theme";
+import { btnRelocate } from "@/lib/variables";
 
 const ToastContext = createContext<ToastContextTypes | undefined>(undefined);
 export const useToast = () => {
@@ -74,7 +74,7 @@ export default function ToastProvider({
   return (
     <ToastContext.Provider value={{ toastPopUp }}>
       {children}
-      <div className="absolute top-5 z-40 flex flex-col gap-3 px-5 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:right-0">
+      <div className="absolute top-5 z-40 flex w-[90vw] max-w-[555px] items-center flex-col gap-3 px-5 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:right-5">
         <AnimatePresence mode="popLayout">
           {toasts.map(({ id, component }) => (
             <motion.div

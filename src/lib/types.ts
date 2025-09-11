@@ -21,6 +21,13 @@ export type ToastContentTypes = {
   msg: string;
 };
 
+//--------------Star--------------//
+export type StarTypes = {
+  size: number;
+  t: number;
+  l: number;
+};
+
 //--------------Dictionary--------------//
 export type WordTypes = {
   id: string;

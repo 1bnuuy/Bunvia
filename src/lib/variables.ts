@@ -1,4 +1,48 @@
+import {
+  faBook,
+  faChartSimple,
+  faHouse,
+  faListCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { ActionTypes, StateTypes, TagTypes } from "./types";
+
+export const links = [
+  {
+    name: "Home",
+    icon: faHouse,
+    path: "/",
+  },
+
+  {
+    name: "Tasks",
+    icon: faListCheck,
+    path: "/todolist",
+  },
+
+  {
+    name: "Wordbook",
+    icon: faBook,
+    path: "/dictionary",
+  },
+
+  {
+    name: "Analytics",
+    icon: faChartSimple,
+    path: "/analytics",
+  },
+];
+
+export const btnScale = {
+  initial: { scale: 1 },
+  hover: { scale: 1.1 },
+  tap: { scale: 0.9 },
+};
+
+export const btnRelocate = {
+  initial: { scale: 1, x: 0 },
+  hover: { x: -20 },
+  tap: { scale: 0.95, x: -20 },
+};
 
 export const DateCreated = new Date().toLocaleDateString("en-GB", {
   day: "2-digit",

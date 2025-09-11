@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { btnScale } from "@/components/Theme";
+import { btnScale } from "@/lib/variables";
 
 const MotionLink = motion.create(Link);
 
