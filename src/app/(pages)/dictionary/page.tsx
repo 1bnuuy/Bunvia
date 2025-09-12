@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useToast } from "@/components/Toast";
+import { useUI } from "@/components/UI";
 
 import { btnScale } from "@/lib/variables";
 import { Favorite, Fetch } from "@/lib/manageWords";
@@ -21,6 +22,7 @@ import { TagTypes } from "@/lib/types";
 import { Modal } from "./modal";
 
 export default function Dictionary() {
+  const { navOpen } = useUI();
   const { toastPopUp } = useToast();
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -45,7 +47,11 @@ export default function Dictionary() {
     <>
       <Modal state={state} dispatch={dispatch} />
 
-      <section className="dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-8 transition max-lg:pb-25 md:pt-15 lg:px-30">
+      <section
+        className={`dark:bg-primary-dark grid-background bg-primary h-dvh w-screen
+           overflow-hidden pt-[80px] transition
+            ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} transition lg:px-30`}
+      >
         <div
           className={`relative flex h-full flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm) && "pointer-events-none opacity-30"}`}
         >
@@ -79,7 +85,7 @@ export default function Dictionary() {
             </div>
           )}
 
-          <div className="z-30 mb-10 grid max-h-[calc(100vh_-_250px)] min-w-[300px] auto-rows-min grid-cols-1 gap-5 overflow-x-hidden overflow-y-auto px-3 pb-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="z-30 mb-10 grid max-h-screen min-w-[300px] auto-rows-min grid-cols-1 gap-5 overflow-x-hidden overflow-y-auto px-3 pb-5 md:grid-cols-2 xl:grid-cols-3">
             <AnimatePresence>
               {state.words.length === 0 ? (
                 <div className="absolute left-1/2 flex w-70 -translate-x-1/2 justify-between text-4xl select-none">

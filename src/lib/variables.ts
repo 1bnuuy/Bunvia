@@ -3,8 +3,18 @@ import {
   faChartSimple,
   faHouse,
   faListCheck,
+  faPen,
+  faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
 import { ActionTypes, StateTypes, TagTypes } from "./types";
+
+export const availablePaths = [
+  "/",
+  "/todolist",
+  "/dictionary",
+  "/analytics",
+  "/auth",
+];
 
 export const links = [
   {
@@ -43,6 +53,37 @@ export const btnRelocate = {
   hover: { x: -20 },
   tap: { scale: 0.95, x: -20 },
 };
+
+export const onView = {
+  initial: { opacity: 0, y: -50 },
+  animate: { opacity: 1, y: 0 },
+};
+
+export const Features = [
+  {
+    name: "To-do List",
+    icon: faPen,
+    desc: "Stay on track by ticking off tasks, one at a time.",
+  },
+
+  {
+    name: "Notebook",
+    icon: faStickyNote,
+    desc: "Capture notes and ideas in a professional, organized space.",
+  },
+
+  {
+    name: "Dictionary",
+    icon: faBook,
+    desc: "Your pocket-sized dictionary for learning on the go.",
+  },
+
+  {
+    name: "Analytics",
+    icon: faChartSimple,
+    desc: "See progress in simple charts and celebrate milestones.",
+  },
+];
 
 export const DateCreated = new Date().toLocaleDateString("en-GB", {
   day: "2-digit",
