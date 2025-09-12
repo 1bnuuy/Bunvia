@@ -1,4 +1,89 @@
+import {
+  faBook,
+  faChartSimple,
+  faHouse,
+  faListCheck,
+  faPen,
+  faStickyNote,
+} from "@fortawesome/free-solid-svg-icons";
 import { ActionTypes, StateTypes, TagTypes } from "./types";
+
+export const availablePaths = [
+  "/",
+  "/todolist",
+  "/dictionary",
+  "/analytics",
+  "/auth",
+];
+
+export const links = [
+  {
+    name: "Home",
+    icon: faHouse,
+    path: "/",
+  },
+
+  {
+    name: "Tasks",
+    icon: faListCheck,
+    path: "/todolist",
+  },
+
+  {
+    name: "Wordbook",
+    icon: faBook,
+    path: "/dictionary",
+  },
+
+  {
+    name: "Analytics",
+    icon: faChartSimple,
+    path: "/analytics",
+  },
+];
+
+export const btnScale = {
+  initial: { scale: 1 },
+  hover: { scale: 1.1 },
+  tap: { scale: 0.9 },
+};
+
+export const btnRelocate = {
+  initial: { scale: 1, x: 0 },
+  hover: { x: -20 },
+  tap: { scale: 0.95, x: -20 },
+};
+
+export const onView = {
+  initial: { opacity: 0, y: -50 },
+  animate: { opacity: 1, y: 0 },
+};
+
+export const Features = [
+  {
+    name: "To-do List",
+    icon: faPen,
+    desc: "Stay on track by ticking off tasks, one at a time.",
+  },
+
+  {
+    name: "Notebook",
+    icon: faStickyNote,
+    desc: "Capture notes and ideas in a professional, organized space.",
+  },
+
+  {
+    name: "Dictionary",
+    icon: faBook,
+    desc: "Your pocket-sized dictionary for learning on the go.",
+  },
+
+  {
+    name: "Analytics",
+    icon: faChartSimple,
+    desc: "See progress in simple charts and celebrate milestones.",
+  },
+];
 
 export const DateCreated = new Date().toLocaleDateString("en-GB", {
   day: "2-digit",

@@ -21,6 +21,19 @@ export type ToastContentTypes = {
   msg: string;
 };
 
+//--------------UI--------------//
+export type UIContextTypes = {
+  navOpen: boolean;
+  navToggle: () => void;
+};
+
+//--------------Star--------------//
+export type StarTypes = {
+  size: number;
+  t: number;
+  l: number;
+};
+
 //--------------Dictionary--------------//
 export type WordTypes = {
   id: string;

@@ -14,8 +14,8 @@ import { useRef } from "react";
 import { tagColor, wordClass } from "@/lib/variables";
 import { ActionTypes, StateTypes, TagTypes } from "@/lib/types";
 import { Create, Delete } from "@/lib/manageWords";
+import { btnScale } from "@/lib/variables";
 
-import { btnScale } from "@/components/Theme";
 import { useToast } from "@/components/Toast";
 
 export const Modal = ({

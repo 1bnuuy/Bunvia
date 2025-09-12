@@ -8,6 +8,8 @@ import ThemeProvider from "@/components/Theme";
 import ToastProvider from "@/components/Toast";
 import Nav from "@/components/Nav";
 import PageTransition from "@/components/PageTransition";
+import Header from "@/components/Header";
+import UIProvider from "@/components/UI";
 
 const jetbrains = JetBrains_Mono({
   variable: "--font-JBMono",
@@ -31,8 +33,11 @@ export default function RootLayout({
         <ThemeProvider>
           <PageTransition>
             <ToastProvider>
-              <Nav />
-              {children}
+              <UIProvider>
+                <Header />
+                <Nav />
+                {children}
+              </UIProvider>
             </ToastProvider>
           </PageTransition>
         </ThemeProvider>
