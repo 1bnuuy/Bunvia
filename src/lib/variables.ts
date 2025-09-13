@@ -54,32 +54,52 @@ export const btnRelocate = {
   tap: { scale: 0.95, x: -20 },
 };
 
-export const onView = {
+export const Pop = {
+  initial: { scale: 0 },
+  animate: { scale: 1 },
+};
+
+export const FadeInBottom = {
+  initial: { opacity: 0, y: 50 },
+  animate: { opacity: 1, y: 0 },
+};
+
+export const FadeInTop = {
   initial: { opacity: 0, y: -50 },
   animate: { opacity: 1, y: 0 },
 };
 
+export const SlideInLeft = {
+  initial: { opacity: 0, x: -50 },
+  animate: { opacity: 1, x: 0 },
+};
+
+export const SlideInRight = {
+  initial: { opacity: 0, x: 50 },
+  animate: { opacity: 1, x: 0 },
+};
+
 export const Features = [
   {
-    name: "To-do List",
+    name: "Tasks & Priorities",
     icon: faPen,
     desc: "Stay on track by ticking off tasks, one at a time.",
   },
 
   {
-    name: "Notebook",
+    name: "Personal Notebook",
     icon: faStickyNote,
     desc: "Capture notes and ideas in a professional, organized space.",
   },
 
   {
-    name: "Dictionary",
+    name: "Vocabulary Builder",
     icon: faBook,
     desc: "Your pocket-sized dictionary for learning on the go.",
   },
 
   {
-    name: "Analytics",
+    name: "Activity Insights",
     icon: faChartSimple,
     desc: "See progress in simple charts and celebrate milestones.",
   },
