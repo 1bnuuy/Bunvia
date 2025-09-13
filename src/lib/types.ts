@@ -27,8 +27,8 @@ export type UIContextTypes = {
   navToggle: () => void;
 };
 
-//--------------Star--------------//
-export type StarTypes = {
+//--------------AddOn--------------//
+export type AddOnTypes = {
   size: number;
   t: number;
   l: number;

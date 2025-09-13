@@ -17,7 +17,7 @@ export default function UIProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [navOpen, setNavOpen] = useState(true);
+  const [navOpen, setNavOpen] = useState(false);
 
   const navToggle = () => {
     setNavOpen(!navOpen);

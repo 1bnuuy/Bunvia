@@ -35,7 +35,7 @@ export default function Nav() {
     <>
       {isAvailable && (
         <nav
-          className={`bg-secondary border-accent flex ${navOpen ? "left-4 max-lg:bottom-4" : "-left-21 max-lg:-bottom-18"} dark:border-accent-dark dark:bg-secondary-dark max-xs:gap-2 fixed z-40 items-start justify-between gap-8 rounded-md border-1 px-4 text-nowrap transition-all select-none max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8`}
+          className={`bg-primary border-accent flex ${navOpen ? "left-4 max-lg:bottom-4" : "-left-21 max-lg:-bottom-18"} dark:border-accent-dark dark:bg-primary-dark max-xs:gap-2 fixed z-40 items-start justify-between gap-8 rounded-md border-1 px-4 text-nowrap transition-all select-none max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8`}
         >
           <MotionLink
             variants={btnScale}
@@ -44,7 +44,7 @@ export default function Nav() {
             initial="initial"
             key="loginButton"
             href="/auth"
-            className="ring-offset-secondary xs:flex hover:ring-accent dark:hover:ring-accent-dark active:ring-accent dark:active:ring-accent-dark ring-tertiary dark:ring-offset-secondary-dark dark:ring-tertiary-dark bg-tertiary dark:bg-tertiary-dark relative hidden aspect-square min-w-[48px] basis-[48px] cursor-pointer items-center justify-center overflow-hidden rounded-full hover:ring-2 hover:ring-offset-3 active:ring-2 active:ring-offset-3"
+            className="ring-offset-secondary xs:flex hover:ring-accent dark:hover:ring-accent-dark active:ring-accent dark:active:ring-accent-dark ring-secondary dark:ring-offset-secondary-dark dark:ring-secondary-dark bg-secondary dark:bg-secondary-dark relative hidden aspect-square min-w-[48px] basis-[48px] cursor-pointer items-center justify-center overflow-hidden rounded-full hover:ring-2 hover:ring-offset-3 active:ring-2 active:ring-offset-3"
           >
             <FontAwesomeIcon
               icon={faPlus}
@@ -77,7 +77,7 @@ export default function Nav() {
                             whileHover="hover"
                             whileTap="tap"
                             initial="initial"
-                            className={`size-[48px] cursor-pointer rounded-md ${link.path === pathname && "bg-tertiary dark:bg-tertiary-dark"}`}
+                            className={`size-[48px] cursor-pointer rounded-md ${link.path === pathname && "bg-secondary dark:bg-secondary-dark"}`}
                           >
                             <FontAwesomeIcon
                               icon={link.icon}

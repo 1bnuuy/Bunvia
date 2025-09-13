@@ -25,7 +25,7 @@ export default function Header() {
     <>
       {isAvailable && (
         <header
-          className={`bg-secondary dark:bg-secondary-dark border-tertiary dark:border-tertiary-dark fixed z-40 flex h-[65px] w-screen items-center justify-between border-b-2 px-5 transition select-none lg:px-45`}
+          className={`bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark fixed z-40 flex h-[65px] w-screen items-center justify-between border-b-2 px-5 transition select-none lg:px-45`}
         >
           <div className="flex items-center gap-5">
             <MotionLink

@@ -17,7 +17,7 @@ export default function ThemeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [ThemeDark, setTheme] = useState(false);
+  const [ThemeDark, setTheme] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   const ThemeToggle = () => {
