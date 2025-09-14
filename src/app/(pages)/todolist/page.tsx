@@ -9,9 +9,9 @@ import { AnimatePresence, motion } from "motion/react";
 
 export default function Todolist() {
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-8 transition-all max-lg:pb-25 md:pt-15 lg:px-25">
+    <section className="dark:bg-primary-dark grid-background pt-[100px] bg-primary h-dvh w-screen overflow-hidden transition max-lg:pb-25 lg:px-25">
       <div className="relative flex h-full flex-col items-center gap-4 px-4">
-        <p className="text-subtext dark:text-subtext-dark text-lg text-balance">
+        <p className="text-subtext text-center dark:text-subtext-dark text-lg text-balance">
           Let&apos;s see what we&apos;ve got to do today.
         </p>
 
