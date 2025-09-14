@@ -29,9 +29,11 @@ export type UIContextTypes = {
 
 //--------------AddOn--------------//
 export type AddOnTypes = {
-  size: number;
-  t: number;
-  l: number;
+  size?: number;
+  h?: number;
+  w?: number;
+  t?: number;
+  l?: number;
 };
 
 //--------------Dictionary--------------//

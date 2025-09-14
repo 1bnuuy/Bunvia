@@ -9,6 +9,7 @@ import {
   SlideInLeft,
   SlideInRight,
   Pop,
+  FadeInBottom,
 } from "@/lib/variables";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,22 +18,26 @@ import {
   faWandMagicSparkles,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Star, StarDouble, StarOutline } from "./addOn";
+import { Star, StarDouble, StarOutline, Svg_TodoList } from "./addOn";
 
 const MotionLink = motion.create(Link);
+const animDelay = 0.25;
+const animDuration = 0.3;
+const viewPercent = 0.8;
 
 export default function Home() {
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary h-screen w-screen overflow-x-hidden overflow-y-scroll pt-[100px] transition max-lg:pb-25 lg:px-15">
-      <div className="text-heading dark:text-heading-dark relative left-1/2 z-10 mb-[150px] flex h-full max-h-[600px] max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-3 px-5">
+    <section className="dark:bg-primary-dark grid-background bg-primary min-h-dvh w-screen overflow-x-hidden pt-[100px] transition max-lg:pb-25 lg:px-15">
+      {/* 1st Section */}
+      <div className="text-heading dark:text-heading-dark relative left-1/2 z-10 mb-[150px] flex h-screen max-h-[600px] max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-3 px-5">
         <AnimatePresence>
           <motion.p
             key="subtitle"
             variants={FadeInTop}
             initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            animate="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration, delay: animDelay * 2 }}
             className="text-xl"
           >
             YOUR GATEWAY TO
@@ -42,9 +47,9 @@ export default function Home() {
             key="title"
             variants={FadeInTop}
             initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.9 }}
+            animate="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration, delay: animDelay * 3 }}
             className="text-accent dark:text-accent-dark z-10 text-center text-5xl leading-tight font-bold tracking-widest md:text-7xl"
           >
             LIMITLESS
@@ -56,9 +61,9 @@ export default function Home() {
             key="desc"
             variants={FadeInTop}
             initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 1.2 }}
+            animate="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration, delay: animDelay * 4 }}
             className="text-subtext dark:text-subtext-dark z-10 text-center text-xl max-sm:text-lg"
           >
             Step into a world where education meets creativity.
@@ -68,14 +73,14 @@ export default function Home() {
             key="link"
             variants={Pop}
             initial="initial"
-            whileInView="animate"
+            animate="animate"
             transition={{
-              duration: 0.4,
-              delay: 2,
+              duration: animDuration,
+              delay: animDelay * 6,
               type: "spring",
               stiffness: 250,
             }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: viewPercent }}
             href="todolist"
             className="bg-heading hover:bg-tertiary-dark dark:text-primary-dark dark:hover:bg-tertiary dark:active:bg-tertiary active:bg-tertiary-dark dark:bg-heading-dark text-primary z-10 flex items-center gap-2 rounded-md px-5 py-2 text-xl select-none"
           >
@@ -99,14 +104,15 @@ export default function Home() {
         <span className="bg-heading dark:bg-heading-dark pointer-events-none absolute -bottom-1/6 -z-10 size-[350px] blur-[250px]" />
       </div>
 
-      <div className="relative left-1/2 z-10 mb-[125px] flex max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center px-3">
+      {/* 2nd Section */}
+      <div className="relative left-1/2 z-10 mb-[125px] flex max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center px-5">
         <AnimatePresence>
           <motion.p
             key="text"
             variants={FadeInTop}
             initial="initial"
             animate="animate"
-            transition={{ duration: 0.5, delay: 2.6 }}
+            transition={{ duration: animDuration, delay: animDelay * 8 }}
             className="text-heading dark:text-heading-dark my-5 text-center text-xl leading-relaxed"
           >
             Designed to keep learning light, fun, and organized.
@@ -116,7 +122,7 @@ export default function Home() {
             variants={FadeInTop}
             initial="initial"
             animate="animate"
-            transition={{ duration: 0.5, delay: 2.8 }}
+            transition={{ duration: animDuration, delay: animDelay * 9 }}
             className="bg-heading dark:bg-heading-dark h-50 w-1 rounded-t-md"
           />
           <motion.span
@@ -124,13 +130,14 @@ export default function Home() {
             variants={FadeInTop}
             initial="initial"
             animate="animate"
-            transition={{ duration: 0.5, delay: 3 }}
+            transition={{ duration: animDuration, delay: animDelay * 10 }}
             className="border-heading dark:border-heading-dark size-5 rounded-full border-3"
           />
         </AnimatePresence>
       </div>
 
-      <div className="text-heading dark:text-heading-dark relative left-1/2 z-10 mb-[175px] flex max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-15 px-3">
+      {/* 3rd Section */}
+      <div className="text-heading dark:text-heading-dark relative left-1/2 z-10 mb-[175px] flex max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-15 px-5">
         <AnimatePresence>
           <div className="relative">
             <motion.span
@@ -138,8 +145,8 @@ export default function Home() {
               variants={SlideInLeft}
               initial="initial"
               whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
+              transition={{ duration: animDuration }}
+              viewport={{ once: true, amount: viewPercent }}
               className="text-accent dark:text-accent-dark absolute top-0 left-0 text-6xl select-none"
             >
               &#8988;
@@ -149,8 +156,8 @@ export default function Home() {
               key="s1"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.6 }}
-              viewport={{ once: true }}
+              transition={{ duration: animDuration, delay: animDelay }}
+              viewport={{ once: true, amount: viewPercent }}
               className="z-10 p-5 text-center text-4xl leading-tight font-bold tracking-widest"
             >
               Organize your goals
@@ -161,8 +168,8 @@ export default function Home() {
               variants={SlideInRight}
               initial="initial"
               whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
+              transition={{ duration: animDuration }}
+              viewport={{ once: true, amount: viewPercent }}
               className="text-accent dark:text-accent-dark absolute right-0 bottom-0 text-6xl select-none"
             >
               &#8991;
@@ -179,8 +186,11 @@ export default function Home() {
                   variants={FadeInTop}
                   initial="initial"
                   whileInView="animate"
-                  transition={{ duration: 0.5, delay: index * 0.15 }}
-                  viewport={{ once: true }}
+                  transition={{
+                    duration: animDuration,
+                    delay: index * 0.15,
+                  }}
+                  viewport={{ once: true, amount: viewPercent }}
                   className="flex flex-col items-center justify-center gap-3 text-center"
                 >
                   <div className="bg-tertiary dark:bg-tertiary-dark flex aspect-square w-[65px] items-center justify-center rounded-full">
@@ -200,242 +210,206 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative left-1/2 z-10 mb-[125px] grid w-full max-w-[1440px] -translate-x-1/2 grid-rows-3 gap-4 px-10 sm:grid-cols-6 lg:grid-cols-10">
-        <div className="bg-secondary dark:bg-secondary-dark flex flex-col gap-2 rounded-md px-4 py-5 sm:col-span-6 lg:col-span-6 lg:row-span-2">
-          <AnimatePresence>
-            <motion.h3
-              key="title"
-              variants={SlideInLeft}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold"
-            >
+      {/* 4th Section */}
+      <div className="relative left-1/2 z-10 mb-[125px] grid w-full max-w-[1440px] -translate-x-1/2 grid-rows-3 gap-4 px-8 sm:grid-cols-6 lg:grid-cols-10">
+        <AnimatePresence>
+          <motion.div
+            key="lg"
+            variants={FadeInTop}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration }}
+            className="bg-secondary dark:bg-secondary-dark relative z-10 flex flex-col gap-2 overflow-hidden rounded-t-lg px-4 py-5 sm:col-span-6 lg:col-span-6 row-span-2"
+          >
+            <h3 className="text-heading dark:text-heading-dark z-10 text-2xl leading-snug font-semibold">
               Effortless strategy & planning management.
-            </motion.h3>
+            </h3>
 
-            <motion.p
-              key="subtitle"
-              variants={SlideInRight}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-subtext dark:text-subtext-dark"
-            >
+            <p className="text-subtext dark:text-subtext-dark z-10">
               Carefully designed to aid you in prioritizing goals, tracking
               deadlines.
-            </motion.p>
+            </p>
 
-            <motion.div
-              key="image"
-              variants={Pop}
-              initial="initial"
-              whileInView="animate"
-              transition={{
-                duration: 0.4,
-                type: "spring",
-                stiffness: 250,
-              }}
-              viewport={{ once: true }}
-              className="text-accent mt-8"
-            >
-              A good visualized demo
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            <div className="text-accent z-10 mt-8">A good visualized demo</div>
 
-        <div className="bg-secondary dark:bg-secondary-dark flex flex-col gap-2 rounded-md px-4 py-5 sm:col-span-3 lg:col-span-4">
-          <AnimatePresence>
-            <motion.h3
-              key="title"
-              variants={SlideInLeft}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold"
-            >
+            <span className="gradient absolute top-0 left-0 size-full" />
+          </motion.div>
+
+          <motion.div
+            key="sm"
+            variants={SlideInRight}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration }}
+            className="bg-secondary dark:bg-secondary-dark relative overflow-hidden flex flex-col gap-2 px-4 py-5 lg:rounded-t-lg sm:col-span-3 lg:col-span-4"
+          >
+            <h3 className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold">
               Manage ideas efficiently.
-            </motion.h3>
+            </h3>
 
-            <motion.p
-              key="subtitle"
-              variants={SlideInRight}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-subtext dark:text-subtext-dark"
-            >
+            <p className="text-subtext dark:text-subtext-dark">
               Carefully designed to aid you in prioritizing goals, tracking
               deadlines.
-            </motion.p>
+            </p>
 
-            <motion.div
-              key="image"
-              variants={Pop}
-              initial="initial"
-              whileInView="animate"
-              transition={{
-                duration: 0.4,
-                type: "spring",
-                stiffness: 250,
-              }}
-              viewport={{ once: true }}
-              className="text-accent mt-8"
-            >
-              A good visualized demo
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            <div className="text-accent mt-8">A good visualized demo</div>
+            <span className="gradient absolute top-0 left-0 size-full" />
+          </motion.div>
 
-        <div className="bg-secondary dark:bg-secondary-dark flex flex-col gap-2 rounded-md px-4 py-5 sm:col-span-3 lg:col-span-4">
-          <AnimatePresence>
-            <motion.h3
-              key="title"
-              variants={SlideInLeft}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold"
-            >
+          <motion.div
+            key="sm2"
+            variants={SlideInLeft}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration }}
+            className="bg-secondary dark:bg-secondary-dark relative overflow-hidden flex flex-col gap-2 px-4 py-5 sm:col-span-3 lg:col-span-4"
+          >
+            <h3 className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold">
               Manage ideas{" "}
               <span className="text-accent dark:text-accent-dark">
                 efficiently
               </span>
-            </motion.h3>
+            </h3>
 
-            <motion.p
-              key="subtitle"
-              variants={SlideInRight}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-subtext dark:text-subtext-dark"
-            >
+            <p className="text-subtext dark:text-subtext-dark">
               Carefully designed to aid you in prioritizing goals, tracking
               deadlines.
-            </motion.p>
+            </p>
 
-            <motion.div
-              key="image"
-              variants={Pop}
-              initial="initial"
-              whileInView="animate"
-              transition={{
-                duration: 0.4,
-                type: "spring",
-                stiffness: 250,
-              }}
-              viewport={{ once: true }}
-              className="text-accent mt-8"
-            >
-              A good visualized demo
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            <div className="text-accent mt-8">A good visualized demo</div>
+            <span className="gradient absolute top-0 left-0 size-full" />
+          </motion.div>
 
-        <div className="bg-secondary dark:bg-secondary-dark flex flex-col gap-2 rounded-md px-4 py-5 sm:col-span-3 lg:col-span-5">
-          <AnimatePresence>
-            <motion.h3
-              key="title"
-              variants={SlideInLeft}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold"
-            >
+          <motion.div
+            key="md"
+            variants={FadeInBottom}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration }}
+            className="bg-secondary dark:bg-secondary-dark overflow-hidden relative flex flex-col gap-2 px-4 py-5 sm:rounded-b-lg sm:col-span-3 lg:col-span-5"
+          >
+            <h3 className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold">
               Manage ideas{" "}
               <span className="text-accent dark:text-accent-dark">
                 efficiently
               </span>
-            </motion.h3>
+            </h3>
 
-            <motion.p
-              key="subtitle"
-              variants={SlideInRight}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-subtext dark:text-subtext-dark"
-            >
+            <p className="text-subtext dark:text-subtext-dark">
               Carefully designed to aid you in prioritizing goals, tracking
               deadlines.
-            </motion.p>
+            </p>
 
-            <motion.div
-              key="image"
-              variants={Pop}
-              initial="initial"
-              whileInView="animate"
-              transition={{
-                duration: 0.4,
-                type: "spring",
-                stiffness: 250,
-              }}
-              viewport={{ once: true }}
-              className="text-accent mt-8"
-            >
-              A good visualized demo
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            <div className="text-accent mt-8">A good visualized demo</div>
+            <span className="gradient absolute top-0 left-0 size-full" />
+          </motion.div>
 
-        <div className="bg-secondary dark:bg-secondary-dark flex flex-col gap-2 rounded-md px-4 py-5 sm:col-span-3 lg:col-span-5">
-          <AnimatePresence>
-            <motion.h3
-              key="title"
-              variants={SlideInLeft}
-              initial="initial"
-              whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold"
-            >
+          <motion.div
+            key="md2"
+            variants={FadeInTop}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: viewPercent }}
+            transition={{ duration: animDuration }}
+            className="bg-secondary dark:bg-secondary-dark overflow-hidden relative flex flex-col gap-2 rounded-b-lg px-4 py-5 sm:col-span-3 lg:col-span-5"
+          >
+            <h3 className="text-heading dark:text-heading-dark text-2xl leading-snug font-semibold">
               Manage ideas{" "}
               <span className="text-accent dark:text-accent-dark">
                 efficiently
               </span>
+            </h3>
+
+            <p className="text-subtext dark:text-subtext-dark">
+              Carefully designed to aid you in prioritizing goals, tracking
+              deadlines.
+            </p>
+
+            <div className="text-accent mt-8">A good visualized demo</div>
+            <span className="gradient absolute top-0 left-0 size-full" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* 5th Section */}
+      <div className="text-heading dark:text-heading-dark relative left-1/2 z-10 mb-[175px] flex max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-15 px-5">
+        <AnimatePresence>
+          <div className="relative">
+            <motion.span
+              key="b1"
+              variants={SlideInLeft}
+              initial="initial"
+              whileInView="animate"
+              transition={{ duration: animDuration }}
+              viewport={{ once: true, amount: viewPercent }}
+              className="text-accent dark:text-accent-dark absolute top-0 left-0 text-6xl select-none"
+            >
+              &#8988;
+            </motion.span>
+
+            <motion.h3
+              key="s1"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: animDuration, delay: animDelay }}
+              viewport={{ once: true, amount: viewPercent }}
+              className="z-10 p-5 text-center text-4xl leading-tight font-bold tracking-widest"
+            >
+              Learn and Reference
             </motion.h3>
 
-            <motion.p
-              key="subtitle"
+            <motion.span
+              key="b2"
               variants={SlideInRight}
               initial="initial"
               whileInView="animate"
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-subtext dark:text-subtext-dark"
+              transition={{ duration: animDuration }}
+              viewport={{ once: true, amount: viewPercent }}
+              className="text-accent dark:text-accent-dark absolute right-0 bottom-0 text-6xl select-none"
             >
-              Carefully designed to aid you in prioritizing goals, tracking
-              deadlines.
-            </motion.p>
+              &#8991;
+            </motion.span>
+          </div>
+        </AnimatePresence>
 
-            <motion.div
-              key="image"
-              variants={Pop}
-              initial="initial"
-              whileInView="animate"
-              transition={{
-                duration: 0.4,
-                type: "spring",
-                stiffness: 250,
-              }}
-              viewport={{ once: true }}
-              className="text-accent mt-8"
-            >
-              A good visualized demo
-            </motion.div>
+        <div className="px-5">
+          <AnimatePresence>
+            <div className="bg-secondary border-accent dark:border-accent-dark dark:bg-secondary-dark relative grid items-end gap-15 rounded-md border-b-5 p-5 md:grid-cols-2">
+              <motion.div
+                variants={FadeInTop}
+                initial="initial"
+                whileInView="animate"
+                transition={{
+                  duration: animDuration,
+                }}
+                viewport={{ once: true, amount: viewPercent }}
+                className="bg-tertiary dark:bg-tertiary-dark absolute flex w-full flex-col gap-3 px-3"
+              >
+                <div>
+                  <p className="text-3xl font-semibold">
+                    Let{" "}
+                    <span className="text-accent dark:text-accent-dark uppercase">
+                      curiosity
+                    </span>{" "}
+                    guide you
+                  </p>
+                  <p className="text-subtext dark:text-subtext-dark text-balance">
+                    Uncover new ideas, explore fresh paths.
+                  </p>
+                </div>
+              </motion.div>
+
+              <Svg_TodoList />
+            </div>
           </AnimatePresence>
         </div>
       </div>
 
+      {/* 6th Section */}
       <div className="relative left-1/2 z-10 mb-[125px] max-w-[700px] -translate-x-1/2 px-5 text-center">
         <AnimatePresence>
           <motion.div
@@ -444,9 +418,9 @@ export default function Home() {
             initial="initial"
             whileInView="animate"
             transition={{
-              duration: 0.5,
+              duration: animDuration,
             }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: viewPercent }}
             className="bg-secondary dark:bg-secondary-dark relative z-10 flex flex-col items-center gap-3 overflow-hidden rounded-md px-5 py-15 text-balance"
           >
             <h3 className="text-heading dark:text-heading-dark z-10 text-2xl font-semibold">

@@ -1,8 +1,12 @@
 import {
   faBook,
   faChartSimple,
+  faEye,
   faHouse,
+  faLightbulb,
   faListCheck,
+  faMagnifyingGlass,
+  faMedal,
   faPen,
   faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
@@ -102,6 +106,32 @@ export const Features = [
     name: "Activity Insights",
     icon: faChartSimple,
     desc: "See progress in simple charts and celebrate milestones.",
+  },
+];
+
+export const LearnAndReference = [
+  {
+    name: "Discover",
+    icon: faMagnifyingGlass,
+    desc: "Uncover new ideas, explore fresh paths, and let curiosity guide your next step.",
+  },
+
+  {
+    name: "Learn",
+    icon: faLightbulb,
+    desc: "Grow your knowledge with guides, notes, and resources that make every step brighter.",
+  },
+
+  {
+    name: "Focus",
+    icon: faEye,
+    desc: "Stay centered and focused with tools to help you keep your attention where it matters most.",
+  },
+
+  {
+    name: "Achieve",
+    icon: faMedal,
+    desc: "Turn effort into the space where focus meets progress, helping you accomplish what you dream of.",
   },
 ];
 

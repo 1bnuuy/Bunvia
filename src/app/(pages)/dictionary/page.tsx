@@ -85,7 +85,7 @@ export default function Dictionary() {
             </div>
           )}
 
-          <div className="z-30 mb-10 grid max-h-screen min-w-[300px] auto-rows-min grid-cols-1 gap-5 overflow-x-hidden overflow-y-auto px-3 pb-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="z-30 mb-10 grid max-h-screen min-w-[300px] custom-scroll auto-rows-min grid-cols-1 gap-5 overflow-x-hidden overflow-y-auto px-3 pb-5 sm:grid-cols-2 xl:grid-cols-3">
             <AnimatePresence>
               {state.words.length === 0 ? (
                 <div className="absolute left-1/2 flex w-70 -translate-x-1/2 justify-between text-4xl select-none">
