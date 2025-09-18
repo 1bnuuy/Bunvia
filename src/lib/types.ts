@@ -1,3 +1,5 @@
+import { object } from "motion/react-client";
+
 //--------------Theme--------------//
 export type ThemeContextTypes = {
   ThemeDark: boolean;
@@ -36,6 +38,33 @@ export type AddOnTypes = {
   l?: number;
 };
 
+//--------------To-do List--------------//
+export type TodoTypes = {
+  id: string;
+  text: string;
+  done: boolean;
+};
+
+export type InitTodoListTypes = {
+  isEditing: null | "title" | "desc";
+  newTitle: string;
+  newDesc: string;
+  openCreate: boolean;
+  list: TodoTypes[];
+  isDragging: boolean;
+};
+
+export type TodoListActionTypes =
+  | { type: "ENABLE_EDITING"; payload: null | "title" | "desc" }
+  | { type: "SET_TITLE"; payload: string }
+  | { type: "SET_DESC"; payload: string }
+  | { type: "OPEN_CREATE" }
+  | { type: "ADD_TODO"; payload: TodoTypes }
+  | { type: "DELETE_TODO"; payload: string }
+  | { type: "ARRANGE_LIST"; payload: TodoTypes[] }
+  | { type: "DONE_TODO"; payload: string }
+  | { type: "SET_IS_DRAGGING" };
+
 //--------------Dictionary--------------//
 export type WordTypes = {
   id: string;
@@ -45,7 +74,7 @@ export type WordTypes = {
   date: string;
   favorite: boolean;
 };
-export type StateTypes = {
+export type InitDictionaryTypes = {
   words: WordTypes[];
   selectedTags: string[];
   selectedTypes: string[];
@@ -57,7 +86,7 @@ export type StateTypes = {
   btnLoading: boolean;
 };
 
-export type ActionTypes =
+export type DictionaryActionTypes =
   | { type: "FETCH_WORD"; payload: WordTypes[] }
   | { type: "SELECT_TYPES"; payload: string }
   | { type: "SELECT_TAGS"; payload: string }
@@ -72,8 +101,7 @@ export type ActionTypes =
       type: "CONFIRMATION";
       payload?: { word: WordTypes; index: number } | null;
     }
-  | { type: "ROLLBACK"; index: number; payload: WordTypes }
-  | { type: "ADMIN_ACCESS" };
+  | { type: "ROLLBACK"; index: number; payload: WordTypes };
 
 export type TagTypes = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 

@@ -1,7 +1,7 @@
 import {
-  ActionTypes,
+  DictionaryActionTypes,
   ApiResponseTypes,
-  StateTypes,
+  InitDictionaryTypes,
   ToastContextTypes,
   WordTypes,
 } from "@/lib/types";
@@ -11,7 +11,7 @@ import { db } from "./firebase";
 //--------------FAVORITE--------------//
 export async function Favorite(
   word: WordTypes,
-  dispatch: React.Dispatch<ActionTypes>,
+  dispatch: React.Dispatch<DictionaryActionTypes>,
   toastPopUp: ToastContextTypes["toastPopUp"],
 ) {
   dispatch({ type: "FAVORITE", payload: word.id });
@@ -54,7 +54,7 @@ export async function Favorite(
 export async function Delete(
   word: WordTypes,
   index: number,
-  dispatch: React.Dispatch<ActionTypes>,
+  dispatch: React.Dispatch<DictionaryActionTypes>,
   toastPopUp: ToastContextTypes["toastPopUp"],
 ) {
   dispatch({ type: "DELETE", payload: word.id });
@@ -98,8 +98,8 @@ export async function Delete(
 export async function Create(
   e: React.FormEvent<HTMLFormElement>,
   Name: React.RefObject<HTMLInputElement | null>,
-  state: StateTypes,
-  dispatch: React.Dispatch<ActionTypes>,
+  state: InitDictionaryTypes,
+  dispatch: React.Dispatch<DictionaryActionTypes>,
   toastPopUp: ToastContextTypes["toastPopUp"],
 ) {
   e.preventDefault();
@@ -142,7 +142,7 @@ export async function Create(
 
 //--------------FETCH--------------//
 export function Fetch(
-  dispatch: React.Dispatch<ActionTypes>,
+  dispatch: React.Dispatch<DictionaryActionTypes>,
   toastPopUp: ToastContextTypes["toastPopUp"],
 ) {
   let firstLoad = true;

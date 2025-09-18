@@ -14,9 +14,14 @@ import {
 import { useToast } from "@/components/Toast";
 import { useUI } from "@/components/UI";
 
-import { btnScale } from "@/lib/variables";
 import { Favorite, Fetch } from "@/lib/manageWords";
-import { initialState, tagColor, reducer } from "@/lib/variables";
+import {
+  InitialDictionary,
+  tagColor,
+  DictionaryReducer,
+  btnScale,
+  framerAnimProps,
+} from "@/lib/variables";
 import { TagTypes } from "@/lib/types";
 
 import { Modal } from "./modal";
@@ -25,7 +30,7 @@ export default function Dictionary() {
   const { navOpen } = useUI();
   const { toastPopUp } = useToast();
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(DictionaryReducer, InitialDictionary);
 
   useEffect(() => {
     const DelayTransition = setTimeout(() => {
@@ -48,12 +53,10 @@ export default function Dictionary() {
       <Modal state={state} dispatch={dispatch} />
 
       <section
-        className={`dark:bg-primary-dark grid-background bg-primary h-dvh w-screen
-           overflow-hidden pt-[80px] transition
-            ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} transition lg:px-30`}
+        className={`dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} transition lg:px-30`}
       >
         <div
-          className={`relative flex h-full flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm) && "pointer-events-none opacity-30"}`}
+          className={`relative left-1/2 flex h-full max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm) && "pointer-events-none opacity-30"}`}
         >
           {state.words.length > 0 && (
             <div className="bg-secondary dark:bg-secondary-dark border-accent dark:border-accent-dark flex w-full max-w-[450px] min-w-[200px] items-center gap-4 rounded-md border-2 p-2.5 text-2xl">
@@ -85,8 +88,8 @@ export default function Dictionary() {
             </div>
           )}
 
-          <div className="z-30 mb-10 grid max-h-screen min-w-[300px] custom-scroll auto-rows-min grid-cols-1 gap-5 overflow-x-hidden overflow-y-auto px-3 pb-5 sm:grid-cols-2 xl:grid-cols-3">
-            <AnimatePresence>
+          <div className="custom-scroll z-30 mb-10 grid max-h-screen min-w-[300px] gap-5 overflow-x-hidden overflow-y-auto px-3 pb-5 sm:grid-cols-2 xl:grid-cols-3">
+            <AnimatePresence mode="popLayout">
               {state.words.length === 0 ? (
                 <div className="absolute left-1/2 flex w-70 -translate-x-1/2 justify-between text-4xl select-none">
                   <span className="rotate-y-180">🐇</span>
@@ -104,14 +107,17 @@ export default function Dictionary() {
                   .map((word, index) => {
                     return (
                       <motion.div
+                        layout
                         variants={{
-                          hidden: { scale: 0 },
-                          loaded: (i) => ({
-                            scale: 1,
+                          hidden: { opacity: 0, y: -50 },
+                          loaded: (index) => ({
+                            opacity: 1,
+                            y: 0,
                             transition: {
-                              delay: i * 0.08,
+                              delay: index * 0.08,
                               type: "spring",
-                              stiffness: 150,
+                              visualDuration: framerAnimProps.animDuration,
+                              bounce: 0.5,
                             },
                           }),
                         }}
@@ -146,7 +152,7 @@ export default function Dictionary() {
                         </div>
                         <div className="flex flex-col justify-center gap-2">
                           <p
-                            className={`text-heading dark:text-heading-dark line-clamp-2 py-1 font-semibold text-balance capitalize ${word.name.length <= 12 ? "text-[2rem]" : word.name.length <= 25 ? "text-[1.8rem]" : word.name.length <= 40 ? "text-2xl" : "text-xl"}`}
+                            className={`text-heading dark:text-heading-dark line-clamp-2 py-1 font-semibold text-balance break-all capitalize ${word.name.length <= 12 ? "text-[2rem]" : word.name.length <= 25 ? "text-[1.8rem]" : word.name.length <= 40 ? "text-2xl" : "text-xl"}`}
                           >
                             {word.name}
                           </p>
