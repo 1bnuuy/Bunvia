@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesDown, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -12,8 +12,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { availablePaths, btnScale } from "@/lib/variables";
 import { links } from "@/lib/variables";
 import { useUI } from "./UI";
-
-const MotionLink = motion.create(Link);
 
 export default function Nav() {
   const { navOpen, navToggle } = useUI();
@@ -35,23 +33,8 @@ export default function Nav() {
     <>
       {isAvailable && (
         <nav
-          className={`bg-primary border-accent flex ${navOpen ? "left-4 max-lg:bottom-4" : "-left-21 max-lg:-bottom-18"} dark:border-accent-dark dark:bg-primary-dark max-xs:gap-2 fixed z-40 items-start justify-between gap-8 rounded-md border-1 px-4 text-nowrap transition-all select-none max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8`}
+          className={`bg-primary border-accent flex ${navOpen ? "left-4 max-lg:bottom-4" : "-left-21 max-lg:-bottom-19"} dark:border-accent-dark dark:bg-primary-dark max-xs:gap-2 fixed z-40 items-start justify-between gap-8 rounded-md border-1 px-4 text-nowrap transition-all select-none max-lg:left-1/2 max-lg:h-18 max-lg:min-w-[260px] max-lg:-translate-x-1/2 max-lg:items-center max-lg:px-8 lg:top-1/2 lg:w-20 lg:-translate-y-1/2 lg:flex-col lg:py-8`}
         >
-          <MotionLink
-            variants={btnScale}
-            whileHover="hover"
-            whileTap="tap"
-            initial="initial"
-            key="loginButton"
-            href="/auth"
-            className="ring-offset-secondary xs:flex hover:ring-accent dark:hover:ring-accent-dark active:ring-accent dark:active:ring-accent-dark ring-secondary dark:ring-offset-secondary-dark dark:ring-secondary-dark bg-secondary dark:bg-secondary-dark relative hidden aspect-square min-w-[48px] basis-[48px] cursor-pointer items-center justify-center overflow-hidden rounded-full hover:ring-2 hover:ring-offset-3 active:ring-2 active:ring-offset-3"
-          >
-            <FontAwesomeIcon
-              icon={faPlus}
-              className="text-heading dark:text-heading-dark text-2xl"
-            />
-          </MotionLink>
-
           <div className="max-xs:gap-3 flex gap-4 max-lg:w-full max-lg:justify-center max-lg:rounded-md lg:flex-col">
             <AnimatePresence>
               {links.map((link, index) => {
@@ -110,7 +93,7 @@ export default function Nav() {
           </div>
 
           <button
-            className="text-accent border-heading dark:border-heading-dark dark:text-accent-dark bg-secondary dark:bg-secondary-dark absolute top-0 left-22 cursor-pointer rounded-md border-1 max-lg:-top-8 max-lg:left-0 max-lg:w-full lg:h-20"
+            className="text-accent border-heading dark:border-heading-dark dark:text-accent-dark bg-secondary dark:bg-secondary-dark absolute top-0 left-23 cursor-pointer rounded-md border-1 max-lg:-top-10 max-lg:left-0 max-lg:w-full lg:h-20"
             onClick={navToggle}
           >
             <FontAwesomeIcon

@@ -10,15 +10,16 @@ import {
   faPen,
   faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
-import { ActionTypes, StateTypes, TagTypes } from "./types";
+import {
+  DictionaryActionTypes,
+  InitDictionaryTypes,
+  InitTodoListTypes,
+  TagTypes,
+  TodoListActionTypes,
+} from "./types";
 
-export const availablePaths = [
-  "/",
-  "/todolist",
-  "/dictionary",
-  "/analytics",
-  "/auth",
-];
+//--------------Navigation--------------//
+export const availablePaths = ["/", "/todolist", "/dictionary", "/analytics"];
 
 export const links = [
   {
@@ -46,16 +47,29 @@ export const links = [
   },
 ];
 
+//--------------Theme--------------//
+export const framerAnimProps = {
+  animDelay: 0.25,
+  animDuration: 0.3,
+  viewPercent: 0.5,
+};
+
 export const btnScale = {
   initial: { scale: 1 },
   hover: { scale: 1.1 },
   tap: { scale: 0.9 },
 };
 
-export const btnRelocate = {
+export const btnRelocateLeft = {
   initial: { scale: 1, x: 0 },
   hover: { x: -20 },
   tap: { scale: 0.95, x: -20 },
+};
+
+export const btnRelocateRight = {
+  initial: { scale: 1, x: 0 },
+  hover: { x: 20 },
+  tap: { scale: 0.95, x: 20 },
 };
 
 export const Pop = {
@@ -83,6 +97,7 @@ export const SlideInRight = {
   animate: { opacity: 1, x: 0 },
 };
 
+//--------------Home--------------//
 export const Features = [
   {
     name: "Tasks & Priorities",
@@ -135,13 +150,69 @@ export const LearnAndReference = [
   },
 ];
 
+//--------------To-do List--------------//
+export const InitialTodo: InitTodoListTypes = {
+  isEditing: null,
+  newTitle: "",
+  newDesc: "",
+  openCreate: false,
+  list: [],
+  isDragging: false,
+};
+
+export const TodoReducer: (
+  state: InitTodoListTypes,
+  action: TodoListActionTypes,
+) => InitTodoListTypes = (state, action) => {
+  switch (action.type) {
+    case "ENABLE_EDITING":
+      return { ...state, isEditing: action.payload };
+
+    case "SET_TITLE":
+      return { ...state, newTitle: action.payload };
+
+    case "SET_DESC":
+      return { ...state, newDesc: action.payload };
+
+    case "OPEN_CREATE":
+      return { ...state, openCreate: !state.openCreate };
+
+    case "ADD_TODO":
+      return { ...state, list: [...state.list, action.payload] };
+
+    case "ARRANGE_LIST":
+      return { ...state, list: action.payload };
+
+    case "DELETE_TODO":
+      return {
+        ...state,
+        list: state.list.filter((l) => l.id !== action.payload),
+      };
+
+    case "DONE_TODO":
+      return {
+        ...state,
+        list: state.list.map((l) =>
+          l.id === action.payload ? { ...l, done: !l.done } : l,
+        ),
+      };
+
+    case "SET_IS_DRAGGING":
+      return { ...state, isDragging: !state.isDragging };
+
+    default:
+      return state;
+  }
+};
+
+//--------------Dictionary--------------//
 export const DateCreated = new Date().toLocaleDateString("en-GB", {
   day: "2-digit",
   month: "2-digit",
   year: "numeric",
 });
 
-export const initialState: StateTypes = {
+export const InitialDictionary: InitDictionaryTypes = {
   words: [],
   selectedTags: [],
   selectedTypes: [],
@@ -153,10 +224,10 @@ export const initialState: StateTypes = {
   btnLoading: false,
 };
 
-export const reducer: (state: StateTypes, action: ActionTypes) => StateTypes = (
-  state,
-  action,
-) => {
+export const DictionaryReducer: (
+  state: InitDictionaryTypes,
+  action: DictionaryActionTypes,
+) => InitDictionaryTypes = (state, action) => {
   switch (action.type) {
     case "FETCH_WORD":
       return { ...state, words: action.payload };

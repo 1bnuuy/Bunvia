@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 import { motion } from "motion/react";
 
@@ -25,7 +25,7 @@ export default function Header() {
     <>
       {isAvailable && (
         <header
-          className={`bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark fixed z-40 flex h-[65px] w-screen items-center justify-between border-b-2 px-5 transition select-none lg:px-45`}
+          className={`bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark fixed z-40 flex h-[65px] w-screen items-center justify-between border-b-2 px-7 transition select-none lg:px-45`}
         >
           <div className="flex items-center gap-5">
             <MotionLink
@@ -51,7 +51,6 @@ export default function Header() {
             </h1>
           </div>
 
-          <div className="flex gap-2">
             <div
               className="hover:bg-tertiary dark:hover:bg-tertiary-dark active:bg-tertiary dark:active:bg-tertiary-dark relative flex cursor-pointer items-center justify-center rounded-md transition"
               onClick={ThemeToggle}
@@ -64,21 +63,6 @@ export default function Header() {
                 icon={faMoon}
                 className={`text-heading dark:text-accent-dark px-[7px] py-2.5 text-2xl`}
               />
-            </div>
-            <MotionLink
-              variants={btnScale}
-              whileHover="hover"
-              whileTap="tap"
-              initial="initial"
-              key="loginButton"
-              href="/auth"
-              className="ring-offset-secondary xs:hidden hover:ring-accent dark:hover:ring-accent-dark active:ring-accent dark:active:ring-accent-dark ring-tertiary dark:ring-offset-secondary-dark dark:ring-tertiary-dark bg-tertiary dark:bg-tertiary-dark relative flex aspect-square min-w-[48px] basis-[48px] cursor-pointer items-center justify-center overflow-hidden rounded-full hover:ring-2 hover:ring-offset-3 active:ring-2 active:ring-offset-3"
-            >
-              <FontAwesomeIcon
-                icon={faUser}
-                className="text-heading dark:text-heading-dark text-2xl"
-              />
-            </MotionLink>
           </div>
         </header>
       )}

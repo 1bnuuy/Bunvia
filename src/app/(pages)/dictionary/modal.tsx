@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
 import { tagColor, wordClass } from "@/lib/variables";
-import { ActionTypes, StateTypes, TagTypes } from "@/lib/types";
+import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "@/lib/types";
 import { Create, Delete } from "@/lib/manageWords";
 import { btnScale } from "@/lib/variables";
 
@@ -22,8 +22,8 @@ export const Modal = ({
   state,
   dispatch,
 }: {
-  state: StateTypes;
-  dispatch: React.Dispatch<ActionTypes>;
+  state: InitDictionaryTypes;
+  dispatch: React.Dispatch<DictionaryActionTypes>;
 }) => {
   const Name = useRef<HTMLInputElement>(null);
   const { toastPopUp } = useToast();

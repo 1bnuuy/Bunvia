@@ -9,7 +9,7 @@ import {
   ToastContentTypes,
   ToastComponentTypes,
 } from "../lib/types";
-import { btnRelocate } from "@/lib/variables";
+import { btnRelocateLeft, framerAnimProps } from "@/lib/variables";
 
 const ToastContext = createContext<ToastContextTypes | undefined>(undefined);
 export const useToast = () => {
@@ -39,7 +39,7 @@ export default function ToastProvider({
     ({ success, msg }: ToastContentTypes) => {
       open((id) => (
         <motion.div
-          variants={btnRelocate}
+          variants={btnRelocateLeft}
           initial="initial"
           whileHover="hover"
           whileTap="tap"
@@ -74,16 +74,16 @@ export default function ToastProvider({
   return (
     <ToastContext.Provider value={{ toastPopUp }}>
       {children}
-      <div className="absolute top-5 z-40 flex w-[90vw] max-w-[555px] items-center flex-col gap-3 px-5 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:right-5">
+      <div className="absolute top-5 z-40 flex w-[90vw] max-w-[555px] flex-col items-center gap-3 px-5 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:right-5">
         <AnimatePresence mode="popLayout">
           {toasts.map(({ id, component }) => (
             <motion.div
               layout
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, y: -50, x: 0 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, y: 0, x: -50 }}
               transition={{
-                duration: 0.3,
+                duration: framerAnimProps.animDuration,
                 type: "spring",
                 visualDuration: 0.2,
                 bounce: 0.5,
