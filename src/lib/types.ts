@@ -1,4 +1,11 @@
-import { object } from "motion/react-client";
+import { Variants } from "motion";
+
+//--------------Auth--------------//
+export type AuthTypes = {
+  email: string;
+  password: string;
+  onChange: (user: import("firebase/auth").User | null) => void
+};
 
 //--------------Theme--------------//
 export type ThemeContextTypes = {
@@ -37,6 +44,15 @@ export type AddOnTypes = {
   t?: number;
   l?: number;
 };
+
+//--------------Home--------------//
+export type ArticleTypes = {
+  gridType: string;
+  variants: Variants;
+  src: string;
+  title: string;
+  description: string;
+}
 
 //--------------To-do List--------------//
 export type TodoTypes = {

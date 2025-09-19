@@ -51,7 +51,7 @@ export const links = [
 export const framerAnimProps = {
   animDelay: 0.25,
   animDuration: 0.3,
-  viewPercent: 0.5,
+  viewPercent: 0.3,
 };
 
 export const btnScale = {
