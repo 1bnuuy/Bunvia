@@ -10,11 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence, motion } from "motion/react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 const MotionLink = motion.create(Link);
 
 export default function Auth() {
+  const router = useRouter();
   const email = useRef<HTMLInputElement | null>(null);
   const password = useRef<HTMLInputElement | null>(null);
   const { toastPopUp } = useToast();
@@ -27,6 +29,7 @@ export default function Auth() {
         email.current?.value ?? "",
         password.current?.value ?? "",
         toastPopUp,
+        router,
       );
     } catch {
       toastPopUp({

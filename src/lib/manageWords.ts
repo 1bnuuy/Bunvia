@@ -6,7 +6,9 @@ import {
   WordTypes,
 } from "@/lib/types";
 import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
+
+const token = await auth.currentUser?.getIdToken();
 
 //--------------FAVORITE--------------//
 export async function Favorite(
@@ -19,7 +21,10 @@ export async function Favorite(
   try {
     const res = await fetch(`/api/favorite`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, //Firebase-admin checks UID
+      },
       body: JSON.stringify({
         id: word.id,
         name: word.name,
@@ -62,7 +67,10 @@ export async function Delete(
   try {
     const res = await fetch(`/api/delete`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: word.name,
         id: word.id,
@@ -109,7 +117,10 @@ export async function Create(
 
     const res = await fetch("/api/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         //Pass name, type, tag values to POST()
         name: Name.current?.value,

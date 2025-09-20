@@ -12,7 +12,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
 import { tagColor, wordClass } from "@/lib/variables";
-import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "@/lib/types";
+import {
+  DictionaryActionTypes,
+  InitDictionaryTypes,
+  TagTypes,
+} from "@/lib/types";
 import { Create, Delete } from "@/lib/manageWords";
 import { btnScale } from "@/lib/variables";
 
@@ -164,7 +168,7 @@ export const Modal = ({
                     whileTap="tap"
                     aria-label="Create"
                     disabled={state.btnLoading}
-                    className="text-primary disabled:cursor-not-allowed disabled:bg-tertiary disabled:text-heading dark:disabled:text-heading-dark dark:disabled:bg-tertiary-dark hover:bg-accent-hovered dark:hover:bg-accent-hovered-dark active:bg-accent-hovered dark:active:bg-accent-hovered-dark bg-accent dark:bg-accent-dark cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
+                    className="text-primary disabled:bg-tertiary disabled:text-heading dark:disabled:text-heading-dark dark:disabled:bg-tertiary-dark hover:bg-accent-hovered dark:hover:bg-accent-hovered-dark active:bg-accent-hovered dark:active:bg-accent-hovered-dark bg-accent dark:bg-accent-dark cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none disabled:cursor-not-allowed"
                   >
                     {state.btnLoading ? "..." : "Create"}
                   </motion.button>
@@ -226,37 +230,11 @@ export const Modal = ({
                       })}
                   </div>
 
-                  <div className="flex items-center justify-between space-x-3">
-                    <p
-                      className={`text-heading dark:text-heading-dark line-clamp-1 text-2xl font-semibold text-balance capitalize`}
-                    >
-                      {state.confirmTarget?.word.name}
-                    </p>
-
-                    <motion.button
-                      variants={btnScale}
-                      initial="initial"
-                      whileHover="hover"
-                      whileTap="tap"
-                      className="text-primary bg-error active:bg-error-hovered hover:bg-error-hovered cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
-                      type="button"
-                      aria-label="Delete"
-                      onClick={() => {
-                        if (state.confirmTarget) {
-                          Delete(
-                            state.confirmTarget.word,
-                            state.confirmTarget.index,
-                            dispatch,
-                            toastPopUp,
-                          );
-                          dispatch({ type: "CONFIRMATION" });
-                          dispatch({ type: "OPEN_FORM" });
-                        }
-                      }}
-                    >
-                      Delete
-                    </motion.button>
-                  </div>
+                  <p
+                    className={`text-heading dark:text-heading-dark line-clamp-1 text-2xl font-semibold text-balance capitalize`}
+                  >
+                    {state.confirmTarget?.word.name}
+                  </p>
 
                   <div className="bg-secondary dark:bg-secondary-dark absolute right-4 -bottom-3 flex px-2">
                     {(Array.isArray(state.confirmTarget?.word.type)
@@ -278,21 +256,47 @@ export const Modal = ({
                   </div>
                 </div>
 
-                <motion.button
-                  variants={btnScale}
-                  initial="initial"
-                  whileHover="hover"
-                  whileTap="tap"
-                  className="text-heading hover:text-primary active:bg-accent dark:active:bg-accent-dark hover:bg-accent dark:hover:bg-accent-dark dark:text-heading-dark dark:bg-tertiary-dark bg-tertiary mt-3 w-5/6 cursor-pointer self-center rounded-md px-4 py-1 text-xl font-semibold select-none"
-                  type="button"
-                  aria-label="Cancel"
-                  onClick={() => {
-                    dispatch({ type: "CONFIRMATION" });
-                    dispatch({ type: "OPEN_FORM" });
-                  }}
-                >
-                  Cancel
-                </motion.button>
+                <div className="mt-3 flex items-center justify-end gap-3">
+                  <motion.button
+                    variants={btnScale}
+                    initial="initial"
+                    whileHover="hover"
+                    whileTap="tap"
+                    className="text-heading hover:text-primary active:bg-accent dark:active:bg-accent-dark hover:bg-accent dark:hover:bg-accent-dark dark:text-heading-dark dark:bg-tertiary-dark bg-tertiary cursor-pointer self-center rounded-md px-4 py-1 text-xl font-semibold select-none"
+                    type="button"
+                    aria-label="Cancel"
+                    onClick={() => {
+                      dispatch({ type: "CONFIRMATION" });
+                      dispatch({ type: "OPEN_FORM" });
+                    }}
+                  >
+                    Cancel
+                  </motion.button>
+
+                  <motion.button
+                    variants={btnScale}
+                    initial="initial"
+                    whileHover="hover"
+                    whileTap="tap"
+                    className="text-primary bg-error active:bg-error-hovered hover:bg-error-hovered cursor-pointer rounded-md px-4 py-1 text-xl font-semibold select-none"
+                    type="button"
+                    aria-label="Delete"
+                    onClick={() => {
+                      if (state.confirmTarget) {
+                        Delete(
+                          state.confirmTarget.word,
+                          state.confirmTarget.index,
+                          dispatch,
+                          toastPopUp,
+                        );
+                        dispatch({ type: "CONFIRMATION" });
+                        dispatch({ type: "OPEN_FORM" });
+                      }
+                    }}
+                  >
+                    Delete
+                  </motion.button>
+                </div>
               </div>
             )}
           </motion.div>
