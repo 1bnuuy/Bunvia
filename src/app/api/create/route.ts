@@ -1,10 +1,25 @@
-import { db } from "@/lib/firebase";
+import { adminDb } from "@/lib/firebaseAdmin";
 import { DateCreated } from "@/lib/variables";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { getAuth } from "firebase-admin/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  const authHeader = req.headers.get("Authorization") || "";
+  const idToken = authHeader.split("Bearer ")[1];
+
+  const decodedToken = await getAuth().verifyIdToken(idToken);
+  const uid = decodedToken.uid;
+
   try {
+    if (uid !== "CDe6wWAC2Uej7ww6faL7Qn0VYPt1")
+      return NextResponse.json(
+        {
+          success: false,
+          msg: `Unauthorized! Pee and Poo are protecting the data!`,
+        },
+        { status: 403 },
+      );
+
     const body = await req.json();
     const { name, type, tag } = body;
 
@@ -33,11 +48,10 @@ export async function POST(req: NextRequest) {
     //Check duplication
     const formattedName = name.trim().toLowerCase();
 
-    const wordsRef = collection(db, "words");
-    const q = query(wordsRef, where("name", "==", formattedName));
-    const querySnapshot = await getDocs(q);
+    const wordsRef = adminDb.collection("words");
+    const q = await wordsRef.where("name", "==", formattedName).get();
 
-    if (!querySnapshot.empty) {
+    if (!q.empty) {
       return NextResponse.json(
         {
           success: false,
@@ -56,7 +70,7 @@ export async function POST(req: NextRequest) {
     };
 
     //Add words
-    await addDoc(wordsRef, newWord);
+    await wordsRef.add(newWord);
 
     return NextResponse.json(
       {

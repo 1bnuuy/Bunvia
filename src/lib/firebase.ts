@@ -4,15 +4,12 @@ import {
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC0HPBs50SN9w8ks8MCS8lXziUHJvJR-9Q",
-  authDomain: "lopcloud.firebaseapp.com",
-  projectId: "lopcloud",
-  storageBucket: "lopcloud.firebasestorage.app",
-  messagingSenderId: "537813002413",
-  appId: "1:537813002413:web:c1245ac715793cbe797e24",
-  measurementId: "G-F756813310",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -22,3 +19,5 @@ export const db = initializeFirestore(app, {
     tabManager: persistentMultipleTabManager(),
   }),
 });
+
+export const auth = getAuth(app);

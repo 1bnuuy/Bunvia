@@ -6,7 +6,7 @@ import {
   WordTypes,
 } from "@/lib/types";
 import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 
 //--------------FAVORITE--------------//
 export async function Favorite(
@@ -16,10 +16,14 @@ export async function Favorite(
 ) {
   dispatch({ type: "FAVORITE", payload: word.id });
 
+  const token = await auth.currentUser?.getIdToken();
   try {
     const res = await fetch(`/api/favorite`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, //Firebase-admin checks UID
+      },
       body: JSON.stringify({
         id: word.id,
         name: word.name,
@@ -63,10 +67,14 @@ export async function Delete(
 ) {
   dispatch({ type: "DELETE", payload: word.id });
 
+  const token = await auth.currentUser?.getIdToken();
   try {
     const res = await fetch(`/api/delete`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: word.name,
         id: word.id,
@@ -108,12 +116,16 @@ export async function Create(
 ) {
   e.preventDefault();
 
+  const token = await auth.currentUser?.getIdToken();
   try {
     dispatch({ type: "BUTTON_LOADING" });
 
     const res = await fetch("/api/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         //Pass name, type, tag values to POST()
         name: Name.current?.value,

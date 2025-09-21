@@ -1,4 +1,11 @@
-import { object } from "motion/react-client";
+import { Variants } from "motion";
+
+//--------------Auth--------------//
+export type AuthTypes = {
+  email: string;
+  password: string;
+  onChange: (user: import("firebase/auth").User | null) => void;
+};
 
 //--------------Theme--------------//
 export type ThemeContextTypes = {
@@ -38,6 +45,15 @@ export type AddOnTypes = {
   l?: number;
 };
 
+//--------------Home--------------//
+export type ArticleTypes = {
+  gridType: string;
+  variants: Variants;
+  src: string;
+  title: string;
+  description: string;
+};
+
 //--------------To-do List--------------//
 export type TodoTypes = {
   id: string;
@@ -74,6 +90,7 @@ export type WordTypes = {
   date: string;
   favorite: boolean;
 };
+
 export type InitDictionaryTypes = {
   words: WordTypes[];
   selectedTags: string[];
@@ -88,6 +105,7 @@ export type InitDictionaryTypes = {
 
 export type DictionaryActionTypes =
   | { type: "FETCH_WORD"; payload: WordTypes[] }
+  | { type: "ADD_WORD"; payload: WordTypes }
   | { type: "SELECT_TYPES"; payload: string }
   | { type: "SELECT_TAGS"; payload: string }
   | { type: "DELETE"; payload: string }
