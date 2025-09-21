@@ -8,8 +8,6 @@ import {
 import { collection, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
-const token = await auth.currentUser?.getIdToken();
-
 //--------------FAVORITE--------------//
 export async function Favorite(
   word: WordTypes,
@@ -18,6 +16,7 @@ export async function Favorite(
 ) {
   dispatch({ type: "FAVORITE", payload: word.id });
 
+  const token = await auth.currentUser?.getIdToken();
   try {
     const res = await fetch(`/api/favorite`, {
       method: "PATCH",
@@ -64,6 +63,7 @@ export async function Delete(
 ) {
   dispatch({ type: "DELETE", payload: word.id });
 
+  const token = await auth.currentUser?.getIdToken();
   try {
     const res = await fetch(`/api/delete`, {
       method: "DELETE",
@@ -112,6 +112,7 @@ export async function Create(
 ) {
   e.preventDefault();
 
+  const token = await auth.currentUser?.getIdToken();
   try {
     dispatch({ type: "BUTTON_LOADING" });
 

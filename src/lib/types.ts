@@ -4,7 +4,7 @@ import { Variants } from "motion";
 export type AuthTypes = {
   email: string;
   password: string;
-  onChange: (user: import("firebase/auth").User | null) => void
+  onChange: (user: import("firebase/auth").User | null) => void;
 };
 
 //--------------Theme--------------//
@@ -52,7 +52,7 @@ export type ArticleTypes = {
   src: string;
   title: string;
   description: string;
-}
+};
 
 //--------------To-do List--------------//
 export type TodoTypes = {
@@ -90,6 +90,7 @@ export type WordTypes = {
   date: string;
   favorite: boolean;
 };
+
 export type InitDictionaryTypes = {
   words: WordTypes[];
   selectedTags: string[];
@@ -104,6 +105,7 @@ export type InitDictionaryTypes = {
 
 export type DictionaryActionTypes =
   | { type: "FETCH_WORD"; payload: WordTypes[] }
+  | { type: "ADD_WORD"; payload: WordTypes }
   | { type: "SELECT_TYPES"; payload: string }
   | { type: "SELECT_TAGS"; payload: string }
   | { type: "DELETE"; payload: string }

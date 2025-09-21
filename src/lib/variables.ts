@@ -232,6 +232,9 @@ export const DictionaryReducer: (
     case "FETCH_WORD":
       return { ...state, words: action.payload };
 
+    case "ADD_WORD":
+      return { ...state, words: [...state.words, action.payload] };
+
     case "SELECT_TYPES":
       return {
         ...state,

@@ -22,7 +22,7 @@ import { btnScale } from "@/lib/variables";
 
 import { useToast } from "@/components/Toast";
 
-export const Modal = ({
+export const AdminModal = ({
   state,
   dispatch,
 }: {
