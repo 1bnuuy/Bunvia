@@ -10,7 +10,7 @@ export default function Dictionary() {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const check = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser?.uid !== "CDe6wWAC2Uej7ww6faL7Qn0VYPt1") {
+      if (currentUser?.uid === "CDe6wWAC2Uej7ww6faL7Qn0VYPt1") {
         setIsAdmin(true);
       } else {
         setIsAdmin(false);
