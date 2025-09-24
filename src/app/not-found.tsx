@@ -8,7 +8,7 @@ const MotionLink = motion.create(Link);
 
 export default function ErrorPage() {
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary flex h-dvh w-screen flex-col items-center justify-center gap-5 overflow-hidden p-4 transition-all select-none">
+    <section className="flex h-dvh flex-col items-center justify-center gap-5 p-4 transition-all select-none">
       <span className="text-accent dark:text-accent-dark text-9xl font-bold">
         404
       </span>

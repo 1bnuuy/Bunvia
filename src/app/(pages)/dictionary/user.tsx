@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useReducer, useRef } from "react";
+import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,7 +71,7 @@ export default function UserDictionary() {
       <UserModal state={state} dispatch={dispatch} />
 
       <section
-        className={`dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} transition lg:px-30`}
+        className={`h-dvh pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} lg:px-30`}
       >
         <div
           className={`relative left-1/2 flex h-full max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm) && "pointer-events-none opacity-30"}`}
@@ -109,10 +109,8 @@ export default function UserDictionary() {
           >
             <AnimatePresence mode="popLayout">
               {state.words.length === 0 ? (
-                <div className="absolute left-1/2 flex w-70 -translate-x-1/2 justify-between text-4xl select-none">
-                  <span className="rotate-y-180">🐇</span>
-                  <span className="animate-carrot absolute">🥕</span>
-                  <span>🐇</span>
+                <div className="text-heading dark:text-heading-dark absolute left-1/2 flex -translate-x-1/2 justify-between text-xl select-none">
+                  <p>No words added yet... 🐰✨</p>
                 </div>
               ) : (
                 filteredWords
@@ -132,7 +130,7 @@ export default function UserDictionary() {
                             opacity: 1,
                             y: 0,
                             transition: {
-                              delay: index * 0.08,
+                              delay: framerAnimProps.animDelay + index * 0.06,
                               type: "spring",
                               visualDuration: framerAnimProps.animDuration,
                               bounce: 0.5,

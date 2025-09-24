@@ -1,14 +1,13 @@
 import {
   faBook,
   faChartSimple,
+  faCircleInfo,
   faEye,
-  faHouse,
   faLightbulb,
   faListCheck,
   faMagnifyingGlass,
   faMedal,
   faPen,
-  faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   DictionaryActionTypes,
@@ -19,13 +18,19 @@ import {
 } from "./types";
 
 //--------------Navigation--------------//
-export const availablePaths = ["/", "/todolist", "/dictionary", "/analytics"];
+export const availablePaths = [
+  "/",
+  "/about",
+  "/todolist",
+  "/dictionary",
+  "/analytics",
+];
 
 export const links = [
   {
-    name: "Home",
-    icon: faHouse,
-    path: "/",
+    name: "About",
+    icon: faCircleInfo,
+    path: "/about",
   },
 
   {
@@ -35,7 +40,7 @@ export const links = [
   },
 
   {
-    name: "Wordbook",
+    name: "Dictionary",
     icon: faBook,
     path: "/dictionary",
   },
@@ -77,6 +82,11 @@ export const Pop = {
   animate: { scale: 1 },
 };
 
+export const Opacity = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+};
+
 export const FadeInBottom = {
   initial: { opacity: 0, y: 50 },
   animate: { opacity: 1, y: 0 },
@@ -106,12 +116,6 @@ export const Features = [
   },
 
   {
-    name: "Personal Notebook",
-    icon: faStickyNote,
-    desc: "Capture notes and ideas in a professional, organized space.",
-  },
-
-  {
     name: "Vocabulary Builder",
     icon: faBook,
     desc: "Your pocket-sized dictionary for learning on the go.",
@@ -124,7 +128,7 @@ export const Features = [
   },
 ];
 
-export const LearnAndReference = [
+export const Journey = [
   {
     name: "Discover",
     icon: faMagnifyingGlass,
@@ -147,6 +151,24 @@ export const LearnAndReference = [
     name: "Achieve",
     icon: faMedal,
     desc: "Turn effort into the space where focus meets progress, helping you accomplish what you dream of.",
+  },
+];
+
+//--------------About--------------//
+export const Offers = [
+  {
+    name: "Responsiveness",
+    desc: "with seamless adaptability.",
+  },
+
+  {
+    name: "Animation",
+    desc: "for enhancing user experience.",
+  },
+
+  {
+    name: "User-friendly",
+    desc: "and with no limitation.",
   },
 ];
 
@@ -322,4 +344,27 @@ export const wordClass = [
   "phrase",
   "idiom",
   "phrasal verb",
+];
+
+//--------------Footer--------------//
+export const socialMedia = [
+  {
+    name: "Facebook",
+    path: "https://web.facebook.com/iiOwl",
+  },
+
+  {
+    name: "Reddit",
+    path: "https://www.reddit.com/user/Budget-Apartment9943",
+  },
+
+  {
+    name: "Github",
+    path: "https://github.com/1bnuuy",
+  },
+
+  {
+    name: "Youtube",
+    path: "https://www.youtube.com/channel/UCHJ8C76GhJ9vXZ0uUxd9xPg",
+  },
 ];

@@ -11,6 +11,8 @@ import {
   Pop,
   FadeInBottom,
   framerAnimProps,
+  Journey,
+  Opacity,
 } from "@/lib/variables";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,16 +21,15 @@ import {
   faWandMagicSparkles,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Star, StarDouble, StarOutline, Svg_TodoList } from "./addOn";
+import { Star, StarDouble, StarOutline } from "./addOn";
 import Footer from "@/components/Footer";
-import Image from "next/image";
 import { Article } from "./gridSection";
 
 const MotionLink = motion.create(Link);
 
 export default function Home() {
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary flex min-h-dvh w-screen flex-col items-center justify-start overflow-x-hidden pt-[100px] transition lg:px-15">
+    <section className="flex flex-col items-center justify-start pt-[80px] transition lg:px-15">
       {/* 1st Section */}
       <div className="text-heading dark:text-heading-dark relative z-10 mb-[150px] flex h-[600px] w-full max-w-[1440px] flex-col items-center justify-center gap-3 px-5">
         <AnimatePresence>
@@ -44,7 +45,7 @@ export default function Home() {
             }}
             className="text-xl"
           >
-            YOUR GATEWAY TO
+            GATEWAY TO
           </motion.p>
 
           <motion.h1
@@ -88,7 +89,8 @@ export default function Home() {
               duration: framerAnimProps.animDuration,
               delay: framerAnimProps.animDelay * 6,
               type: "spring",
-              stiffness: 250,
+              bounce: 0.5,
+              visualDuration: framerAnimProps.animDuration,
             }}
             viewport={{ once: true, amount: framerAnimProps.viewPercent }}
             href="todolist"
@@ -173,8 +175,9 @@ export default function Home() {
 
             <motion.h2
               key="s1"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              variants={Opacity}
+              initial="initial"
+              whileInView="animate"
               transition={{
                 duration: framerAnimProps.animDuration,
                 delay: framerAnimProps.animDelay,
@@ -182,7 +185,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="z-10 p-5 text-center text-4xl leading-tight font-bold tracking-widest"
             >
-              Organize your goals
+              Organize goals
             </motion.h2>
 
             <motion.span
@@ -199,7 +202,7 @@ export default function Home() {
           </div>
         </AnimatePresence>
 
-        <div className="grid grid-cols-1 items-start gap-15 px-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex items-start justify-center gap-15 px-3 max-md:flex-wrap">
           <AnimatePresence>
             {Features.map((feat, index) => {
               return (
@@ -279,6 +282,83 @@ export default function Home() {
       </div>
 
       {/* 5th Section */}
+      <div className="text-heading dark:text-heading-dark relative z-10 mb-[175px] flex max-w-[1440px] flex-col items-center justify-center gap-15 px-10">
+        <AnimatePresence>
+          <div className="relative">
+            <motion.span
+              key="b1"
+              variants={SlideInLeft}
+              initial="initial"
+              whileInView="animate"
+              transition={{ duration: framerAnimProps.animDuration }}
+              viewport={{ once: true }}
+              className="text-accent dark:text-accent-dark absolute top-0 left-0 text-6xl select-none"
+            >
+              &#8988;
+            </motion.span>
+
+            <motion.h2
+              key="s1"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{
+                duration: framerAnimProps.animDuration,
+                delay: framerAnimProps.animDelay,
+              }}
+              viewport={{ once: true }}
+              className="z-10 p-5 text-center text-4xl leading-tight font-bold tracking-widest"
+            >
+              Learning Journey
+            </motion.h2>
+
+            <motion.span
+              key="b2"
+              variants={SlideInRight}
+              initial="initial"
+              whileInView="animate"
+              transition={{ duration: framerAnimProps.animDuration }}
+              viewport={{ once: true }}
+              className="text-accent dark:text-accent-dark absolute right-0 bottom-0 text-6xl select-none"
+            >
+              &#8991;
+            </motion.span>
+          </div>
+        </AnimatePresence>
+
+        <div className="flex items-start justify-center gap-15 px-3 max-md:flex-wrap">
+          <AnimatePresence>
+            {Journey.map((ref, index) => {
+              return (
+                <motion.div
+                  key={index}
+                  variants={FadeInTop}
+                  initial="initial"
+                  whileInView="animate"
+                  transition={{
+                    duration: framerAnimProps.animDuration,
+                    delay: index * 0.15,
+                  }}
+                  viewport={{ once: true, amount: framerAnimProps.viewPercent }}
+                  className="flex flex-col items-center justify-center gap-3 text-center"
+                >
+                  <div className="bg-tertiary dark:bg-tertiary-dark flex aspect-square w-[65px] items-center justify-center rounded-full">
+                    <FontAwesomeIcon
+                      icon={ref.icon}
+                      className="text-accent dark:text-accent-dark text-3xl"
+                    />
+                  </div>
+                  <p className="text-2xl font-semibold">{ref.name}</p>
+                  <p className="text-subtext dark:text-subtext-dark text-balance">
+                    {ref.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* 6th Section */}
       <div className="relative z-10 mb-[125px] max-w-[700px] px-5 text-center">
         <AnimatePresence>
           <motion.div
@@ -296,14 +376,22 @@ export default function Home() {
               No limitation, infinite possibilities.
             </h3>
             <p className="text-subtext dark:text-subtext-dark z-10">
-              Finish your tasks and see your day brighten up!
+              Finish your tasks, each step leads to success!
             </p>
+
             <Link
               href="todolist"
               className="bg-heading hover:bg-tertiary-dark dark:text-primary-dark dark:hover:bg-tertiary dark:active:bg-tertiary active:bg-tertiary-dark dark:bg-heading-dark text-primary z-10 flex items-center justify-center gap-2 rounded-md px-5 py-2 text-xl transition select-none"
             >
               <span>Try it</span>
               <FontAwesomeIcon icon={faArrowRight} />
+            </Link>
+
+            <Link
+              href="about"
+              className="text-accent dark:text-accent-dark z-10 mt-1 rounded-md opacity-70 transition"
+            >
+              What is Bunvia?
             </Link>
 
             <StarOutline size={125} t={-15} l={0} />
@@ -313,6 +401,7 @@ export default function Home() {
         </AnimatePresence>
       </div>
 
+      <span className="from-primary dark:from-primary-dark pointer-events-none fixed bottom-0 z-40 h-1/8 w-screen bg-linear-to-t from-5% to-transparent" />
       <Footer />
     </section>
   );

@@ -51,7 +51,7 @@ export default function ThemeProvider({
   return (
     <ThemeContext.Provider value={{ ThemeDark, ThemeToggle }}>
       <main
-        className={`${ThemeDark && "dark"} bg-primary dark:bg-primary-dark`}
+        className={`${ThemeDark && "dark"} bg-primary grid-background dark:bg-primary-dark min-h-dvh w-full overflow-hidden`}
       >
         {children}
       </main>

@@ -16,3 +16,4 @@
 + To-do List: A simple yet effective task manager that helps organize daily study activities and track progress.
 + Dictionary: A personalized English word bank where users can store, categorize, and revisit their vocabulary, supporting long-term learning goals.
 + Light/Dark Theme: Just an indispensable feature that seems to exist and somewhat has become standard in almost every project today.
++ User-friendly: Easy to start using, perfect for those who seeking a fast experience without having to undergo the hassle of login and signup

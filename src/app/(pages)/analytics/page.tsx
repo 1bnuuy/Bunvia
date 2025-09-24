@@ -1,8 +1,15 @@
+"use client";
+
+import { useUI } from "@/components/UI";
+
 export default function Analytics() {
+  const { navOpen } = useUI();
 
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-8 transition-all max-lg:pb-25 md:pt-15 lg:px-25">
-      <p>Analytics</p>
+    <section
+      className={`h-dvh pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} lg:px-30`}
+    >
+      <p className="text-heading-dark">Analytics</p>
     </section>
   );
-};
+}

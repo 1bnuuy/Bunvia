@@ -53,7 +53,7 @@ export default function AdminDictionary() {
       <AdminModal state={state} dispatch={dispatch} />
 
       <section
-        className={`dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} transition lg:px-30`}
+        className={`h-dvh pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} lg:px-30`}
       >
         <div
           className={`relative left-1/2 flex h-full max-w-[1440px] -translate-x-1/2 flex-col items-center justify-center gap-8 px-4 ${(state.open || state.confirm) && "pointer-events-none opacity-30"}`}
@@ -114,7 +114,7 @@ export default function AdminDictionary() {
                             opacity: 1,
                             y: 0,
                             transition: {
-                              delay: index * 0.08,
+                              delay: index * 0.06,
                               type: "spring",
                               visualDuration: framerAnimProps.animDuration,
                               bounce: 0.5,

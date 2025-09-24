@@ -3,7 +3,7 @@
 import { useToast } from "@/components/Toast";
 
 import { AdminSignIn } from "@/lib/auth";
-import { btnScale } from "@/lib/variables";
+import { btnScale, framerAnimProps } from "@/lib/variables";
 
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,12 +40,19 @@ export default function Auth() {
   }
 
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary h-dvh w-screen overflow-hidden pt-8 transition-all max-lg:pb-25 md:pt-15 lg:px-25">
+    <section className="transition">
       <div className="fixed top-1/2 left-1/2 z-40 w-11/12 max-w-[650px] min-w-[200px] -translate-x-1/2 -translate-y-1/2">
         <AnimatePresence>
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
+            transition={{
+              duration: framerAnimProps.animDuration - 0.1,
+              type: "spring",
+              bounce: 0.5,
+              visualDuration: framerAnimProps.animDuration,
+              delay: framerAnimProps.animDelay,
+            }}
             className="bg-secondary dark:bg-secondary-dark relative space-y-5 rounded-lg p-5 text-center"
           >
             <p className="text-heading dark:text-heading-dark text-3xl font-bold">
