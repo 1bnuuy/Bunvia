@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     if (
       !type ||
       (Array.isArray(type) && type.length === 0) ||
-      (typeof type === "string" && !type.trim())
+      (typeof type === "string" && !type.trim()) //Has to check typeof type because body refers to it as any types
     )
       blankFields.push("Class");
 

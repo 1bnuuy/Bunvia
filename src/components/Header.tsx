@@ -25,7 +25,7 @@ export default function Header() {
     <>
       {isAvailable && (
         <header
-          className={`bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark fixed z-40 flex h-[65px] w-screen items-center justify-between border-b-2 px-7 transition select-none lg:px-45`}
+          className={`bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark fixed z-40 flex h-[65px] w-screen items-center justify-between border-b-2 px-8 transition select-none`}
         >
           <div className="flex items-center gap-5">
             <MotionLink
@@ -51,18 +51,18 @@ export default function Header() {
             </h1>
           </div>
 
-            <div
-              className="hover:bg-tertiary dark:hover:bg-tertiary-dark active:bg-tertiary dark:active:bg-tertiary-dark relative flex cursor-pointer items-center justify-center rounded-md transition"
-              onClick={ThemeToggle}
-            >
-              <span
-                className={`bg-accent dark:bg-accent-dark absolute top-2/3 left-5/6 h-full w-1 origin-top -translate-1/2 scale-y-100 rotate-45 transition select-none dark:scale-y-0`}
-              ></span>
+          <div
+            className="hover:bg-tertiary dark:hover:bg-tertiary-dark active:bg-tertiary dark:active:bg-tertiary-dark relative flex cursor-pointer items-center justify-center rounded-md transition"
+            onClick={ThemeToggle}
+          >
+            <span
+              className={`bg-accent dark:bg-accent-dark absolute top-2/3 left-5/6 h-full w-1 origin-top -translate-1/2 scale-y-100 rotate-45 transition select-none dark:scale-y-0`}
+            ></span>
 
-              <FontAwesomeIcon
-                icon={faMoon}
-                className={`text-heading dark:text-accent-dark px-[7px] py-2.5 text-2xl`}
-              />
+            <FontAwesomeIcon
+              icon={faMoon}
+              className={`text-heading dark:text-accent-dark px-[7px] py-2.5 text-2xl`}
+            />
           </div>
         </header>
       )}

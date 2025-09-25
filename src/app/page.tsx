@@ -11,6 +11,8 @@ import {
   Pop,
   FadeInBottom,
   framerAnimProps,
+  Journey,
+  Opacity,
 } from "@/lib/variables";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,18 +21,17 @@ import {
   faWandMagicSparkles,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Star, StarDouble, StarOutline, Svg_TodoList } from "./addOn";
+import { Carousel, Star, StarDouble, StarOutline } from "./addOn";
 import Footer from "@/components/Footer";
-import Image from "next/image";
 import { Article } from "./gridSection";
 
 const MotionLink = motion.create(Link);
 
 export default function Home() {
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary flex min-h-dvh w-screen flex-col items-center justify-start overflow-x-hidden pt-[100px] transition lg:px-15">
+    <section className="flex flex-col items-center justify-start gap-[150px] pt-[80px] transition">
       {/* 1st Section */}
-      <div className="text-heading dark:text-heading-dark relative z-10 mb-[150px] flex h-[600px] w-full max-w-[1440px] flex-col items-center justify-center gap-3 px-5">
+      <div className="text-heading dark:text-heading-dark relative z-10 flex h-[475px] w-full max-w-[1440px] flex-col items-center justify-center gap-3 px-5">
         <AnimatePresence>
           <motion.p
             key="subtitle"
@@ -44,7 +45,7 @@ export default function Home() {
             }}
             className="text-xl"
           >
-            YOUR GATEWAY TO
+            GATEWAY TO
           </motion.p>
 
           <motion.h1
@@ -88,7 +89,8 @@ export default function Home() {
               duration: framerAnimProps.animDuration,
               delay: framerAnimProps.animDelay * 6,
               type: "spring",
-              stiffness: 250,
+              bounce: 0.5,
+              visualDuration: framerAnimProps.animDuration,
             }}
             viewport={{ once: true, amount: framerAnimProps.viewPercent }}
             href="todolist"
@@ -100,22 +102,22 @@ export default function Home() {
         </AnimatePresence>
 
         <div className="absolute size-full">
-          <Star size={40} t={10} l={30} />
-          <Star size={25} t={90} l={65} />
-          <Star size={30} t={25} l={10} />
-          <Star size={20} t={110} l={25} />
-          <Star size={50} t={75} l={90} />
+          <Star size={40} t={10} l={30} abs={true} />
+          <Star size={25} t={90} l={65} abs={true} />
+          <Star size={30} t={25} l={10} abs={true} />
+          <Star size={20} t={110} l={25} abs={true} />
+          <Star size={50} t={75} l={90} abs={true} />
 
-          <StarDouble size={50} t={20} l={75} />
-          <StarDouble size={35} t={95} l={45} />
-          <StarDouble size={30} t={0} l={50} />
-          <StarDouble size={40} t={80} l={15} />
+          <StarDouble size={50} t={20} l={75} abs={true} />
+          <StarDouble size={35} t={95} l={45} abs={true} />
+          <StarDouble size={30} t={0} l={50} abs={true} />
+          <StarDouble size={40} t={80} l={15} abs={true} />
         </div>
         <span className="bg-heading dark:bg-heading-dark pointer-events-none absolute -bottom-1/6 -z-10 size-[350px] blur-[250px]" />
       </div>
 
       {/* 2nd Section */}
-      <div className="relative z-10 mb-[125px] flex max-w-[1440px] flex-col items-center justify-center px-5">
+      <div className="relative z-10 flex max-w-[1440px] flex-col items-center justify-center px-5">
         <AnimatePresence>
           <motion.p
             key="text"
@@ -156,7 +158,7 @@ export default function Home() {
       </div>
 
       {/* 3rd Section */}
-      <div className="text-heading dark:text-heading-dark relative z-10 mb-[175px] flex max-w-[1440px] flex-col items-center justify-center gap-15 px-10">
+      <div className="text-heading dark:text-heading-dark relative z-10 flex max-w-[1440px] flex-col items-center justify-center gap-15 px-10">
         <AnimatePresence>
           <div className="relative">
             <motion.span
@@ -173,8 +175,9 @@ export default function Home() {
 
             <motion.h2
               key="s1"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              variants={Opacity}
+              initial="initial"
+              whileInView="animate"
               transition={{
                 duration: framerAnimProps.animDuration,
                 delay: framerAnimProps.animDelay,
@@ -182,7 +185,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="z-10 p-5 text-center text-4xl leading-tight font-bold tracking-widest"
             >
-              Organize your goals
+              Organize goals
             </motion.h2>
 
             <motion.span
@@ -199,7 +202,7 @@ export default function Home() {
           </div>
         </AnimatePresence>
 
-        <div className="grid grid-cols-1 items-start gap-15 px-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex items-start justify-center gap-15 px-3 max-md:flex-wrap">
           <AnimatePresence>
             {Features.map((feat, index) => {
               return (
@@ -233,13 +236,12 @@ export default function Home() {
       </div>
 
       {/* 4th Section */}
-      <div className="relative z-10 mb-[125px] grid w-full max-w-[1440px] grid-rows-1 gap-3 px-8 sm:grid-cols-6 lg:grid-cols-10">
+      <div className="relative z-10 grid max-w-[1440px] grid-rows-1 gap-3 px-8 sm:grid-cols-6 lg:grid-cols-10">
         <AnimatePresence>
           <Article
             key="lg"
             gridType="lg"
             variants={FadeInTop}
-            src="/todo.png"
             title="Manage ideas efficiently."
             description="Carefully designed to aid you in prioritizing goals, tracking deadlines."
           />
@@ -247,15 +249,15 @@ export default function Home() {
             key="sm-1"
             gridType="sm-1"
             variants={SlideInRight}
-            src="/dict.png"
-            title="Small yet handy dictionary"
+            svg="wordbook"
+            title="Simplified word book"
             description="Build and manage your own collection of precious english words with ease."
           />
           <Article
             key="sm-2"
             gridType="sm-2"
             variants={SlideInLeft}
-            src="/todo.png"
+            svg="progress"
             title="Progress tracks"
             description="Sync your tasks seamlessly across devices and carry your progress wherever you go."
           />
@@ -263,23 +265,29 @@ export default function Home() {
             key="md-1"
             gridType="md-1"
             variants={FadeInBottom}
-            src="/dict.png"
-            title="Manage ideas efficiently."
-            description="Carefully designed to aid you in prioritizing goals, tracking deadlines."
+            svg="notebook"
+            title="Catch inspiration, plant your thoughts."
+            description="Simple yet powerful companion for creative and professional work."
           />
           <Article
             key="md-2"
             gridType="md-2"
             variants={FadeInTop}
-            src="/dict.png"
-            title="Manage ideas efficiently."
-            description="Carefully designed to aid you in prioritizing goals, tracking deadlines."
+            svg="world"
+            title="Your world, your rules."
+            description="With Bunvia's fast and user-friendly tools, your goals are at hand."
           />
         </AnimatePresence>
       </div>
 
       {/* 5th Section */}
-      <div className="relative z-10 mb-[125px] max-w-[700px] px-5 text-center">
+      <div className="text-heading dark:text-heading-dark relative z-10 flex w-full flex-col items-center justify-center gap-5 overflow-hidden">
+        <Carousel attribute={true} />
+        <Carousel attribute={false} />
+      </div>
+
+      {/* 6th Section */}
+      <div className="relative z-10 max-w-[700px] px-5 text-center">
         <AnimatePresence>
           <motion.div
             key="noLimit"
@@ -290,14 +298,15 @@ export default function Home() {
               duration: framerAnimProps.animDuration,
             }}
             viewport={{ once: true, amount: framerAnimProps.viewPercent }}
-            className="bg-secondary dark:bg-secondary-dark relative z-10 flex flex-col items-center gap-3 overflow-hidden rounded-md px-5 py-15 text-balance"
+            className="bg-secondary dark:bg-secondary-dark relative z-10 flex flex-col items-center gap-3 overflow-hidden rounded-md px-5 py-15 text-wrap sm:px-10"
           >
             <h3 className="text-heading dark:text-heading-dark z-10 text-2xl font-semibold">
               No limitation, infinite possibilities.
             </h3>
             <p className="text-subtext dark:text-subtext-dark z-10">
-              Finish your tasks and see your day brighten up!
+              Finish your tasks, each step leads to success!
             </p>
+
             <Link
               href="todolist"
               className="bg-heading hover:bg-tertiary-dark dark:text-primary-dark dark:hover:bg-tertiary dark:active:bg-tertiary active:bg-tertiary-dark dark:bg-heading-dark text-primary z-10 flex items-center justify-center gap-2 rounded-md px-5 py-2 text-xl transition select-none"
@@ -306,13 +315,21 @@ export default function Home() {
               <FontAwesomeIcon icon={faArrowRight} />
             </Link>
 
-            <StarOutline size={125} t={-15} l={0} />
-            <StarOutline size={75} t={80} l={60} />
-            <StarOutline size={50} t={5} l={85} />
+            <Link
+              href="about"
+              className="text-accent dark:text-accent-dark z-10 mt-1 rounded-md opacity-70 transition"
+            >
+              What is Bunvia?
+            </Link>
+
+            <StarOutline size={125} t={-15} l={0} abs={true} />
+            <StarOutline size={75} t={80} l={60} abs={true} />
+            <StarOutline size={50} t={5} l={85} abs={true} />
           </motion.div>
         </AnimatePresence>
       </div>
 
+      <span className="from-primary dark:from-primary-dark pointer-events-none fixed bottom-0 z-30 h-1/8 w-full bg-linear-to-t from-5% to-transparent" />
       <Footer />
     </section>
   );

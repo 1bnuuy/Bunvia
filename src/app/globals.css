@@ -30,6 +30,8 @@
   --color-error-hovered: #6e000f;
 
   --animate-carrot: carrot 2s ease-in-out infinite alternate;
+  --animate-carousel: carousel 15s linear infinite;
+  --animate-carousel-reversed: carousel-reversed 15s linear infinite;
 
   @keyframes carrot {
     0%,
@@ -39,6 +41,24 @@
     90%,
     100% {
       left: calc(100% - 100px);
+    }
+  }
+
+  @keyframes carousel {
+    from {
+      translate: 0;
+    }
+    to {
+      translate: -20%; /*picked a random number (-20%) and turned out it actually created an illusion of infinite carousel lmao*/
+    }
+  }
+
+  @keyframes carousel-reversed {
+    from {
+      translate: 0;
+    }
+    to {
+      translate: 20%;
     }
   }
 }

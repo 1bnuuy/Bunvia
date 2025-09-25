@@ -44,7 +44,7 @@ export default function Todolist() {
 
   return (
     <section
-      className={`dark:bg-primary-dark grid-background bg-primary flex h-dvh w-screen justify-center overflow-hidden pt-[100px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} lg:px-25`}
+      className={`flex justify-center pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"}`}
     >
       <div className="relative flex h-full max-w-[1440px] flex-col items-center gap-4 px-4">
         <TitleHandler state={state} dispatch={dispatch} />
@@ -74,7 +74,7 @@ export default function Todolist() {
                         opacity: 1,
                         x: 0,
                         transition: {
-                          delay: i * 0.08,
+                          delay: framerAnimProps.animDuration + i * 0.08,
                           type: "spring",
                           bounce: 0.5,
                           visualDuration: framerAnimProps.animDuration,

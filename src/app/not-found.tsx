@@ -8,7 +8,7 @@ const MotionLink = motion.create(Link);
 
 export default function ErrorPage() {
   return (
-    <section className="dark:bg-primary-dark grid-background bg-primary flex h-dvh w-screen flex-col items-center justify-center gap-5 overflow-hidden p-4 transition-all select-none">
+    <section className="flex h-dvh flex-col items-center justify-center gap-5 p-4 transition-all select-none">
       <span className="text-accent dark:text-accent-dark text-9xl font-bold">
         404
       </span>
@@ -55,14 +55,14 @@ export default function ErrorPage() {
               data-name="Path 3123"
               d="M612.519,418.284l-119.208,30.7a5.759,5.759,0,0,1-2.872-11.154l119.208-30.7a5.759,5.759,0,1,1,2.872,11.154Z"
               transform="translate(-302.605 -126.189)"
-              fill="#ccc"
+              className="fill-tertiary"
             />
             <path
               id="Path_3124-255"
               data-name="Path 3124"
               d="M640.149,430.592,497.936,467.214a5.759,5.759,0,1,1-2.872-11.154l142.213-36.622a5.759,5.759,0,0,1,2.872,11.154Z"
               transform="translate(-302.384 -125.599)"
-              fill="#ccc"
+              className="fill-tertiary"
             />
             <circle
               id="Ellipse_44"
@@ -85,21 +85,21 @@ export default function ErrorPage() {
               data-name="Path 3126"
               d="M604.421,374.437,446.1,415.191a17.835,17.835,0,0,1-21.694-12.812L391.229,273.49A17.835,17.835,0,0,1,404.041,251.8l158.32-40.754a17.835,17.835,0,0,1,21.694,12.812l33.178,128.889A17.835,17.835,0,0,1,604.421,374.437ZM404.563,253.826a15.737,15.737,0,0,0-11.3,19.142l33.178,128.889a15.737,15.737,0,0,0,19.142,11.3L603.9,372.407a15.737,15.737,0,0,0,11.3-19.142L582.025,224.376a15.737,15.737,0,0,0-19.142-11.3Z"
               transform="translate(-307.183 -135.611)"
-              fill="#e6e6e6"
+              className="fill-tertiary"
             />
             <path
               id="Path_411-258"
               data-name="Path 411"
               d="M550.66,252.63l-79.9,20.568a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l81.335-20.937c3.286,1.665,2.421,5.07.091,5.67Z"
               transform="translate(-303.514 -133.861)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_412-259"
               data-name="Path 412"
               d="M554.1,266l-79.9,20.568a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l81.335-20.937c3.286,1.665,2.421,5.07.091,5.67Z"
               transform="translate(-303.349 -133.22)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_413-260"
@@ -113,35 +113,35 @@ export default function ErrorPage() {
               data-name="Path 414"
               d="M562.854,293.445,440.909,324.835a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l123.38-31.76c3.286,1.665,2.421,5.07.091,5.67Z"
               transform="translate(-304.946 -131.904)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_415-262"
               data-name="Path 415"
               d="M566.3,306.822,444.353,338.213a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l123.38-31.76c3.286,1.665,2.421,5.07.091,5.67Z"
               transform="translate(-304.781 -131.263)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_416-263"
               data-name="Path 416"
               d="M569.739,320.192,447.794,351.582a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l123.379-31.76c3.286,1.665,2.421,5.07.091,5.67Z"
               transform="translate(-304.616 -130.621)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_417-264"
               data-name="Path 417"
               d="M573.183,333.569,451.237,364.959a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l123.38-31.76C576.377,329.564,575.513,332.969,573.183,333.569Z"
               transform="translate(-304.45 -129.98)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_418-265"
               data-name="Path 418"
               d="M576.624,346.939,454.679,378.329a2.862,2.862,0,0,1-3.467-1.8,2.757,2.757,0,0,1,1.942-3.5l123.38-31.76C579.819,342.934,578.954,346.339,576.624,346.939Z"
               transform="translate(-304.285 -129.339)"
-              fill="#f2f2f2"
+              className="fill-tertiary"
             />
             <path
               id="Path_395-266"
@@ -194,28 +194,28 @@ export default function ErrorPage() {
                 data-name="Path 3131"
                 d="M128.852,0H5.758a5.758,5.758,0,1,0,0,11.517H128.852a5.759,5.759,0,0,0,0-11.517Z"
                 transform="translate(123.517 177.868)"
-                fill="#ccc"
+                className="fill-tertiary"
               />
               <path
                 id="Path_3132-272"
                 data-name="Path 3132"
                 d="M152.609,0H5.758a5.759,5.759,0,1,0,0,11.517h146.85a5.759,5.759,0,1,0,0-11.517Z"
                 transform="translate(123.517 197.307)"
-                fill="#ccc"
+                className="fill-tertiary"
               />
               <path
                 id="Path_3133-273"
                 data-name="Path 3133"
                 d="M128.856,11.518H5.759A5.759,5.759,0,0,1,5.759,0h123.1a5.759,5.759,0,0,1,0,11.518Z"
                 transform="translate(123.512 264.975)"
-                fill="#ccc"
+                className="fill-tertiary"
               />
               <path
                 id="Path_3134-274"
                 data-name="Path 3134"
                 d="M152.612,11.518H5.759A5.759,5.759,0,0,1,5.759,0H152.612a5.759,5.759,0,1,1,0,11.518Z"
                 transform="translate(123.512 284.411)"
-                fill="#ccc"
+                className="fill-tertiary"
               />
               <circle
                 id="Ellipse_44-2"

@@ -1,8 +1,7 @@
 import {
   faBook,
-  faChartSimple,
+  faCircleInfo,
   faEye,
-  faHouse,
   faLightbulb,
   faListCheck,
   faMagnifyingGlass,
@@ -19,13 +18,19 @@ import {
 } from "./types";
 
 //--------------Navigation--------------//
-export const availablePaths = ["/", "/todolist", "/dictionary", "/analytics"];
+export const availablePaths = [
+  "/",
+  "/about",
+  "/todolist",
+  "/dictionary",
+  "/notebook",
+];
 
 export const links = [
   {
-    name: "Home",
-    icon: faHouse,
-    path: "/",
+    name: "About",
+    icon: faCircleInfo,
+    path: "/about",
   },
 
   {
@@ -35,15 +40,15 @@ export const links = [
   },
 
   {
-    name: "Wordbook",
+    name: "Dictionary",
     icon: faBook,
     path: "/dictionary",
   },
 
   {
-    name: "Analytics",
-    icon: faChartSimple,
-    path: "/analytics",
+    name: "Notebook",
+    icon: faStickyNote,
+    path: "/notebook",
   },
 ];
 
@@ -77,6 +82,11 @@ export const Pop = {
   animate: { scale: 1 },
 };
 
+export const Opacity = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+};
+
 export const FadeInBottom = {
   initial: { opacity: 0, y: 50 },
   animate: { opacity: 1, y: 0 },
@@ -106,47 +116,51 @@ export const Features = [
   },
 
   {
-    name: "Personal Notebook",
-    icon: faStickyNote,
-    desc: "Capture notes and ideas in a professional, organized space.",
-  },
-
-  {
     name: "Vocabulary Builder",
     icon: faBook,
     desc: "Your pocket-sized dictionary for learning on the go.",
   },
 
   {
-    name: "Activity Insights",
-    icon: faChartSimple,
-    desc: "See progress in simple charts and celebrate milestones.",
+    name: "Ideas & Insights",
+    icon: faStickyNote,
+    desc: "Capture notes and ideas in a professional, organized space.",
   },
 ];
 
-export const LearnAndReference = [
+export const Journey = [
+  "Discover",
+  "Organize",
+  "Plan",
+  "Learn",
+  "Practice",
+  "Focus",
+  "Reflect",
+  "Share",
+  "Achieve",
+  "Grow",
+];
+
+//--------------About--------------//
+export const Offers = [
   {
-    name: "Discover",
-    icon: faMagnifyingGlass,
-    desc: "Uncover new ideas, explore fresh paths, and let curiosity guide your next step.",
+    name: "Responsiveness",
+    desc: "across all devices.",
   },
 
   {
-    name: "Learn",
-    icon: faLightbulb,
-    desc: "Grow your knowledge with guides, notes, and resources that make every step brighter.",
+    name: "Animation",
+    desc: "enhances user experience.",
   },
 
   {
-    name: "Focus",
-    icon: faEye,
-    desc: "Stay centered and focused with tools to help you keep your attention where it matters most.",
+    name: "User-friendly",
+    desc: "and with no limitation.",
   },
 
   {
-    name: "Achieve",
-    icon: faMedal,
-    desc: "Turn effort into the space where focus meets progress, helping you accomplish what you dream of.",
+    name: "No Sign-up",
+    desc: "Start writing immediately.",
   },
 ];
 
@@ -322,4 +336,27 @@ export const wordClass = [
   "phrase",
   "idiom",
   "phrasal verb",
+];
+
+//--------------Footer--------------//
+export const socialMedia = [
+  {
+    name: "Facebook",
+    path: "https://web.facebook.com/iiOwl",
+  },
+
+  {
+    name: "Reddit",
+    path: "https://www.reddit.com/user/Budget-Apartment9943",
+  },
+
+  {
+    name: "Github",
+    path: "https://github.com/1bnuuy",
+  },
+
+  {
+    name: "Youtube",
+    path: "https://www.youtube.com/channel/UCHJ8C76GhJ9vXZ0uUxd9xPg",
+  },
 ];
