@@ -1,6 +1,5 @@
 import {
   faBook,
-  faChartSimple,
   faCircleInfo,
   faEye,
   faLightbulb,
@@ -8,6 +7,7 @@ import {
   faMagnifyingGlass,
   faMedal,
   faPen,
+  faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   DictionaryActionTypes,
@@ -23,7 +23,7 @@ export const availablePaths = [
   "/about",
   "/todolist",
   "/dictionary",
-  "/analytics",
+  "/notebook",
 ];
 
 export const links = [
@@ -46,9 +46,9 @@ export const links = [
   },
 
   {
-    name: "Analytics",
-    icon: faChartSimple,
-    path: "/analytics",
+    name: "Notebook",
+    icon: faStickyNote,
+    path: "/notebook",
   },
 ];
 
@@ -122,53 +122,45 @@ export const Features = [
   },
 
   {
-    name: "Activity Insights",
-    icon: faChartSimple,
-    desc: "See progress in simple charts and celebrate milestones.",
+    name: "Ideas & Insights",
+    icon: faStickyNote,
+    desc: "Capture notes and ideas in a professional, organized space.",
   },
 ];
 
 export const Journey = [
-  {
-    name: "Discover",
-    icon: faMagnifyingGlass,
-    desc: "Uncover new ideas, explore fresh paths, and let curiosity guide your next step.",
-  },
-
-  {
-    name: "Learn",
-    icon: faLightbulb,
-    desc: "Grow your knowledge with guides, notes, and resources that make every step brighter.",
-  },
-
-  {
-    name: "Focus",
-    icon: faEye,
-    desc: "Stay centered and focused with tools to help you keep your attention where it matters most.",
-  },
-
-  {
-    name: "Achieve",
-    icon: faMedal,
-    desc: "Turn effort into the space where focus meets progress, helping you accomplish what you dream of.",
-  },
+  "Discover",
+  "Organize",
+  "Plan",
+  "Learn",
+  "Practice",
+  "Focus",
+  "Reflect",
+  "Share",
+  "Achieve",
+  "Grow",
 ];
 
 //--------------About--------------//
 export const Offers = [
   {
     name: "Responsiveness",
-    desc: "with seamless adaptability.",
+    desc: "across all devices.",
   },
 
   {
     name: "Animation",
-    desc: "for enhancing user experience.",
+    desc: "enhances user experience.",
   },
 
   {
     name: "User-friendly",
     desc: "and with no limitation.",
+  },
+
+  {
+    name: "No Sign-up",
+    desc: "Start writing immediately.",
   },
 ];
 

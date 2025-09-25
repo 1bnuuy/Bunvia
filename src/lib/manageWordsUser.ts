@@ -42,6 +42,25 @@ export function UserCreate(
 ) {
   e.preventDefault();
 
+  const blankFields: string[] = [];
+  const type = state.selectedTypes || "";
+
+  if (
+    !Name.current?.value ||
+    typeof Name.current?.value !== "string" ||
+    !Name.current?.value.trim()
+  )
+    blankFields.push("Name");
+  if (!type || (Array.isArray(type) && type.length === 0))
+    blankFields.push("Class");
+
+  if (blankFields.length) {
+    return toastPopUp({
+      success: false,
+      msg: `Hoppy mistake! ${blankFields.join(", ")} ${blankFields.length > 1 ? "fields are" : "field is"} still blank!`,
+    });
+  }
+
   const formattedName = Name.current?.value.trim();
   const newWord = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
@@ -52,6 +71,9 @@ export function UserCreate(
     favorite: false,
   };
   dispatch({ type: "ADD_WORD", payload: newWord });
+
+  dispatch({ type: "RESET_FORM" });
+  Name.current!.value = "";
 
   toastPopUp({
     success: true,

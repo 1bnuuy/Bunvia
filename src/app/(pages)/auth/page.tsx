@@ -40,8 +40,8 @@ export default function Auth() {
   }
 
   return (
-    <section className="transition">
-      <div className="fixed top-1/2 left-1/2 z-40 w-11/12 max-w-[650px] min-w-[200px] -translate-x-1/2 -translate-y-1/2">
+    <section className="transition flex justify-center items-center h-dvh">
+      <div className="z-40 w-11/12 max-w-[650px] min-w-[200px]">
         <AnimatePresence>
           <motion.div
             initial={{ scale: 0, opacity: 0 }}

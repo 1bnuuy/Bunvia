@@ -36,22 +36,25 @@ export type UIContextTypes = {
   navToggle: () => void;
 };
 
-//--------------AddOn--------------//
+//--------------Home--------------//
 export type AddOnTypes = {
   size?: number;
   h?: number;
   w?: number;
   t?: number;
   l?: number;
+  abs?: boolean;
+  attribute?: boolean;
 };
 
-//--------------Home--------------//
+export type SVGTypes = "wordbook" | "progress" | "notebook" | "world";
+
 export type ArticleTypes = {
   gridType: string;
   variants: Variants;
-  src: string;
   title: string;
   description: string;
+  svg?: SVGTypes;
 };
 
 //--------------To-do List--------------//

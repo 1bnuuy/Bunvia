@@ -6,12 +6,14 @@ const MotionLink = motion.create(Link);
 export default function Footer() {
   return (
     <>
-      <footer className="bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark z-30 flex w-screen justify-around gap-15 border-t-2 px-8 py-15 transition max-sm:flex-col max-sm:items-center lg:px-45">
+      <footer className="bg-primary dark:bg-primary-dark border-tertiary dark:border-tertiary-dark z-30 flex w-full justify-around gap-15 border-t-2 px-8 py-15 transition max-sm:flex-col max-sm:items-center">
         <div className="text-center">
           <p className="text-heading dark:text-heading-dark text-2xl font-semibold">
             Success belongs to those <br /> who dare to pursue it
           </p>
-          <p className="text-subtext dark:text-subtext-dark">Made with ❤️ from Vietnam</p>
+          <p className="text-subtext dark:text-subtext-dark">
+            Made with ❤️ from Vietnam
+          </p>
           <p className="text-subtext dark:text-subtext-dark">© Bunvia 2025</p>
         </div>
 

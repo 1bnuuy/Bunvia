@@ -44,7 +44,7 @@ export default function Todolist() {
 
   return (
     <section
-      className={`flex justify-center pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"} lg:px-25`}
+      className={`flex justify-center pt-[80px] transition ${navOpen ? "max-lg:pb-25" : "max-lg:pb-3"}`}
     >
       <div className="relative flex h-full max-w-[1440px] flex-col items-center gap-4 px-4">
         <TitleHandler state={state} dispatch={dispatch} />
