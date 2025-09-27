@@ -1,5 +1,6 @@
+import { DateCreated } from "@/app/(pages)/dictionary/var";
 import { adminDb } from "@/lib/firebaseAdmin";
-import { DateCreated } from "@/lib/variables";
+
 import { getAuth } from "firebase-admin/auth";
 import { NextRequest, NextResponse } from "next/server";
 

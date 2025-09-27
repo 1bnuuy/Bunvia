@@ -11,7 +11,6 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
-import { tagColor, wordClass } from "@/lib/variables";
 import {
   DictionaryActionTypes,
   InitDictionaryTypes,
@@ -21,6 +20,8 @@ import { Create, Delete } from "@/lib/manageWords";
 import { btnScale } from "@/lib/variables";
 
 import { useToast } from "@/components/Toast";
+
+import { tagColor, wordClass } from "./var";
 
 export const AdminModal = ({
   state,

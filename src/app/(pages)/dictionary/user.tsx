@@ -16,15 +16,13 @@ import { useUI } from "@/components/UI";
 
 import { UserFavorite } from "@/lib/manageWordsUser";
 import {
-  InitialDictionary,
-  tagColor,
-  DictionaryReducer,
   btnScale,
   framerAnimProps,
 } from "@/lib/variables";
 import { TagTypes } from "@/lib/types";
 
 import { UserModal } from "./userModal";
+import { DictionaryReducer, InitialDictionary, tagColor } from "./var";
 
 export default function UserDictionary() {
   const { navOpen } = useUI();

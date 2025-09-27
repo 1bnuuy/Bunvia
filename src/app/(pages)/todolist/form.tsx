@@ -24,7 +24,7 @@ export const FormHandler = ({
           <textarea
             ref={text}
             placeholder="What is on your mind today?"
-            className="caret-heading dark:caret-heading-dark text-heading dark:text-heading-dark size-full h-[200px] resize-none overflow-hidden text-lg outline-none"
+            className="caret-heading dark:caret-heading-dark text-heading dark:text-heading-dark size-full h-[200px] resize-none overflow-y-auto overflow-x-hidden custom-scroll text-lg outline-none"
           />
 
           <button

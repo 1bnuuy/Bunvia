@@ -6,16 +6,17 @@ import Footer from "@/components/Footer";
 import {
   FadeInTop,
   framerAnimProps,
-  Offers,
   Opacity,
   SlideInLeft,
   SlideInRight,
 } from "@/lib/variables";
+
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
+import { Offers } from "./var";
 
 export default function About() {
   return (
@@ -372,9 +373,9 @@ export default function About() {
               <FontAwesomeIcon icon={faArrowRight} />
             </Link>
 
-            <StarOutline size={125} t={-15} l={0} />
-            <StarOutline size={75} t={80} l={60} />
-            <StarOutline size={50} t={5} l={85} />
+            <StarOutline size={125} t={-15} l={0} abs={true} />
+            <StarOutline size={75} t={80} l={60} abs={true} />
+            <StarOutline size={50} t={5} l={85} abs={true} />
           </motion.div>
         </AnimatePresence>
       </div>

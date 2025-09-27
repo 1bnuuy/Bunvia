@@ -126,6 +126,20 @@ export type DictionaryActionTypes =
 
 export type TagTypes = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 
+//--------------Notepad--------------//
+export type InitToolbarTypes = {
+  text: string;
+  undo: string[];
+  redo: string[];
+};
+
+export type ToolbarActionTypes =
+  | { type: "SET_TEXT"; payload?: string }
+  | { type: "SAVE" }
+  | { type: "UNDO" }
+  | { type: "REDO" }
+  | { type: "BOLD" }
+
 //--------------API--------------//
 export type ApiResponseTypes = {
   success: boolean;

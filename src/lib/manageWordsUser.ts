@@ -1,10 +1,10 @@
+import { DateCreated } from "@/app/(pages)/dictionary/var";
 import {
   DictionaryActionTypes,
   InitDictionaryTypes,
   ToastContextTypes,
   WordTypes,
 } from "@/lib/types";
-import { DateCreated } from "./variables";
 
 //--------------FAVORITE--------------//
 export function UserFavorite(

@@ -11,7 +11,6 @@ import {
   Pop,
   FadeInBottom,
   framerAnimProps,
-  Journey,
   Opacity,
 } from "@/lib/variables";
 
@@ -31,7 +30,7 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-start gap-[150px] pt-[80px] transition">
       {/* 1st Section */}
-      <div className="text-heading dark:text-heading-dark relative z-10 flex h-[475px] w-full max-w-[1440px] flex-col items-center justify-center gap-3 px-5">
+      <div className="text-heading dark:text-heading-dark relative z-10 flex h-[525px] w-full max-w-[1440px] flex-col items-center justify-center gap-3 px-5">
         <AnimatePresence>
           <motion.p
             key="subtitle"

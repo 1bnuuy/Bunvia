@@ -15,16 +15,11 @@ import { useToast } from "@/components/Toast";
 import { useUI } from "@/components/UI";
 
 import { Favorite, Fetch } from "@/lib/manageWords";
-import {
-  InitialDictionary,
-  tagColor,
-  DictionaryReducer,
-  btnScale,
-  framerAnimProps,
-} from "@/lib/variables";
 import { TagTypes } from "@/lib/types";
+import { btnScale, framerAnimProps } from "@/lib/variables";
 
 import { AdminModal } from "./adminModal";
+import { DictionaryReducer, InitialDictionary, tagColor } from "./var";
 
 export default function AdminDictionary() {
   const { navOpen } = useUI();
