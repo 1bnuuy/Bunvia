@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 
 import { useUI } from "@/components/UI";
 import { useToast } from "@/components/Toast";
