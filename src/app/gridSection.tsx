@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { framerAnimProps } from "@/lib/globalVar";
-import { ArticleTypes, SVGTypes } from "@/lib/globalTypes";
+import { ArticleTypes } from "@/lib/globalTypes";
 import { SVG_Component } from "@/lib/variablesRender";
 import { useTheme } from "@/components/Theme";
 
