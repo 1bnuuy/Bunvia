@@ -1,6 +1,6 @@
 "use client";
 
-import { framerAnimProps, InitialTodo, TodoReducer } from "@/lib/variables";
+import { framerAnimProps } from "@/lib/globalVar";
 
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,10 +11,12 @@ import { useEffect, useReducer } from "react";
 import { TitleHandler } from "./title";
 import { FormHandler } from "./form";
 
-import { DeleteList, DoneList } from "@/lib/manageTodoList";
+import { DeleteList, DoneList } from "./manageTodoList";
 
 import { useUI } from "@/components/UI";
 import { useToast } from "@/components/Toast";
+
+import { InitialTodo, TodoReducer } from "./var";
 
 export default function Todolist() {
   const { navOpen } = useUI();
@@ -92,7 +94,7 @@ export default function Todolist() {
                     initial="hidden"
                     animate="loaded"
                     exit="exit"
-                    className={`bg-secondary hover:bg-tertiary active:bg-tertiary dark:active:bg-tertiary-dark dark:hover:bg-tertiary-dark dark:bg-secondary-dark relative flex shrink-0 grow-0 items-start gap-2 overflow-hidden rounded-md border-1 px-2 py-2.5 ${li.done ? "border-subtext dark:border-subtext-dark scale-90" : "border-tertiary dark:border-tertiary-dark"}`}
+                    className={`bg-secondary hover:bg-tertiary active:bg-tertiary dark:active:bg-tertiary-dark dark:hover:bg-tertiary-dark dark:bg-secondary-dark relative flex shrink-0 grow-0 items-start gap-2 overflow-hidden rounded-md border-1 px-2 py-2.5 ${li.done ? "border-subtext dark:border-subtext-dark scale-95" : "border-tertiary dark:border-tertiary-dark"}`}
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -115,7 +117,7 @@ export default function Todolist() {
                     />
 
                     <span
-                      className={`text-heading dark:text-heading-dark pointer-events-none text-lg break-all ${li.done ? "blur-[2px]" : "blur-none"}`}
+                      className={`text-heading dark:text-heading-dark pointer-events-none text-lg break-all ${li.done && "opacity-30"}`}
                     >
                       {li.text}
                     </span>

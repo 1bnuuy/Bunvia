@@ -9,6 +9,9 @@
 + Framer Motion
 + Firebase
 + FontAwesomeIcon
++ Slate
++ JSPDF
++ HTML2CANVAS
 
 ## Features
 + Responsiveness: Seamless adaptability across all devices, ensuring a smooth and consistent experience.

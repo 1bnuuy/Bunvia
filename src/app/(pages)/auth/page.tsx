@@ -3,7 +3,7 @@
 import { useToast } from "@/components/Toast";
 
 import { AdminSignIn } from "@/lib/auth";
-import { btnScale, framerAnimProps } from "@/lib/variables";
+import { btnScale, framerAnimProps } from "@/lib/globalVar";
 
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,7 +40,7 @@ export default function Auth() {
   }
 
   return (
-    <section className="transition flex justify-center items-center h-dvh">
+    <section className="flex h-dvh items-center justify-center transition">
       <div className="z-40 w-11/12 max-w-[650px] min-w-[200px]">
         <AnimatePresence>
           <motion.div

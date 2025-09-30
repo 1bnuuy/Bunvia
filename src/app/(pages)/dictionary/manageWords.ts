@@ -1,12 +1,8 @@
-import {
-  DictionaryActionTypes,
-  ApiResponseTypes,
-  InitDictionaryTypes,
-  ToastContextTypes,
-  WordTypes,
-} from "@/lib/types";
+
+import { ApiResponseTypes, ToastContextTypes } from "@/lib/globalTypes";
+import { DictionaryActionTypes, InitDictionaryTypes, WordTypes } from "./types";
 import { collection, onSnapshot } from "firebase/firestore";
-import { auth, db } from "./firebase";
+import { auth, db } from "../../../lib/firebase";
 
 //--------------FAVORITE--------------//
 export async function Favorite(
@@ -34,7 +30,6 @@ export async function Favorite(
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
-
     const result: ApiResponseTypes = await res.json().catch(() => null);
 
     if (result?.success) {

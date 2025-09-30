@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useReducer, useRef, useState } from "react";
+import { useEffect, useMemo, useReducer, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,17 +14,12 @@ import {
 import { useToast } from "@/components/Toast";
 import { useUI } from "@/components/UI";
 
-import { UserFavorite } from "@/lib/manageWordsUser";
-import {
-  InitialDictionary,
-  tagColor,
-  DictionaryReducer,
-  btnScale,
-  framerAnimProps,
-} from "@/lib/variables";
-import { TagTypes } from "@/lib/types";
+import { UserFavorite } from "@/app/(pages)/dictionary/manageWordsUser";
+import { btnScale, framerAnimProps } from "@/lib/globalVar";
 
+import { TagTypes } from "./types";
 import { UserModal } from "./userModal";
+import { DictionaryReducer, InitialDictionary, tagColor } from "./var";
 
 export default function UserDictionary() {
   const { navOpen } = useUI();
@@ -141,7 +136,7 @@ export default function UserDictionary() {
                         initial="hidden"
                         animate="loaded"
                         exit="hidden"
-                        key={word.name}
+                        key={word.id}
                         className={`bg-secondary dark:bg-secondary-dark ${word.favorite ? "border-yellow-600 dark:border-amber-200" : "border-accent dark:border-accent-dark"} relative flex h-60 w-71 flex-col justify-between border-b-4 p-4`}
                       >
                         <div className="flex gap-2">

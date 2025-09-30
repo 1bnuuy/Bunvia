@@ -13,11 +13,16 @@
         "@fortawesome/react-fontawesome": "^3.0.2",
         "firebase": "^12.2.1",
         "firebase-admin": "^13.5.0",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^3.0.3",
         "motion": "^12.23.12",
         "next": "15.5.2",
         "postcss": "^8.5.6",
         "react": "19.1.0",
-        "react-dom": "19.1.0"
+        "react-dom": "19.1.0",
+        "slate": "^0.118.1",
+        "slate-history": "^0.113.1",
+        "slate-react": "^0.117.4"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",

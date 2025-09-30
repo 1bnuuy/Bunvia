@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { UIContextTypes } from "../lib/types";
+import { UIContextTypes } from "../lib/globalTypes";
 
 const UIContext = createContext<UIContextTypes | undefined>(undefined);
 export const useUI = (): UIContextTypes => {

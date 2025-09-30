@@ -1,6 +1,6 @@
-import { InitTodoListTypes, TodoListActionTypes } from "@/lib/types";
-import { framerAnimProps } from "@/lib/variables";
+import { framerAnimProps } from "@/lib/globalVar";
 import { motion } from "motion/react";
+import { InitTodoListTypes, TodoListActionTypes } from "./types";
 
 export const TitleHandler = ({
   state,
@@ -35,7 +35,7 @@ export const TitleHandler = ({
           whileTap={{ opacity: 0.3 }}
           transition={{ duration: framerAnimProps.animDuration - 0.15 }}
           onClick={() => dispatch({ type: "ENABLE_EDITING", payload: "title" })}
-          className="text-heading dark:text-heading-dark cursor-pointer text-center text-4xl max-sm:text-2xl text-balance break-all"
+          className="text-heading dark:text-heading-dark cursor-pointer text-center text-4xl text-balance break-all max-sm:text-2xl"
         >
           {state.newTitle || "Untitled"}
         </motion.button>

@@ -8,8 +8,8 @@ import {
   ToastTypes,
   ToastContentTypes,
   ToastComponentTypes,
-} from "../lib/types";
-import { btnRelocateLeft, framerAnimProps } from "@/lib/variables";
+} from "../lib/globalTypes";
+import { btnRelocateLeft, framerAnimProps } from "@/lib/globalVar";
 
 const ToastContext = createContext<ToastContextTypes | undefined>(undefined);
 export const useToast = () => {
@@ -24,12 +24,20 @@ export default function ToastProvider({
   children: React.ReactNode;
 }) {
   const [toasts, setToasts] = useState<ToastTypes[]>([]);
+  let toastCooldown = false;
 
   const open: (component: ToastComponentTypes) => void = (component) => {
-    const id = Date.now() + Math.random();
-    setToasts((toast) => [...toast, { id, component: component(id) }]);
+    if (!toastCooldown) {
+      const id = Date.now() + Math.random();
+      setToasts((toast) => {
+        const newToast = [...toast, { id, component: component(id) }];
+        return newToast.slice(-4);
+      });
+      toastCooldown = true;
 
-    setTimeout(() => close(id), 5000);
+      setTimeout(() => (toastCooldown = false), 500);
+      setTimeout(() => close(id), 3500);
+    }
   };
 
   const close: (id: number) => void = (id) =>

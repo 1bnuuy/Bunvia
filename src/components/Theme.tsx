@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import { ThemeContextTypes } from "../lib/types";
+import { ThemeContextTypes } from "../lib/globalTypes";
 
 const ThemeContext = createContext<ThemeContextTypes | undefined>(undefined);
 export const useTheme = (): ThemeContextTypes => {

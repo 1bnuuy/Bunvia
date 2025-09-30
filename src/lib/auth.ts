@@ -3,7 +3,7 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { AuthTypes, ToastContextTypes } from "./types";
+import { AuthTypes, ToastContextTypes } from "./globalTypes";
 import { auth } from "./firebase";
 import { useRouter } from "next/navigation";
 

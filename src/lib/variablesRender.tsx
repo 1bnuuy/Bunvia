@@ -1,5 +1,5 @@
 import { SVG_Dict, SVG_Notebook, SVG_Progress, SVG_World } from "@/app/addOn";
-import { SVGTypes } from "./types";
+import { SVGTypes } from "./globalTypes";
 
 export const SVG_Component: Record<SVGTypes, React.ReactElement> = {
   wordbook: <SVG_Dict />,

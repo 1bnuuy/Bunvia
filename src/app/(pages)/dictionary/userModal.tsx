@@ -11,16 +11,16 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
-import { tagColor, wordClass } from "@/lib/variables";
+import { btnScale } from "@/lib/globalVar";
 import {
-  DictionaryActionTypes,
-  InitDictionaryTypes,
-  TagTypes,
-} from "@/lib/types";
-import { btnScale } from "@/lib/variables";
+  UserCreate,
+  UserDelete,
+} from "@/app/(pages)/dictionary/manageWordsUser";
 
 import { useToast } from "@/components/Toast";
-import { UserCreate, UserDelete } from "@/lib/manageWordsUser";
+
+import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "./types";
+import { tagColor, wordClass } from "./var";
 
 export const UserModal = ({
   state,
@@ -55,7 +55,9 @@ export const UserModal = ({
 
             {!state.confirm && (
               <form
-                onSubmit={(e) => UserCreate(e, Name, state, dispatch, toastPopUp)}
+                onSubmit={(e) =>
+                  UserCreate(e, Name, state, dispatch, toastPopUp)
+                }
                 className="flex flex-col gap-8"
               >
                 <div className="relative flex flex-wrap gap-3">

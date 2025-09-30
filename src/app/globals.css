@@ -30,8 +30,8 @@
   --color-error-hovered: #6e000f;
 
   --animate-carrot: carrot 2s ease-in-out infinite alternate;
-  --animate-carousel: carousel 15s linear infinite;
-  --animate-carousel-reversed: carousel-reversed 15s linear infinite;
+  --animate-carousel: carousel 50s linear infinite;
+  --animate-carousel-reversed: carousel-reversed 50s linear infinite;
 
   @keyframes carrot {
     0%,
