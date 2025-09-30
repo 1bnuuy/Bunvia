@@ -1,4 +1,4 @@
-import { InitTodoListTypes, TodoListActionTypes } from "@/lib/types";
+import { InitTodoListTypes, TodoListActionTypes } from "./types";
 
 export const InitialTodo: InitTodoListTypes = {
   isEditing: null,

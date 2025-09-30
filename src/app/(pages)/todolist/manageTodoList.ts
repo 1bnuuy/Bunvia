@@ -1,11 +1,16 @@
-import { ToastContextTypes, TodoListActionTypes } from "./types";
+import { TodoListActionTypes } from "./types";
+import { ToastContextTypes } from "@/lib/globalTypes";
 
 export const AppendList = (
   dispatch: React.Dispatch<TodoListActionTypes>,
   text: React.RefObject<HTMLTextAreaElement | null>,
   toastPopUp: ToastContextTypes["toastPopUp"],
 ) => {
-  if (!text.current?.value) return toastPopUp({success: false, msg: "You shouldn't leave your text field blank!"});
+  if (!text.current?.value)
+    return toastPopUp({
+      success: false,
+      msg: "You shouldn't leave your text field blank!",
+    });
 
   const newTodo = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
@@ -36,7 +41,10 @@ export const DeleteList = (
   try {
     dispatch({ type: "DELETE_TODO", payload: id });
   } catch {
-    toastPopUp({ success: false, msg: "Pee couldn't remove that tangled task!" });
+    toastPopUp({
+      success: false,
+      msg: "Pee couldn't remove that tangled task!",
+    });
   }
 };
 
@@ -48,6 +56,9 @@ export const DoneList = (
   try {
     dispatch({ type: "DONE_TODO", payload: id });
   } catch {
-    toastPopUp({ success: false, msg: "Pee couldn't remove that tangled task!" });
+    toastPopUp({
+      success: false,
+      msg: "Pee couldn't remove that tangled task!",
+    });
   }
 };

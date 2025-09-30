@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { btnScale } from "@/lib/variables";
+import { btnScale } from "@/lib/globalVar";
 
 const MotionLink = motion.create(Link);
 
@@ -295,4 +295,4 @@ export default function ErrorPage() {
       </MotionLink>
     </section>
   );
-};
+}

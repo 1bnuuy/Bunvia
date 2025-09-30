@@ -1,6 +1,6 @@
 "use client";
 
-import { framerAnimProps } from "@/lib/variables";
+import { framerAnimProps } from "@/lib/globalVar";
 
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,7 @@ import { useEffect, useReducer } from "react";
 import { TitleHandler } from "./title";
 import { FormHandler } from "./form";
 
-import { DeleteList, DoneList } from "@/lib/manageTodoList";
+import { DeleteList, DoneList } from "./manageTodoList";
 
 import { useUI } from "@/components/UI";
 import { useToast } from "@/components/Toast";

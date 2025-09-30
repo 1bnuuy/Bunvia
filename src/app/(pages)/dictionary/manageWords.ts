@@ -1,12 +1,7 @@
-import {
-  DictionaryActionTypes,
-  ApiResponseTypes,
-  InitDictionaryTypes,
-  ToastContextTypes,
-  WordTypes,
-} from "@/lib/types";
+import { ApiResponseTypes, ToastContextTypes } from "@/lib/globalTypes";
+import { DictionaryActionTypes, InitDictionaryTypes, WordTypes } from "./types";
 import { collection, onSnapshot } from "firebase/firestore";
-import { auth, db } from "./firebase";
+import { auth, db } from "../../../lib/firebase";
 
 //--------------FAVORITE--------------//
 export async function Favorite(

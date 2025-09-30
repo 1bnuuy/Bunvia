@@ -1,4 +1,4 @@
-import { btnScale, framerAnimProps, links, socialMedia } from "@/lib/variables";
+import { btnScale, framerAnimProps, links, socialMedia } from "@/lib/globalVar";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 

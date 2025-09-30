@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
-import { framerAnimProps } from "@/lib/variables";
-import { ArticleTypes, SVGTypes } from "@/lib/types";
+import { framerAnimProps } from "@/lib/globalVar";
+import { ArticleTypes, SVGTypes } from "@/lib/globalTypes";
 import { SVG_Component } from "@/lib/variablesRender";
 import { useTheme } from "@/components/Theme";
 
@@ -12,7 +12,7 @@ export const Article = ({
   svg,
   description,
 }: ArticleTypes) => {
-  const { ThemeDark } = useTheme()
+  const { ThemeDark } = useTheme();
   return (
     <motion.div
       variants={variants}
@@ -31,7 +31,7 @@ export const Article = ({
       </p>
 
       <div
-        className={`relative z-10 mt-4 flex aspect-video w-full justify-center overflow-hidden max-sm:aspect-[4/3] ${gridType.includes("lg") && "rounded-md h-full"}`}
+        className={`relative z-10 mt-4 flex aspect-video w-full justify-center overflow-hidden max-sm:aspect-[4/3] ${gridType.includes("lg") && "h-full rounded-md"}`}
       >
         {svg && svg in SVG_Component ? (
           SVG_Component[svg]

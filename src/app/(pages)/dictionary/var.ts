@@ -1,4 +1,4 @@
-import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "@/lib/types";
+import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "./types";
 
 export const DateCreated = new Date().toLocaleDateString("en-GB", {
   day: "2-digit",

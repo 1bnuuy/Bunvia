@@ -1,5 +1,5 @@
-import { AddOnTypes } from "@/lib/types";
-import { Journey } from "@/lib/variables";
+import { AddOnTypes } from "@/lib/globalTypes";
+import { Journey } from "@/lib/globalVar";
 
 export const Star = ({ size, t, l, abs }: AddOnTypes) => {
   return (

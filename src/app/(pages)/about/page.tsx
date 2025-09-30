@@ -9,7 +9,7 @@ import {
   Opacity,
   SlideInLeft,
   SlideInRight,
-} from "@/lib/variables";
+} from "@/lib/globalVar";
 
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

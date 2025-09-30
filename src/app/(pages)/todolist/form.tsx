@@ -1,19 +1,23 @@
 "use client";
 
-import { AppendList } from "@/lib/manageTodoList";
-import { InitTodoListTypes, ToastContextTypes, TodoListActionTypes } from "@/lib/types";
+import { AppendList } from "./manageTodoList";
+import { InitTodoListTypes, TodoListActionTypes } from "./types";
+
+import { ToastContextTypes } from "@/lib/globalTypes";
+
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useRef } from "react";
 
 export const FormHandler = ({
   state,
   dispatch,
-  toastPopUp
+  toastPopUp,
 }: {
   state: InitTodoListTypes;
   dispatch: React.Dispatch<TodoListActionTypes>;
-  toastPopUp: ToastContextTypes["toastPopUp"]
+  toastPopUp: ToastContextTypes["toastPopUp"];
 }) => {
   const text = useRef<HTMLTextAreaElement>(null);
 
@@ -24,7 +28,7 @@ export const FormHandler = ({
           <textarea
             ref={text}
             placeholder="What is on your mind today?"
-            className="caret-heading dark:caret-heading-dark text-heading dark:text-heading-dark size-full h-[200px] resize-none overflow-y-auto overflow-x-hidden custom-scroll text-lg outline-none"
+            className="caret-heading dark:caret-heading-dark text-heading dark:text-heading-dark custom-scroll size-full h-[200px] resize-none overflow-x-hidden overflow-y-auto text-lg outline-none"
           />
 
           <button

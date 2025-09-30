@@ -11,16 +11,15 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
+import { btnScale } from "@/lib/globalVar";
 import {
-  DictionaryActionTypes,
-  InitDictionaryTypes,
-  TagTypes,
-} from "@/lib/types";
-import { btnScale } from "@/lib/variables";
-import { UserCreate, UserDelete } from "@/lib/manageWordsUser";
+  UserCreate,
+  UserDelete,
+} from "@/app/(pages)/dictionary/manageWordsUser";
 
 import { useToast } from "@/components/Toast";
 
+import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "./types";
 import { tagColor, wordClass } from "./var";
 
 export const UserModal = ({

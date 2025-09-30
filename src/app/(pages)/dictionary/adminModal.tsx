@@ -11,17 +11,13 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
-import {
-  DictionaryActionTypes,
-  InitDictionaryTypes,
-  TagTypes,
-} from "@/lib/types";
-import { Create, Delete } from "@/lib/manageWords";
-import { btnScale } from "@/lib/variables";
+import { Create, Delete } from "@/app/(pages)/dictionary/manageWords";
+import { btnScale } from "@/lib/globalVar";
 
 import { useToast } from "@/components/Toast";
 
 import { tagColor, wordClass } from "./var";
+import { DictionaryActionTypes, InitDictionaryTypes, TagTypes } from "./types";
 
 export const AdminModal = ({
   state,

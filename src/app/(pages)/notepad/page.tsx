@@ -1,54 +1,77 @@
 "use client";
 
-import { useUI } from "@/components/UI";
+import { useMemo, useRef, useState } from "react";
 
-import { useEffect, useReducer } from "react";
-import { Toolbar } from "./toolbar";
-import { InitialToolbar, ToolbarReducer } from "./var";
+import { useUI } from "@/components/UI";
+import { useToast } from "@/components/Toast";
+
+import { Editable, Slate, withReact } from "slate-react";
+import { withHistory } from "slate-history";
+import { createEditor } from "slate";
+
+import { KeyboardFunc } from "./manageNotepad";
+import { EditorTypes } from "./types";
+import { ToolbarBottom, ToolbarTop } from "./toolbar";
+import { Leaf } from "./decoration";
 
 export default function Notepad() {
   const { navOpen } = useUI();
-  const [state, dispatch] = useReducer(ToolbarReducer, InitialToolbar, () => ({
-    text: localStorage.getItem("notepad") ?? "",
-    undo: [],
-    redo: [],
-  }));
+  const { toastPopUp } = useToast();
+  const PrintContent = useRef<HTMLDivElement | null>(null);
+  const editor = useMemo<EditorTypes>(
+    () => withHistory(withReact(createEditor())),
+    [],
+  );
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      localStorage.setItem("notepad", state.text);
-    }, 500);
+  const fallbackValue = [
+    {
+      type: "paragraph",
+      children: [{ text: "Hello from Pee and Poo :3" }],
+    },
+  ];
 
-    return () => clearTimeout(handler);
-  }, [state.text]);
+  const initialValue = useMemo(
+    () =>
+      JSON.parse(localStorage.getItem("NotePadContent") ?? "null") ??
+      fallbackValue,
+    //Fallback for JSON can't be "" or it will freak out, has to be "null" tho
+    [],
+  );
 
   return (
     <section
       className={`h-dvh px-3 pt-[80px] pb-5 transition ${navOpen ? "max-lg:pb-35" : "max-lg:pb-12"}`}
     >
       <div className="text-heading dark:text-heading-dark bg-secondary dark:bg-secondary-dark relative left-1/2 z-10 flex h-full max-w-[940px] -translate-x-1/2 flex-col gap-3 overflow-hidden rounded-md p-3">
-        <Toolbar state={state} dispatch={dispatch} />
+        <Slate
+          editor={editor}
+          initialValue={initialValue}
+          onChange={(value) => {
+            const isTextChange = editor.operations.some(
+              (op) => "set_selection" !== op.type,
+            ); //Check if user actually types something, not moving caret/cursor
 
-        <textarea
-          name="textarea"
-          placeholder="Write something..."
-          value={state.text}
-          onChange={(e) =>
-            dispatch({ type: "SET_TEXT", payload: e.target.value })
-          }
-          onKeyDown={(e) => {
-            if (e.ctrlKey || e.metaKey) {
-              if (e.key === "z" || e.key === "Z") {
-                e.preventDefault();
-                dispatch({ type: "UNDO" });
-              } else if (e.key === "y" || e.key === "Y") {
-                e.preventDefault();
-                dispatch({ type: "REDO" });
-              }
+            const content = JSON.stringify(value);
+
+            if (isTextChange) {
+              if (value.length > 0)
+                localStorage.setItem("NotePadContent", content);
+            } else {
+              localStorage.setItem("NotePadContent", content);
             }
           }}
-          className="custom-scroll w-full flex-1 resize-none px-2 leading-snug outline-none"
-        />
+        >
+          <ToolbarTop toastPopUp={toastPopUp} PrintContent={PrintContent} />
+          <Editable
+            spellCheck={false}
+            ref={PrintContent}
+            renderLeaf={(props) => <Leaf {...props} />}
+            onKeyDown={(e) => KeyboardFunc(e, toastPopUp, editor)}
+            placeholder="Type something..."
+            className={`custom-scroll w-full flex-1 overflow-auto px-2 pb-2 leading-relaxed outline-none`}
+          />
+          <ToolbarBottom toastPopUp={toastPopUp} PrintContent={PrintContent} />
+        </Slate>
       </div>
     </section>
   );

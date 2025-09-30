@@ -11,7 +11,7 @@ import { motion } from "motion/react";
 
 import { useTheme } from "@/components/Theme";
 
-import { availablePaths, btnScale } from "@/lib/variables";
+import { availablePaths, btnScale } from "@/lib/globalVar";
 
 const MotionLink = motion.create(Link);
 

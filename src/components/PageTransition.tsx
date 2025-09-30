@@ -1,6 +1,6 @@
 "use client";
 
-import { framerAnimProps } from "@/lib/variables";
+import { framerAnimProps } from "@/lib/globalVar";
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 

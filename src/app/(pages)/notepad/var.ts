@@ -1,33 +1,35 @@
-import { InitToolbarTypes, ToolbarActionTypes } from "@/lib/types";
 import {
-  faA,
+  faBold,
   faCopy,
+  faHighlighter,
+  faItalic,
   faPaste,
   faRedo,
   faSave,
   faScissors,
+  faUnderline,
   faUndo,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const ToolBarButtons = [
+export const TopToolbarButtons = [
   {
-    id: "save",
-    icon: faSave,
-  },
-
-  {
-    id: "undo",
-    icon: faUndo,
-  },
-
-  {
-    id: "redo",
-    icon: faRedo,
+    id: "highlight",
+    icon: faHighlighter,
   },
 
   {
     id: "bold",
-    icon: faA
+    icon: faBold,
+  },
+
+  {
+    id: "italic",
+    icon: faItalic,
+  },
+
+  {
+    id: "underline",
+    icon: faUnderline,
   },
 
   {
@@ -46,52 +48,19 @@ export const ToolBarButtons = [
   },
 ];
 
-export const InitialToolbar: InitToolbarTypes = {
-  text: "",
-  undo: [],
-  redo: [],
-};
+export const BottomToolbarButtons = [
+  {
+    id: "save",
+    icon: faSave,
+  },
 
-export const ToolbarReducer: (
-  state: InitToolbarTypes,
-  action: ToolbarActionTypes,
-) => InitToolbarTypes = (state, action) => {
-  switch (action.type) {
-    case "SET_TEXT":
-      return {
-        ...state,
-        text: action.payload ?? "",
-        undo: [...state.undo, state.text],
-        redo: [],
-      };
+  {
+    id: "undo",
+    icon: faUndo,
+  },
 
-    case "UNDO":
-      if (state.undo.length === 0) return state;
-
-      return {
-        ...state,
-        text: state.undo[state.undo.length - 1],
-        undo: state.undo.slice(0, -1),
-        redo: [...state.redo, state.text],
-      };
-
-    case "REDO":
-      if (state.redo.length === 0) return state;
-
-      return {
-        ...state,
-        text: state.redo[state.redo.length - 1],
-        undo: [...state.undo, state.text],
-        redo: state.redo.slice(0, -1),
-      };
-
-      case "BOLD":
-      return {
-        ...state,
-        text: state.text,
-      };
-
-    default:
-      return state;
-  }
-};
+  {
+    id: "redo",
+    icon: faRedo,
+  },
+];

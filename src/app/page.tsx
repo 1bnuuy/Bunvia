@@ -12,7 +12,7 @@ import {
   FadeInBottom,
   framerAnimProps,
   Opacity,
-} from "@/lib/variables";
+} from "@/lib/globalVar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

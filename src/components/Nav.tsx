@@ -9,8 +9,8 @@ import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-import { availablePaths, btnScale } from "@/lib/variables";
-import { links } from "@/lib/variables";
+import { availablePaths, btnScale } from "@/lib/globalVar";
+import { links } from "@/lib/globalVar";
 import { useUI } from "./UI";
 
 export default function Nav() {
