@@ -116,6 +116,8 @@ export default function UserDictionary() {
                     return a.name.localeCompare(b.name);
                   })
                   .map((word, index) => {
+                    const relativeIndex = index % 10; //Resets to 1 every 10th item
+
                     return (
                       <motion.div
                         layout
@@ -125,16 +127,17 @@ export default function UserDictionary() {
                             opacity: 1,
                             y: 0,
                             transition: {
-                              delay: framerAnimProps.animDelay + index * 0.06,
+                              delay: Math.pow(index, 0.7) * 0.05,
                               type: "spring",
                               visualDuration: framerAnimProps.animDuration,
                               bounce: 0.5,
                             },
                           }),
                         }}
-                        custom={index}
+                        custom={relativeIndex}
                         initial="hidden"
-                        animate="loaded"
+                        whileInView="loaded"
+                        viewport={{ once: true, amount: 0.2 }}
                         exit="hidden"
                         key={word.id}
                         className={`bg-secondary dark:bg-secondary-dark ${word.favorite ? "border-yellow-600 dark:border-amber-200" : "border-accent dark:border-accent-dark"} relative flex h-60 w-71 flex-col justify-between border-b-4 p-4`}
