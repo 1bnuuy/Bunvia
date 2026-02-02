@@ -13,6 +13,7 @@ export const availablePaths = [
   "/about",
   "/todolist",
   "/dictionary",
+  "/dictionary/preview",
   "/notepad",
 ];
 
